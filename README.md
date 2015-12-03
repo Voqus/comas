@@ -7,3 +7,7 @@ Later on, there will be a setup.exe for the installation of the software but rig
 
 * The name **COMAS** came out of the software's speciality **CO**mmercial **MA**nagement **S**oftware.
 * The project started, as a challenge for 7th semester of our university.
+
+### Team Members ###
+* Vasilis Chados
+* Mellides Gabriel
