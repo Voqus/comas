@@ -80,7 +80,7 @@ public class MainScreen extends javax.swing.JFrame {
         mainTabbedPane.addTab("Αποθήκη", storagePane);
         mainTabbedPane.addTab("Πωλήσεις", sellsPane);
         mainTabbedPane.addTab("Αγορές", marketPane);
-        mainTabbedPane.addTab("Οικονομική Διαχείρηση", cashDeskPane);
+        mainTabbedPane.addTab("Ταμείο", cashDeskPane);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
