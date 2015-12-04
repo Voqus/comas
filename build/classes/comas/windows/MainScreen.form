@@ -216,8 +216,8 @@
             <Container class="javax.swing.JTabbedPane" name="cashDeskPane">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&#x39f;&#x3b9;&#x3ba;&#x3bf;&#x3bd;&#x3bf;&#x3bc;&#x3b9;&#x3ba;&#x3ae; &#x394;&#x3b9;&#x3b1;&#x3c7;&#x3b5;&#x3af;&#x3c1;&#x3b7;&#x3c3;&#x3b7;">
-                    <Property name="tabTitle" type="java.lang.String" value="&#x39f;&#x3b9;&#x3ba;&#x3bf;&#x3bd;&#x3bf;&#x3bc;&#x3b9;&#x3ba;&#x3ae; &#x394;&#x3b9;&#x3b1;&#x3c7;&#x3b5;&#x3af;&#x3c1;&#x3b7;&#x3c3;&#x3b7;"/>
+                  <JTabbedPaneConstraints tabName="&#x3a4;&#x3b1;&#x3bc;&#x3b5;&#x3af;&#x3bf;">
+                    <Property name="tabTitle" type="java.lang.String" value="&#x3a4;&#x3b1;&#x3bc;&#x3b5;&#x3af;&#x3bf;"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>

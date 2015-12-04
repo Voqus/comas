@@ -1,5 +1,7 @@
 package comas.windows;
 
+import comas.base.Client;
+
 public class AddClientScreen extends javax.swing.JFrame {
 
     /**
@@ -81,6 +83,11 @@ public class AddClientScreen extends javax.swing.JFrame {
         taxRegisterLabel.setText("Α.Φ.Μ:");
 
         confirmLabel.setText("Επιβεβαίωση");
+        confirmLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmLabelActionPerformed(evt);
+            }
+        });
 
         cancelLabel.setText("Άκυρο");
         cancelLabel.addActionListener(new java.awt.event.ActionListener() {
@@ -143,12 +150,12 @@ public class AddClientScreen extends javax.swing.JFrame {
                                 .addComponent(confirmLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelLabel)))))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameLabel)
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,7 +207,7 @@ public class AddClientScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmLabel)
                     .addComponent(cancelLabel))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,6 +216,22 @@ public class AddClientScreen extends javax.swing.JFrame {
     private void cancelLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelLabelActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelLabelActionPerformed
+
+    private void confirmLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmLabelActionPerformed
+        Client client = new Client(businessNameField.getText(),
+                                   firstNameField.getText(),
+                                   lastNameField.getText(),
+                                   professionField.getText(),
+                                   addressField.getText(),
+                                   cityField.getText(),
+                                   telephoneAField.getText(),
+                                   telephoneBField.getText(),
+                                   faxField.getText(),
+                                   postalCodeField.getText(),
+                                   taxRegisterField.getText(),
+                                   professionCodeField.getText());
+        
+    }//GEN-LAST:event_confirmLabelActionPerformed
 
     /**
      * @param args the command line arguments
