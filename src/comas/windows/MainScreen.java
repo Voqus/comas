@@ -36,6 +36,8 @@ public class MainScreen extends javax.swing.JFrame {
         clientPane = new javax.swing.JScrollPane();
         clientTable = new javax.swing.JTable();
         supplierPane = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         storagePane = new javax.swing.JPanel();
         sellsPane = new javax.swing.JPanel();
         marketPane = new javax.swing.JPanel();
@@ -56,6 +58,7 @@ public class MainScreen extends javax.swing.JFrame {
         editClientMenuItem = new javax.swing.JMenuItem();
         deleteClientMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpProgramMenuItem = new javax.swing.JMenuItem();
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
@@ -84,15 +87,17 @@ public class MainScreen extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Πελατολόγιο", clientPane);
 
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout supplierPaneLayout = new javax.swing.GroupLayout(supplierPane);
         supplierPane.setLayout(supplierPaneLayout);
         supplierPaneLayout.setHorizontalGroup(
             supplierPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
         );
         supplierPaneLayout.setVerticalGroup(
             supplierPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 441, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
         );
 
         mainTabbedPane.addTab("Προμηθευτές", supplierPane);
@@ -244,6 +249,15 @@ public class MainScreen extends javax.swing.JFrame {
         menuBar.add(clientMenu);
 
         jMenu1.setText("Προμηθευτες");
+
+        jMenuItem1.setText("Καταχώριση Προμηθευτή");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         menuBar.add(jMenu1);
 
         helpMenu.setText("Βοήθεια");
@@ -281,6 +295,10 @@ public class MainScreen extends javax.swing.JFrame {
     private void insertClientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertClientMenuItemActionPerformed
        new AddClientScreen().setVisible(true);
     }//GEN-LAST:event_insertClientMenuItemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       new AddSupplierScreen().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +357,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem helpProgramMenuItem;
     private javax.swing.JMenuItem insertClientMenuItem;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblMg3;
     private javax.swing.JLabel lblMsg1;
