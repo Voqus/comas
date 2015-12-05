@@ -1,5 +1,6 @@
 package comas.database;
 
+import comas.base.Client;
 import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -44,35 +45,25 @@ public class ClientDatabase extends Database {
     
     // Executes Insert Query in order to insert new client on database
     // returns true or false for success or fail message for JOptionPane.
-    public boolean insertClient(String BusinessName,
-                                String FirstName,
-                                String LastName,
-                                String TelephoneA,
-                                String TelephoneB,
-                                String Fax,
-                                String Address,
-                                String City,
-                                String PostalCode,
-                                String TaxRegister,
-                                String ProfessionCode,
-                                String Profession){
+    public boolean insertClient(Client client){
          connect();
          try{
              dbStatement = dbConnection.prepareStatement("INSERT INTO Clients (clientId,BusinessName,FirstName,LastName,TelephoneA,TelephoneB,Fax,Address,City,PostalCode,TaxRegister,ProfessionCode,Profession) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 dbStatement.setInt(1, 0);
-                dbStatement.setString(2, BusinessName);
-                dbStatement.setString(3, FirstName);
-                dbStatement.setString(4, LastName);
-                dbStatement.setString(5, TelephoneA);
-                dbStatement.setString(6, TelephoneB);
-                dbStatement.setString(7, Fax);
-                dbStatement.setString(8, Address);
-                dbStatement.setString(9, City);
-                dbStatement.setString(10, PostalCode);
-                dbStatement.setString(11, TaxRegister);
-                dbStatement.setString(12, ProfessionCode);
-                dbStatement.setString(13, Profession);
+                dbStatement.setString(2, client.getBusinessName());
+                dbStatement.setString(3, client.getFirstName());
+                dbStatement.setString(4, client.getLastName());
+                dbStatement.setString(5, client.getTelephoneA());
+                dbStatement.setString(6, client.getTelephoneB());
+                dbStatement.setString(7, client.getFax());
+                dbStatement.setString(8, client.getAddress());
+                dbStatement.setString(9, client.getCity());
+                dbStatement.setString(10, client.getPostalCode());
+                dbStatement.setString(11, client.getTaxRegister());
+                dbStatement.setString(12, client.getProfessionCode());
+                dbStatement.setString(13, client.getProfession());
              dbStatement.execute();
+             close();
              return true;
          }catch(SQLException e){
              e.printStackTrace();

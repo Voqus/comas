@@ -35,11 +35,17 @@ public class MainScreen extends javax.swing.JFrame {
         mainTabbedPane = new javax.swing.JTabbedPane();
         clientPane = new javax.swing.JScrollPane();
         clientTable = new javax.swing.JTable();
-        supplierPane = new javax.swing.JTabbedPane();
-        storagePane = new javax.swing.JTabbedPane();
-        sellsPane = new javax.swing.JTabbedPane();
-        marketPane = new javax.swing.JTabbedPane();
-        cashDeskPane = new javax.swing.JTabbedPane();
+        supplierPane = new javax.swing.JPanel();
+        storagePane = new javax.swing.JPanel();
+        sellsPane = new javax.swing.JPanel();
+        marketPane = new javax.swing.JPanel();
+        DeskPane = new javax.swing.JPanel();
+        lblBalance = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        lblMsg1 = new javax.swing.JLabel();
+        lblMsg2 = new javax.swing.JLabel();
+        lblMg3 = new javax.swing.JLabel();
+        lblMsg4 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         restartMenuItem = new javax.swing.JMenuItem();
@@ -49,6 +55,7 @@ public class MainScreen extends javax.swing.JFrame {
         insertClientMenuItem = new javax.swing.JMenuItem();
         editClientMenuItem = new javax.swing.JMenuItem();
         deleteClientMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         helpProgramMenuItem = new javax.swing.JMenuItem();
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
@@ -76,23 +83,130 @@ public class MainScreen extends javax.swing.JFrame {
         clientPane.setViewportView(clientTable);
 
         mainTabbedPane.addTab("Πελατολόγιο", clientPane);
+
+        javax.swing.GroupLayout supplierPaneLayout = new javax.swing.GroupLayout(supplierPane);
+        supplierPane.setLayout(supplierPaneLayout);
+        supplierPaneLayout.setHorizontalGroup(
+            supplierPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        supplierPaneLayout.setVerticalGroup(
+            supplierPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 441, Short.MAX_VALUE)
+        );
+
         mainTabbedPane.addTab("Προμηθευτές", supplierPane);
+
+        javax.swing.GroupLayout storagePaneLayout = new javax.swing.GroupLayout(storagePane);
+        storagePane.setLayout(storagePaneLayout);
+        storagePaneLayout.setHorizontalGroup(
+            storagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        storagePaneLayout.setVerticalGroup(
+            storagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 441, Short.MAX_VALUE)
+        );
+
         mainTabbedPane.addTab("Αποθήκη", storagePane);
+
+        javax.swing.GroupLayout sellsPaneLayout = new javax.swing.GroupLayout(sellsPane);
+        sellsPane.setLayout(sellsPaneLayout);
+        sellsPaneLayout.setHorizontalGroup(
+            sellsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        sellsPaneLayout.setVerticalGroup(
+            sellsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 441, Short.MAX_VALUE)
+        );
+
         mainTabbedPane.addTab("Πωλήσεις", sellsPane);
+
+        javax.swing.GroupLayout marketPaneLayout = new javax.swing.GroupLayout(marketPane);
+        marketPane.setLayout(marketPaneLayout);
+        marketPaneLayout.setHorizontalGroup(
+            marketPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        marketPaneLayout.setVerticalGroup(
+            marketPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 441, Short.MAX_VALUE)
+        );
+
         mainTabbedPane.addTab("Αγορές", marketPane);
-        mainTabbedPane.addTab("Ταμείο", cashDeskPane);
+
+        lblBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblBalance.setText("0.00€");
+
+        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTitle.setText("Πληροφορίες Ταμείου");
+
+        lblMsg1.setText("Συνολό Πολύσεων");
+
+        lblMsg2.setText("Έσοδα:");
+
+        lblMg3.setText("Έξοδα:");
+
+        lblMsg4.setText("Χρήματα");
+
+        javax.swing.GroupLayout DeskPaneLayout = new javax.swing.GroupLayout(DeskPane);
+        DeskPane.setLayout(DeskPaneLayout);
+        DeskPaneLayout.setHorizontalGroup(
+            DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMsg4)
+                .addGap(18, 18, 18)
+                .addComponent(lblBalance)
+                .addGap(21, 21, 21))
+            .addGroup(DeskPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DeskPaneLayout.createSequentialGroup()
+                        .addGap(0, 312, Short.MAX_VALUE)
+                        .addComponent(lblTitle)
+                        .addGap(341, 341, 341))
+                    .addGroup(DeskPaneLayout.createSequentialGroup()
+                        .addComponent(lblMsg1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(DeskPaneLayout.createSequentialGroup()
+                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMsg2)
+                            .addComponent(lblMg3))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        DeskPaneLayout.setVerticalGroup(
+            DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle)
+                .addGap(25, 25, 25)
+                .addComponent(lblMsg1)
+                .addGap(36, 36, 36)
+                .addComponent(lblMsg2)
+                .addGap(27, 27, 27)
+                .addComponent(lblMg3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBalance)
+                    .addComponent(lblMsg4))
+                .addGap(125, 125, 125))
+        );
+
+        mainTabbedPane.addTab("Ταμείο", DeskPane);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(mainTabbedPane)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                .addComponent(mainTabbedPane))
         );
 
         programMenu.setText("Πρόγραμμα");
@@ -128,6 +242,9 @@ public class MainScreen extends javax.swing.JFrame {
         clientMenu.add(deleteClientMenuItem);
 
         menuBar.add(clientMenu);
+
+        jMenu1.setText("Προμηθευτες");
+        menuBar.add(jMenu1);
 
         helpMenu.setText("Βοήθεια");
 
@@ -209,7 +326,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane cashDeskPane;
+    private javax.swing.JPanel DeskPane;
     private javax.swing.JMenu clientMenu;
     private javax.swing.JScrollPane clientPane;
     private javax.swing.JTable clientTable;
@@ -221,15 +338,22 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator helpMenuSeparator;
     private javax.swing.JMenuItem helpProgramMenuItem;
     private javax.swing.JMenuItem insertClientMenuItem;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel lblBalance;
+    private javax.swing.JLabel lblMg3;
+    private javax.swing.JLabel lblMsg1;
+    private javax.swing.JLabel lblMsg2;
+    private javax.swing.JLabel lblMsg4;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTabbedPane mainTabbedPane;
-    private javax.swing.JTabbedPane marketPane;
+    private javax.swing.JPanel marketPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu programMenu;
     private javax.swing.JPopupMenu.Separator programMenuSeparator;
     private javax.swing.JMenuItem restartMenuItem;
-    private javax.swing.JTabbedPane sellsPane;
-    private javax.swing.JTabbedPane storagePane;
-    private javax.swing.JTabbedPane supplierPane;
+    private javax.swing.JPanel sellsPane;
+    private javax.swing.JPanel storagePane;
+    private javax.swing.JPanel supplierPane;
     // End of variables declaration//GEN-END:variables
 }

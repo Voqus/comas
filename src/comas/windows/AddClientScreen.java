@@ -248,18 +248,7 @@ public class AddClientScreen extends javax.swing.JFrame {
                                    professionCodeField.getText());
         
         // Inserts Data to Database and gives a JOptionPane for message
-        if (new ClientDatabase().insertClient(client.getBusinessName(),
-                                              client.getFirstName(),
-                                              client.getLastName(),
-                                              client.getTelephoneA(),
-                                              client.getTelephoneB(),
-                                              client.getFax(),
-                                              client.getAddress(),
-                                              client.getCity(),
-                                              client.getPostalCode(),
-                                              client.getTaxRegister(),
-                                              client.getProfessionCode(),
-                                              client.getProfession())){
+        if (new ClientDatabase().insertClient(client)){
             JOptionPane.showMessageDialog (null,
                                            "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
                                            "Επιτυχείς Καταχώριση",
