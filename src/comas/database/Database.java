@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 /**
  * Database class.
-*/
+ */
 public class Database {
-    
+
     protected static final String dbPath = "jdbc:ucanaccess://C:\\Users\\gabri\\Desktop\\EManagementDatabase.accdb";
     protected Connection dbConnection;
     protected ResultSet dataResults;
@@ -18,9 +18,10 @@ public class Database {
 
     /**
      * Connects with the database, returns true/false for success/fail.
+     *
      * @return
      */
-    public boolean connect(){
+    public boolean connect() {
 
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -32,7 +33,7 @@ public class Database {
         }
         return false;
     }
-    
+
     /**
      * Closes the database
      */
@@ -41,7 +42,11 @@ public class Database {
         try {
             if (dbConnection != null) {
                 dbConnection.close();
-            } else if (dataResults != null) {
+            }
+            if (dbStatement != null) {
+                dbStatement.close();
+            }
+            if (dataResults != null) {
                 dataResults.close();
             }
         } catch (SQLException e) {
