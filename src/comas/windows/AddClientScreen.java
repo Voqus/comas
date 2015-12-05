@@ -1,6 +1,8 @@
 package comas.windows;
 
 import comas.base.Client;
+import comas.database.ClientDatabase;
+import javax.swing.JOptionPane;
 
 public class AddClientScreen extends javax.swing.JFrame {
 
@@ -230,6 +232,7 @@ public class AddClientScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelLabelActionPerformed
 
+    // Saves Clients Data to Database {Returns message on jOptionPane}
     private void confirmLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmLabelActionPerformed
         Client client = new Client(businessNameField.getText(),
                                    firstNameField.getText(),
@@ -244,6 +247,29 @@ public class AddClientScreen extends javax.swing.JFrame {
                                    taxRegisterField.getText(),
                                    professionCodeField.getText());
         
+        // Inserts Data to Database and gives a JOptionPane for message
+        if (new ClientDatabase().insertClient(client.getBusinessName(),
+                                              client.getFirstName(),
+                                              client.getLastName(),
+                                              client.getTelephoneA(),
+                                              client.getTelephoneB(),
+                                              client.getFax(),
+                                              client.getAddress(),
+                                              client.getCity(),
+                                              client.getPostalCode(),
+                                              client.getTaxRegister(),
+                                              client.getProfessionCode(),
+                                              client.getProfession())){
+            JOptionPane.showMessageDialog (null,
+                                           "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
+                                           "Επιτυχείς Καταχώριση",
+                                           JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog (null,
+                                           "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",
+                                           "Ανεπιτυχής Καταχώριση",
+                                           JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_confirmLabelActionPerformed
 
     /**

@@ -10,8 +10,8 @@ import java.sql.SQLException;
  * Database class.
 */
 public class Database {
-
-    protected static final String dbPath = "jdbc:ucanaccess://C:\\EManagementDatabase.accdb";
+    
+    protected static final String dbPath = "jdbc:ucanaccess://C:\\Users\\gabri\\Desktop\\EManagementDatabase.accdb";
     protected Connection dbConnection;
     protected ResultSet dataResults;
     protected PreparedStatement dbStatement;
