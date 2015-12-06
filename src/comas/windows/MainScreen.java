@@ -1,6 +1,13 @@
 package comas.windows;
 
+import comas.Comas;
 import comas.database.ClientDatabase;
+import comas.database.SupplierDatabase;
+import java.io.File;
+import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class MainScreen extends javax.swing.JFrame {
@@ -10,13 +17,13 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        loadTable();
-        
+        loadClientTable();
+        loadSupplierTable();
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     }
 
-    private void loadTable() {
+    private void loadClientTable() {
 
         final String QUERY = "SELECT * FROM Clients";
         ClientDatabase database = new ClientDatabase();
@@ -24,7 +31,18 @@ public class MainScreen extends javax.swing.JFrame {
 
         DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
         clientTable.setModel(dtm);
+        database.close();
+    }
 
+    private void loadSupplierTable() {
+
+        final String QUERY = "SELECT * FROM Suppliers";
+        SupplierDatabase database = new SupplierDatabase();
+        database.connect();
+
+        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        supplierTable.setModel(dtm);
+        database.close();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,9 +53,8 @@ public class MainScreen extends javax.swing.JFrame {
         mainTabbedPane = new javax.swing.JTabbedPane();
         clientPane = new javax.swing.JScrollPane();
         clientTable = new javax.swing.JTable();
-        supplierPane = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        supplierPane = new javax.swing.JScrollPane();
+        supplierTable = new javax.swing.JTable();
         storagePane = new javax.swing.JPanel();
         sellsPane = new javax.swing.JPanel();
         marketPane = new javax.swing.JPanel();
@@ -87,18 +104,18 @@ public class MainScreen extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Πελατολόγιο", clientPane);
 
-        jScrollPane1.setViewportView(jTable1);
+        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
 
-        javax.swing.GroupLayout supplierPaneLayout = new javax.swing.GroupLayout(supplierPane);
-        supplierPane.setLayout(supplierPaneLayout);
-        supplierPaneLayout.setHorizontalGroup(
-            supplierPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
-        );
-        supplierPaneLayout.setVerticalGroup(
-            supplierPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-        );
+            }
+        ));
+        supplierPane.setViewportView(supplierTable);
 
         mainTabbedPane.addTab("Προμηθευτές", supplierPane);
 
@@ -106,7 +123,7 @@ public class MainScreen extends javax.swing.JFrame {
         storagePane.setLayout(storagePaneLayout);
         storagePaneLayout.setHorizontalGroup(
             storagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 813, Short.MAX_VALUE)
         );
         storagePaneLayout.setVerticalGroup(
             storagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +136,7 @@ public class MainScreen extends javax.swing.JFrame {
         sellsPane.setLayout(sellsPaneLayout);
         sellsPaneLayout.setHorizontalGroup(
             sellsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 813, Short.MAX_VALUE)
         );
         sellsPaneLayout.setVerticalGroup(
             sellsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +149,7 @@ public class MainScreen extends javax.swing.JFrame {
         marketPane.setLayout(marketPaneLayout);
         marketPaneLayout.setHorizontalGroup(
             marketPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 813, Short.MAX_VALUE)
         );
         marketPaneLayout.setVerticalGroup(
             marketPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +164,7 @@ public class MainScreen extends javax.swing.JFrame {
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTitle.setText("Πληροφορίες Ταμείου");
 
-        lblMsg1.setText("Συνολό Πολύσεων");
+        lblMsg1.setText("Συνολό Πωλήσεων");
 
         lblMsg2.setText("Έσοδα:");
 
@@ -169,7 +186,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DeskPaneLayout.createSequentialGroup()
-                        .addGap(0, 312, Short.MAX_VALUE)
+                        .addGap(0, 330, Short.MAX_VALUE)
                         .addComponent(lblTitle)
                         .addGap(341, 341, 341))
                     .addGroup(DeskPaneLayout.createSequentialGroup()
@@ -217,6 +234,11 @@ public class MainScreen extends javax.swing.JFrame {
         programMenu.setText("Πρόγραμμα");
 
         restartMenuItem.setText("Επανεκκίνηση");
+        restartMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restartMenuItemActionPerformed(evt);
+            }
+        });
         programMenu.add(restartMenuItem);
         programMenu.add(programMenuSeparator);
 
@@ -232,7 +254,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         clientMenu.setText("Πελατολόγιο");
 
-        insertClientMenuItem.setText("Εισαγωγή Πελάτη");
+        insertClientMenuItem.setText("Καταχώριση Πελάτη");
         insertClientMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertClientMenuItemActionPerformed(evt);
@@ -248,7 +270,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         menuBar.add(clientMenu);
 
-        jMenu1.setText("Προμηθευτες");
+        jMenu1.setText("Προμηθευτές");
 
         jMenuItem1.setText("Καταχώριση Προμηθευτή");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -293,12 +315,40 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void insertClientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertClientMenuItemActionPerformed
-       new AddClientScreen().setVisible(true);
+        new AddClientScreen().setVisible(true);
     }//GEN-LAST:event_insertClientMenuItemActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       new AddSupplierScreen().setVisible(true);
+        new AddSupplierScreen().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    /**
+     * Creates a new process of the program and terminates the first one.
+     *
+     * @param evt
+     */
+    private void restartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartMenuItemActionPerformed
+        //TODO: try to fix splashscreen
+
+        //Get all arguments needed for the program
+        String command = new String();
+        command += System.getProperty("java.home") + File.separator + "bin" + File.separator + "java ";
+        for (String args : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
+            command += args + " ";
+        }
+        command += "-cp " + ManagementFactory.getRuntimeMXBean().getClassPath() + " ";
+        command += Comas.class.getName() + " ";
+
+        try {
+            //Create new process
+            Runtime.getRuntime().exec(command);
+        } catch (IOException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Terminate this program
+        System.exit(0);
+    }//GEN-LAST:event_restartMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,10 +382,9 @@ public class MainScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     Thread.sleep(3000);
-                }catch(Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 new MainScreen().setVisible(true);
@@ -358,8 +407,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem insertClientMenuItem;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblMg3;
     private javax.swing.JLabel lblMsg1;
@@ -375,6 +422,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem restartMenuItem;
     private javax.swing.JPanel sellsPane;
     private javax.swing.JPanel storagePane;
-    private javax.swing.JPanel supplierPane;
+    private javax.swing.JScrollPane supplierPane;
+    private javax.swing.JTable supplierTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,10 @@ import comas.windows.MainScreen;
 
 public class Comas {
 
-    public static void main(String[] args) {
+    /**
+     * Launches the main panel of the application
+     */
+    private static void launchApplication() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -18,6 +21,10 @@ public class Comas {
             }
 
         });
+    }
+
+    public static void main(String[] args) {
+        launchApplication();
     }
 
 }

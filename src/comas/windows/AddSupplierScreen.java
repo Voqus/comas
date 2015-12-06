@@ -44,11 +44,16 @@ public class AddSupplierScreen extends javax.swing.JFrame {
         txtTaxReg = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Νέος Προμηθευτής");
+        setTitle("Καταχώριση Προμηθευτή");
 
-        btnClose.setText("Κλεισιμο");
+        btnClose.setText("Άκυρο");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
-        btnSave.setText("Αποθυκευση");
+        btnSave.setText("Επιβεβαίωση");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -56,7 +61,7 @@ public class AddSupplierScreen extends javax.swing.JFrame {
         });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTitle.setText("Καταχώριση Προμηθευτη");
+        lblTitle.setText("Καταχώριση Προμηθευτή");
 
         lblMsgName.setText("Όνομα:");
 
@@ -79,27 +84,21 @@ public class AddSupplierScreen extends javax.swing.JFrame {
         MainPanelLayout.setHorizontalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(lblTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(MainPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMsgTaxReg)
-                    .addComponent(lblMsgCity)
-                    .addComponent(lblMsgAddress)
-                    .addComponent(lblMsgPhoneB)
-                    .addComponent(lblMsgPhoneA)
-                    .addComponent(lblMsgLastName)
-                    .addComponent(lblMsgName)
-                    .addComponent(btnClose)
-                    .addComponent(lblMsgPostalCode))
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MainPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSave)
-                        .addContainerGap())
+                        .addGap(82, 82, 82)
+                        .addComponent(lblTitle))
                     .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblMsgTaxReg)
+                            .addComponent(lblMsgCity)
+                            .addComponent(lblMsgAddress)
+                            .addComponent(lblMsgPhoneB)
+                            .addComponent(lblMsgPhoneA)
+                            .addComponent(lblMsgLastName)
+                            .addComponent(lblMsgName)
+                            .addComponent(lblMsgPostalCode))
                         .addGap(18, 18, 18)
                         .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPostalCode)
@@ -109,8 +108,12 @@ public class AddSupplierScreen extends javax.swing.JFrame {
                             .addComponent(txtPhoneB)
                             .addComponent(txtAddress)
                             .addComponent(txtCity)
-                            .addComponent(txtTaxReg, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
-                        .addContainerGap(27, Short.MAX_VALUE))))
+                            .addComponent(txtTaxReg, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addGroup(MainPanelLayout.createSequentialGroup()
+                                .addComponent(btnSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnClose)))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,6 +197,10 @@ public class AddSupplierScreen extends javax.swing.JFrame {
                                            JOptionPane.ERROR_MESSAGE);
        }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
