@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  * Database class.
@@ -29,7 +30,9 @@ public class Database {
             dbConnection = DriverManager.getConnection(dbPath);
             return true;
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            //  Terminate program if database not found.
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
         return false;
     }
