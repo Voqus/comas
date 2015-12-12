@@ -1,5 +1,6 @@
 package comas.database;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Database {
 
-    protected static final String dbPath = "jdbc:ucanaccess://C:\\Users\\gabri\\Desktop\\EManagementDatabase.accdb";
+    private static final String dbPath = "jdbc:ucanaccess://" + new File("src/comas/res/EManagementDatabase.accdb").getAbsolutePath();
     protected Connection dbConnection;
     protected ResultSet dataResults;
     protected PreparedStatement dbStatement;
