@@ -54,6 +54,7 @@ public class Database {
                 dataResults.close();
             }
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }

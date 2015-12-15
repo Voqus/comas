@@ -50,7 +50,10 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     public static void loadStorageTable() {
-        final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.Stock FROM Storage,Products WHERE Storage.ProductId = Products.ProductId";
+        //  Selects the StorageId, ProductName, ProductDescription, Supplier's TaxRegister, Product's SellingPrice and Product's Stock
+        final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.ProductDescription, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock"
+                + " FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
+                + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
         StorageDatabase database = new StorageDatabase();
         database.connect();
 
@@ -90,8 +93,9 @@ public class MainScreen extends javax.swing.JFrame {
         clientMenu = new javax.swing.JMenu();
         insertClientMenuItem = new javax.swing.JMenuItem();
         deleteClientMenuItem = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        supplierMenu = new javax.swing.JMenu();
+        insertSupplierMenuItem = new javax.swing.JMenuItem();
+        deleteSupplierMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpProgramMenuItem = new javax.swing.JMenuItem();
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
@@ -303,17 +307,20 @@ public class MainScreen extends javax.swing.JFrame {
 
         menuBar.add(clientMenu);
 
-        jMenu1.setText("Προμηθευτές");
+        supplierMenu.setText("Προμηθευτές");
 
-        jMenuItem1.setText("Καταχώριση Προμηθευτή");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        insertSupplierMenuItem.setText("Καταχώριση Προμηθευτή");
+        insertSupplierMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                insertSupplierMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        supplierMenu.add(insertSupplierMenuItem);
 
-        menuBar.add(jMenu1);
+        deleteSupplierMenuItem.setText("Διαγραφή Προμηθευτή");
+        supplierMenu.add(deleteSupplierMenuItem);
+
+        menuBar.add(supplierMenu);
 
         helpMenu.setText("Βοήθεια");
 
@@ -351,9 +358,9 @@ public class MainScreen extends javax.swing.JFrame {
         new AddClientScreen().setVisible(true);
     }//GEN-LAST:event_insertClientMenuItemActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void insertSupplierMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertSupplierMenuItemActionPerformed
         new AddSupplierScreen().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_insertSupplierMenuItemActionPerformed
 
     /**
      * Creates a new process of the program and terminates the first one.
@@ -406,13 +413,13 @@ public class MainScreen extends javax.swing.JFrame {
     public static javax.swing.JTable clientTable;
     private javax.swing.JMenuItem contactMenuItem;
     private javax.swing.JMenuItem deleteClientMenuItem;
+    private javax.swing.JMenuItem deleteSupplierMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator helpMenuSeparator;
     private javax.swing.JMenuItem helpProgramMenuItem;
     private javax.swing.JMenuItem insertClientMenuItem;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem insertSupplierMenuItem;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBalance;
@@ -431,6 +438,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane sellsPane;
     private javax.swing.JPanel storagePane;
     public static javax.swing.JTable storageTable;
+    private javax.swing.JMenu supplierMenu;
     private javax.swing.JScrollPane supplierPane;
     public static javax.swing.JTable supplierTable;
     // End of variables declaration//GEN-END:variables
