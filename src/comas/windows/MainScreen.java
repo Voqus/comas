@@ -1,6 +1,7 @@
 package comas.windows;
 
 import comas.Comas;
+import comas.base.Client;
 import comas.database.ClientDatabase;
 import comas.database.StorageDatabase;
 import comas.database.SupplierDatabase;
@@ -21,11 +22,12 @@ public class MainScreen extends javax.swing.JFrame {
         loadClientTable();
         loadSupplierTable();
         loadStorageTable();
+        
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     }
 
-    private void loadClientTable() {
+    public static void loadClientTable() {
 
         final String QUERY = "SELECT * FROM Clients";
         ClientDatabase database = new ClientDatabase();
@@ -36,7 +38,7 @@ public class MainScreen extends javax.swing.JFrame {
         database.close();
     }
 
-    private void loadSupplierTable() {
+    public static void loadSupplierTable() {
 
         final String QUERY = "SELECT * FROM Suppliers";
         SupplierDatabase database = new SupplierDatabase();
@@ -47,7 +49,7 @@ public class MainScreen extends javax.swing.JFrame {
         database.close();
     }
 
-    private void loadStorageTable() {
+    public static void loadStorageTable() {
         final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.Stock FROM Storage,Products WHERE Storage.ProductId = Products.ProductId";
         StorageDatabase database = new StorageDatabase();
         database.connect();
@@ -70,7 +72,8 @@ public class MainScreen extends javax.swing.JFrame {
         storagePane = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         storageTable = new javax.swing.JTable();
-        sellsPane = new javax.swing.JPanel();
+        sellsPane = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         marketPane = new javax.swing.JPanel();
         DeskPane = new javax.swing.JPanel();
         lblBalance = new javax.swing.JLabel();
@@ -86,7 +89,6 @@ public class MainScreen extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         clientMenu = new javax.swing.JMenu();
         insertClientMenuItem = new javax.swing.JMenuItem();
-        editClientMenuItem = new javax.swing.JMenuItem();
         deleteClientMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -114,6 +116,11 @@ public class MainScreen extends javax.swing.JFrame {
         ));
         clientTable.setEditingColumn(1);
         clientTable.setEditingRow(1);
+        clientTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clientTableMouseClicked(evt);
+            }
+        });
         clientPane.setViewportView(clientTable);
 
         mainTabbedPane.addTab("Πελατολόγιο", clientPane);
@@ -162,16 +169,15 @@ public class MainScreen extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Αποθήκη", storagePane);
 
-        javax.swing.GroupLayout sellsPaneLayout = new javax.swing.GroupLayout(sellsPane);
-        sellsPane.setLayout(sellsPaneLayout);
-        sellsPaneLayout.setHorizontalGroup(
-            sellsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 813, Short.MAX_VALUE)
-        );
-        sellsPaneLayout.setVerticalGroup(
-            sellsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-        );
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        sellsPane.setViewportView(jTable1);
 
         mainTabbedPane.addTab("Πωλήσεις", sellsPane);
 
@@ -292,9 +298,6 @@ public class MainScreen extends javax.swing.JFrame {
         });
         clientMenu.add(insertClientMenuItem);
 
-        editClientMenuItem.setText("Επεξεργασία Πελάτη");
-        clientMenu.add(editClientMenuItem);
-
         deleteClientMenuItem.setText("Διαγραφή Πελάτη");
         clientMenu.add(deleteClientMenuItem);
 
@@ -380,14 +383,29 @@ public class MainScreen extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_restartMenuItemActionPerformed
 
+    private void clientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientTableMouseClicked
+        if (evt.getClickCount() > 1) {
+            int rowIndex = clientTable.getSelectedRow();
+            String clientName = clientTable.getModel().getValueAt(rowIndex, 2).toString();
+            int clientId = Integer.parseInt(clientTable.getModel().getValueAt(rowIndex,0).toString());
+            final String QUERY = "SELECT * FROM Clients WHERE FirstName='" + clientName + "'";
+
+            ClientDatabase database = new ClientDatabase();
+            database.connect();
+            Client client = database.selectClient(QUERY);
+            database.close();
+
+            new EditClientScreen(client,clientId).setVisible(true);
+        }
+    }//GEN-LAST:event_clientTableMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;
     private javax.swing.JMenu clientMenu;
     private javax.swing.JScrollPane clientPane;
-    private javax.swing.JTable clientTable;
+    public static javax.swing.JTable clientTable;
     private javax.swing.JMenuItem contactMenuItem;
     private javax.swing.JMenuItem deleteClientMenuItem;
-    private javax.swing.JMenuItem editClientMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator helpMenuSeparator;
@@ -396,6 +414,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblMg3;
     private javax.swing.JLabel lblMsg1;
@@ -409,10 +428,10 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu programMenu;
     private javax.swing.JPopupMenu.Separator programMenuSeparator;
     private javax.swing.JMenuItem restartMenuItem;
-    private javax.swing.JPanel sellsPane;
+    private javax.swing.JScrollPane sellsPane;
     private javax.swing.JPanel storagePane;
-    private javax.swing.JTable storageTable;
+    public static javax.swing.JTable storageTable;
     private javax.swing.JScrollPane supplierPane;
-    private javax.swing.JTable supplierTable;
+    public static javax.swing.JTable supplierTable;
     // End of variables declaration//GEN-END:variables
 }

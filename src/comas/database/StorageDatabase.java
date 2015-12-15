@@ -2,6 +2,7 @@ package comas.database;
 
 import java.sql.SQLException;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -9,8 +10,9 @@ public class StorageDatabase extends Database {
 
     /**
      * Loads table for the main JFrame to import data.
+     *
      * @param Query
-     * @return 
+     * @return
      */
     public TableModel selectTable(final String Query) {
         connect();
@@ -41,6 +43,7 @@ public class StorageDatabase extends Database {
                 }
             };
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
         close();
