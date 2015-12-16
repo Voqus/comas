@@ -3,6 +3,7 @@ package comas.windows;
 import comas.Comas;
 import comas.base.Client;
 import comas.database.ClientDatabase;
+import comas.database.PurchaseDatabase;
 import comas.database.StorageDatabase;
 import comas.database.SupplierDatabase;
 import java.io.File;
@@ -22,7 +23,9 @@ public class MainScreen extends javax.swing.JFrame {
         loadClientTable();
         loadSupplierTable();
         loadStorageTable();
-        
+        loadPurchaseTable();
+        loadSellTable();
+
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     }
@@ -62,6 +65,27 @@ public class MainScreen extends javax.swing.JFrame {
         database.close();
     }
 
+    public static void loadPurchaseTable() {
+        final String QUERY = "SELECT * FROM Purchases";
+        PurchaseDatabase database = new PurchaseDatabase();
+        database.connect();
+
+        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        purchaseTable.setModel(dtm);
+        database.close();
+    }
+
+    public static void loadSellTable() {
+        final String QUERY = "SELECT Sells.SellId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
+                + "FROM Sells, Products, Clients WHERE Sells.ProductsId = Products.ProductId AND Sells.ClientId=Clients.ClientId";
+        PurchaseDatabase database = new PurchaseDatabase();
+        database.connect();
+
+        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        sellTable.setModel(dtm);
+        database.close();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,12 +96,12 @@ public class MainScreen extends javax.swing.JFrame {
         clientTable = new javax.swing.JTable();
         supplierPane = new javax.swing.JScrollPane();
         supplierTable = new javax.swing.JTable();
-        storagePane = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        storagePane = new javax.swing.JScrollPane();
         storageTable = new javax.swing.JTable();
         sellsPane = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        marketPane = new javax.swing.JPanel();
+        sellTable = new javax.swing.JTable();
+        marketPane = new javax.swing.JScrollPane();
+        purchaseTable = new javax.swing.JTable();
         DeskPane = new javax.swing.JPanel();
         lblBalance = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
@@ -105,7 +129,6 @@ public class MainScreen extends javax.swing.JFrame {
         setTitle("ΛΕΔ: Λογισμικό Εμπορικής Διαχείρησης");
         setMinimumSize(new java.awt.Dimension(800, 504));
         setName("mainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(520, 504));
 
         mainTabbedPane.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
@@ -152,28 +175,11 @@ public class MainScreen extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(storageTable);
-
-        javax.swing.GroupLayout storagePaneLayout = new javax.swing.GroupLayout(storagePane);
-        storagePane.setLayout(storagePaneLayout);
-        storagePaneLayout.setHorizontalGroup(
-            storagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(storagePaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        storagePaneLayout.setVerticalGroup(
-            storagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(storagePaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-        );
+        storagePane.setViewportView(storageTable);
 
         mainTabbedPane.addTab("Αποθήκη", storagePane);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        sellTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -181,20 +187,19 @@ public class MainScreen extends javax.swing.JFrame {
 
             }
         ));
-        sellsPane.setViewportView(jTable1);
+        sellsPane.setViewportView(sellTable);
 
         mainTabbedPane.addTab("Πωλήσεις", sellsPane);
 
-        javax.swing.GroupLayout marketPaneLayout = new javax.swing.GroupLayout(marketPane);
-        marketPane.setLayout(marketPaneLayout);
-        marketPaneLayout.setHorizontalGroup(
-            marketPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 813, Short.MAX_VALUE)
-        );
-        marketPaneLayout.setVerticalGroup(
-            marketPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-        );
+        purchaseTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        marketPane.setViewportView(purchaseTable);
 
         mainTabbedPane.addTab("Αγορές", marketPane);
 
@@ -216,19 +221,9 @@ public class MainScreen extends javax.swing.JFrame {
         DeskPane.setLayout(DeskPaneLayout);
         DeskPaneLayout.setHorizontalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMsg4)
-                .addGap(18, 18, 18)
-                .addComponent(lblBalance)
-                .addGap(21, 21, 21))
             .addGroup(DeskPaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DeskPaneLayout.createSequentialGroup()
-                        .addGap(0, 330, Short.MAX_VALUE)
-                        .addComponent(lblTitle)
-                        .addGap(341, 341, 341))
                     .addGroup(DeskPaneLayout.createSequentialGroup()
                         .addComponent(lblMsg1)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -236,7 +231,18 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMsg2)
                             .addComponent(lblMg3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
+                        .addGap(0, 330, Short.MAX_VALUE)
+                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
+                                .addComponent(lblTitle)
+                                .addGap(341, 341, 341))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
+                                .addComponent(lblMsg4)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblBalance)
+                                .addGap(21, 21, 21))))))
         );
         DeskPaneLayout.setVerticalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,7 +400,7 @@ public class MainScreen extends javax.swing.JFrame {
         if (evt.getClickCount() > 1) {
             int rowIndex = clientTable.getSelectedRow();
             String clientName = clientTable.getModel().getValueAt(rowIndex, 2).toString();
-            int clientId = Integer.parseInt(clientTable.getModel().getValueAt(rowIndex,0).toString());
+            int clientId = Integer.parseInt(clientTable.getModel().getValueAt(rowIndex, 0).toString());
             final String QUERY = "SELECT * FROM Clients WHERE FirstName='" + clientName + "'";
 
             ClientDatabase database = new ClientDatabase();
@@ -402,7 +408,7 @@ public class MainScreen extends javax.swing.JFrame {
             Client client = database.selectClient(QUERY);
             database.close();
 
-            new EditClientScreen(client,clientId).setVisible(true);
+            new EditClientScreen(client, clientId).setVisible(true);
         }
     }//GEN-LAST:event_clientTableMouseClicked
 
@@ -420,8 +426,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem helpProgramMenuItem;
     private javax.swing.JMenuItem insertClientMenuItem;
     private javax.swing.JMenuItem insertSupplierMenuItem;
-    private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblMg3;
     private javax.swing.JLabel lblMsg1;
@@ -430,13 +434,15 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTabbedPane mainTabbedPane;
-    private javax.swing.JPanel marketPane;
+    private javax.swing.JScrollPane marketPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu programMenu;
     private javax.swing.JPopupMenu.Separator programMenuSeparator;
+    public static javax.swing.JTable purchaseTable;
     private javax.swing.JMenuItem restartMenuItem;
+    public static javax.swing.JTable sellTable;
     private javax.swing.JScrollPane sellsPane;
-    private javax.swing.JPanel storagePane;
+    private javax.swing.JScrollPane storagePane;
     public static javax.swing.JTable storageTable;
     private javax.swing.JMenu supplierMenu;
     private javax.swing.JScrollPane supplierPane;
