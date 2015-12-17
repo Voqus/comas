@@ -1,14 +1,16 @@
 package comas.database;
 
 import comas.base.Client;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class ClientDatabase extends Database {
-
+    Statement dbSimpleStatement = null;
     /**
      * Builds the table with data then returns the tablemodel.
      * @param Query
@@ -163,4 +165,20 @@ public class ClientDatabase extends Database {
         return client;
     }
 
+    
+    public boolean deleteClient(String TaxReg){
+        connect();
+        try{
+            dbStatement = dbConnection.prepareStatement("DELETE FROM Clients WHERE TaxRegister = ?");
+            dbStatement.setString(1,TaxReg);
+            dbStatement.executeUpdate();
+            close();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        close();
+        return false;
+    }
+    
 }

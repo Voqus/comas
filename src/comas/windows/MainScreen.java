@@ -114,12 +114,13 @@ public class MainScreen extends javax.swing.JFrame {
         restartMenuItem = new javax.swing.JMenuItem();
         programMenuSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
-        clientMenu = new javax.swing.JMenu();
-        insertClientMenuItem = new javax.swing.JMenuItem();
-        deleteClientMenuItem = new javax.swing.JMenuItem();
-        supplierMenu = new javax.swing.JMenu();
-        insertSupplierMenuItem = new javax.swing.JMenuItem();
-        deleteSupplierMenuItem = new javax.swing.JMenuItem();
+        actionMenu = new javax.swing.JMenu();
+        addClientMenu = new javax.swing.JMenuItem();
+        addSupplierMenu = new javax.swing.JMenuItem();
+        addProductMenu = new javax.swing.JMenuItem();
+        seperator = new javax.swing.JPopupMenu.Separator();
+        newPurchase = new javax.swing.JMenuItem();
+        newSell = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpProgramMenuItem = new javax.swing.JMenuItem();
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
@@ -255,7 +256,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(lblMsg2)
                 .addGap(27, 27, 27)
                 .addComponent(lblMg3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBalance)
                     .addComponent(lblMsg4))
@@ -298,35 +299,35 @@ public class MainScreen extends javax.swing.JFrame {
 
         menuBar.add(programMenu);
 
-        clientMenu.setText("Πελατολόγιο");
+        actionMenu.setText("Ενέργειες");
 
-        insertClientMenuItem.setText("Καταχώριση Πελάτη");
-        insertClientMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        addClientMenu.setText("Καταχώριση Πελάτη");
+        addClientMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertClientMenuItemActionPerformed(evt);
+                addClientMenuActionPerformed(evt);
             }
         });
-        clientMenu.add(insertClientMenuItem);
+        actionMenu.add(addClientMenu);
 
-        deleteClientMenuItem.setText("Διαγραφή Πελάτη");
-        clientMenu.add(deleteClientMenuItem);
-
-        menuBar.add(clientMenu);
-
-        supplierMenu.setText("Προμηθευτές");
-
-        insertSupplierMenuItem.setText("Καταχώριση Προμηθευτή");
-        insertSupplierMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        addSupplierMenu.setText("Καταχώριση Προμηθευτή");
+        addSupplierMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertSupplierMenuItemActionPerformed(evt);
+                addSupplierMenuActionPerformed(evt);
             }
         });
-        supplierMenu.add(insertSupplierMenuItem);
+        actionMenu.add(addSupplierMenu);
 
-        deleteSupplierMenuItem.setText("Διαγραφή Προμηθευτή");
-        supplierMenu.add(deleteSupplierMenuItem);
+        addProductMenu.setText("Καταχώριση Προιόντος");
+        actionMenu.add(addProductMenu);
+        actionMenu.add(seperator);
 
-        menuBar.add(supplierMenu);
+        newPurchase.setText("Νεα Αγορά");
+        actionMenu.add(newPurchase);
+
+        newSell.setText("Νέα Πόληση");
+        actionMenu.add(newSell);
+
+        menuBar.add(actionMenu);
 
         helpMenu.setText("Βοήθεια");
 
@@ -359,14 +360,6 @@ public class MainScreen extends javax.swing.JFrame {
         // Τερματισμός προγράμματος
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
-    private void insertClientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertClientMenuItemActionPerformed
-        new AddClientScreen().setVisible(true);
-    }//GEN-LAST:event_insertClientMenuItemActionPerformed
-
-    private void insertSupplierMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertSupplierMenuItemActionPerformed
-        new AddSupplierScreen().setVisible(true);
-    }//GEN-LAST:event_insertSupplierMenuItemActionPerformed
 
     /**
      * Creates a new process of the program and terminates the first one.
@@ -412,20 +405,27 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clientTableMouseClicked
 
+    private void addClientMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClientMenuActionPerformed
+        new AddClientScreen().setVisible(true);
+    }//GEN-LAST:event_addClientMenuActionPerformed
+
+    private void addSupplierMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierMenuActionPerformed
+       new AddSupplierScreen().setVisible(true);
+    }//GEN-LAST:event_addSupplierMenuActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;
-    private javax.swing.JMenu clientMenu;
+    private javax.swing.JMenu actionMenu;
+    private javax.swing.JMenuItem addClientMenu;
+    private javax.swing.JMenuItem addProductMenu;
+    private javax.swing.JMenuItem addSupplierMenu;
     private javax.swing.JScrollPane clientPane;
     public static javax.swing.JTable clientTable;
     private javax.swing.JMenuItem contactMenuItem;
-    private javax.swing.JMenuItem deleteClientMenuItem;
-    private javax.swing.JMenuItem deleteSupplierMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator helpMenuSeparator;
     private javax.swing.JMenuItem helpProgramMenuItem;
-    private javax.swing.JMenuItem insertClientMenuItem;
-    private javax.swing.JMenuItem insertSupplierMenuItem;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblMg3;
     private javax.swing.JLabel lblMsg1;
@@ -436,15 +436,17 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JScrollPane marketPane;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem newPurchase;
+    private javax.swing.JMenuItem newSell;
     private javax.swing.JMenu programMenu;
     private javax.swing.JPopupMenu.Separator programMenuSeparator;
     public static javax.swing.JTable purchaseTable;
     private javax.swing.JMenuItem restartMenuItem;
     public static javax.swing.JTable sellTable;
     private javax.swing.JScrollPane sellsPane;
+    private javax.swing.JPopupMenu.Separator seperator;
     private javax.swing.JScrollPane storagePane;
     public static javax.swing.JTable storageTable;
-    private javax.swing.JMenu supplierMenu;
     private javax.swing.JScrollPane supplierPane;
     public static javax.swing.JTable supplierTable;
     // End of variables declaration//GEN-END:variables

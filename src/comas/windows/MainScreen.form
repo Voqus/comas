@@ -29,42 +29,42 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="clientMenu">
+        <Menu class="javax.swing.JMenu" name="actionMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x3a0;&#x3b5;&#x3bb;&#x3b1;&#x3c4;&#x3bf;&#x3bb;&#x3cc;&#x3b3;&#x3b9;&#x3bf;"/>
+            <Property name="text" type="java.lang.String" value="&#x395;&#x3bd;&#x3ad;&#x3c1;&#x3b3;&#x3b5;&#x3b9;&#x3b5;&#x3c2;"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="insertClientMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="addClientMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x39a;&#x3b1;&#x3c4;&#x3b1;&#x3c7;&#x3ce;&#x3c1;&#x3b9;&#x3c3;&#x3b7; &#x3a0;&#x3b5;&#x3bb;&#x3ac;&#x3c4;&#x3b7;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertClientMenuItemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addClientMenuActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="deleteClientMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3b3;&#x3c1;&#x3b1;&#x3c6;&#x3ae; &#x3a0;&#x3b5;&#x3bb;&#x3ac;&#x3c4;&#x3b7;"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="supplierMenu">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x3a0;&#x3c1;&#x3bf;&#x3bc;&#x3b7;&#x3b8;&#x3b5;&#x3c5;&#x3c4;&#x3ad;&#x3c2;"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="insertSupplierMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="addSupplierMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x39a;&#x3b1;&#x3c4;&#x3b1;&#x3c7;&#x3ce;&#x3c1;&#x3b9;&#x3c3;&#x3b7; &#x3a0;&#x3c1;&#x3bf;&#x3bc;&#x3b7;&#x3b8;&#x3b5;&#x3c5;&#x3c4;&#x3ae;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertSupplierMenuItemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSupplierMenuActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="deleteSupplierMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="addProductMenu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3b3;&#x3c1;&#x3b1;&#x3c6;&#x3ae; &#x3a0;&#x3c1;&#x3bf;&#x3bc;&#x3b7;&#x3b8;&#x3b5;&#x3c5;&#x3c4;&#x3ae;"/>
+                <Property name="text" type="java.lang.String" value="&#x39a;&#x3b1;&#x3c4;&#x3b1;&#x3c7;&#x3ce;&#x3c1;&#x3b9;&#x3c3;&#x3b7; &#x3a0;&#x3c1;&#x3bf;&#x3b9;&#x3cc;&#x3bd;&#x3c4;&#x3bf;&#x3c2;"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="seperator">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="newPurchase">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x39d;&#x3b5;&#x3b1; &#x391;&#x3b3;&#x3bf;&#x3c1;&#x3ac;"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="newSell">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x39d;&#x3ad;&#x3b1; &#x3a0;&#x3cc;&#x3bb;&#x3b7;&#x3c3;&#x3b7;"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -356,7 +356,7 @@
                           <Component id="lblMsg2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="lblMg3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="137" max="32767" attributes="0"/>
+                          <EmptySpace pref="139" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblBalance" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblMsg4" alignment="3" min="-2" max="-2" attributes="0"/>
