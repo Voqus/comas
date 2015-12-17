@@ -286,7 +286,7 @@ public class EditClientScreen extends javax.swing.JFrame {
         if (new ClientDatabase().updateClient(client, clientId)) {
             JOptionPane.showMessageDialog(null,
                     "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
-                    "Επιτυχείς Καταχώριση",
+                    "Επιτυχής Καταχώριση",
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadClientTable();
             this.dispose();
@@ -318,12 +318,12 @@ public class EditClientScreen extends javax.swing.JFrame {
             ClientDatabase database = new ClientDatabase();
             if(database.deleteClient(clientTaxReg)){
                 MainScreen.loadClientTable();
-                JOptionPane.showMessageDialog(this, "Η διαγραφή του πελάτη ολοκληρώθηκε επιτυχώς", "Επιτυχείς Διαγραφή",JOptionPane.INFORMATION_MESSAGE);  
+                JOptionPane.showMessageDialog(this, "Η διαγραφή του πελάτη ολοκληρώθηκε επιτυχώς", "Επιτυχής Διαγραφή",JOptionPane.INFORMATION_MESSAGE);  
                 this.dispose();
             }
             else{
              // Joptionpane error message
-             JOptionPane.showMessageDialog(this, "Ανεπιτυχείς διαγραφή πελάτη ", "Σφάλμα",JOptionPane.ERROR_MESSAGE);
+             JOptionPane.showMessageDialog(this, "Ανεπιτυχής διαγραφή πελάτη ", "Σφάλμα",JOptionPane.ERROR_MESSAGE);
             }
         }else{
           this.dispose();
