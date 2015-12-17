@@ -2,6 +2,7 @@ package comas.windows;
 
 import comas.Comas;
 import comas.base.Client;
+import comas.base.Supplier;
 import comas.database.ClientDatabase;
 import comas.database.PurchaseDatabase;
 import comas.database.StorageDatabase;
@@ -164,6 +165,11 @@ public class MainScreen extends javax.swing.JFrame {
 
             }
         ));
+        supplierTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supplierTableMouseClicked(evt);
+            }
+        });
         supplierPane.setViewportView(supplierTable);
 
         mainTabbedPane.addTab("Προμηθευτές", supplierPane);
@@ -412,6 +418,22 @@ public class MainScreen extends javax.swing.JFrame {
     private void addSupplierMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierMenuActionPerformed
        new AddSupplierScreen().setVisible(true);
     }//GEN-LAST:event_addSupplierMenuActionPerformed
+
+    private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
+      if (evt.getClickCount() > 1) {
+            int rowIndex = supplierTable.getSelectedRow();
+            String supplierId = supplierTable.getModel().getValueAt(rowIndex, 0).toString();
+            int clientId = Integer.parseInt(supplierTable.getModel().getValueAt(rowIndex, 0).toString());
+            final String QUERY = "SELECT * FROM Suppliers WHERE SupplierId=" + supplierId ;
+   
+          SupplierDatabase database = new SupplierDatabase();
+            database.connect();
+            Supplier client = database.selectSupplier(QUERY);
+            database.close();
+
+            new EditSupplierScreen(client, clientId).setVisible(true);
+        }
+    }//GEN-LAST:event_supplierTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;

@@ -189,7 +189,8 @@ public class AddSupplierScreen extends javax.swing.JFrame {
                                            "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
                                            "Επιτυχείς Καταχώριση",
                                            JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+          MainScreen.loadSupplierTable();
+          this.dispose();
         }else{
             JOptionPane.showMessageDialog (null,
                                            "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",

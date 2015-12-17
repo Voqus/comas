@@ -46,6 +46,36 @@ public class SupplierDatabase extends Database {
         return null;
     }
 
+    public Supplier selectSupplier(final String QUERY){
+        Supplier supplier = null;
+        connect();
+        try {
+            dbStatement = dbConnection.prepareStatement(QUERY);
+            dataResults = dbStatement.executeQuery();
+            if (dataResults.next()) {
+                supplier = new Supplier(dataResults.getString("FirstName"),
+                                        dataResults.getString("LastName"),
+                                        dataResults.getString("Address"),
+                                        dataResults.getString("City"),
+                                        dataResults.getString("TelephoneA"),                
+                                        dataResults.getString("TelephoneB"),
+                                        dataResults.getString("PostalCode"),
+                                        dataResults.getString("TaxRegister"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No result found.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        close();
+        return supplier;
+    }
+    
+    
     public boolean insertSupplier(Supplier supplier) {
         connect();
         try {
@@ -66,6 +96,49 @@ public class SupplierDatabase extends Database {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
+        }
+        close();
+        return false;
+    }
+    
+    public boolean updateSupplier(Supplier supplier, final int supplierId){
+        connect();
+        try {
+            dbStatement = dbConnection.prepareStatement("UPDATE Suppliers SET "
+                                                      + "FirstName = ?, LastName=?,TelephoneA=?,TelephoneB=?,"
+                                                      + "Address = ?, City = ?, PostalCode = ? ,TaxRegister = ? WHERE SupplierId = ?");
+            dbStatement.setString(1, supplier.getFirstName());
+            dbStatement.setString(2, supplier.getLastName());
+            dbStatement.setString(3, supplier.getTelephoneA());
+            dbStatement.setString(4, supplier.getTelephoneB());
+            dbStatement.setString(5, supplier.getAddress());
+            dbStatement.setString(6, supplier.getCity());
+            dbStatement.setString(7, supplier.getPostalCode());
+            dbStatement.setString(8, supplier.getTaxRegister());
+            dbStatement.setInt(9, supplierId);
+            dbStatement.executeUpdate();
+            close();
+            return true;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            System.exit(1);
+        }
+        close();
+        return false;
+    }
+        
+    
+    public boolean deleteSupplier(final int supplierTaxReg){
+         connect();
+        try{
+            dbStatement = dbConnection.prepareStatement("DELETE FROM Suppliers WHERE SupplierId= ?");
+            dbStatement.setInt(1,supplierTaxReg);
+            dbStatement.executeUpdate();
+            close();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
         }
         close();
         return false;
