@@ -66,7 +66,7 @@ public class EditSupplierScreen extends javax.swing.JFrame {
         taxRegisterLabel = new javax.swing.JLabel();
         taxRegisterField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         titleLabel.setText("Επεξεργασία Στοιχείων Προμηθευτή");
@@ -237,7 +237,7 @@ public class EditSupplierScreen extends javax.swing.JFrame {
             SupplierDatabase database = new SupplierDatabase();
             if(database.deleteSupplier(supplierId)){
                 MainScreen.loadSupplierTable();
-                JOptionPane.showMessageDialog(this, "Η διαγραφή του προμηθευτή ολοκληρώθηκε επιτυχώς", "Επιτυχείς Διαγραφή",JOptionPane.INFORMATION_MESSAGE);  
+                JOptionPane.showMessageDialog(this, "Η διαγραφή του προμηθευτή ολοκληρώθηκε επιτυχώς", "Επιτυχής Διαγραφή",JOptionPane.INFORMATION_MESSAGE);  
                 this.dispose();
             }
             else{
