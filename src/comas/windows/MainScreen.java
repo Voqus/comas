@@ -453,10 +453,11 @@ public class MainScreen extends javax.swing.JFrame {
        //TODO
        //1. new panel
        //2. product textfields - X stock, if not enough return errors.
-       //3. client taxregister textfield to associate on the tables
+       //3. client id textfield to associate on the tables
        //4. insert.
        //5. load on jtable, if success.
-       //6. seperate option for pdf extraction
+       //6. separate option for pdf extraction
+       new AddSellScreen().setVisible(true);
     }//GEN-LAST:event_newSellActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
