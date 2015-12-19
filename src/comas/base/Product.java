@@ -8,15 +8,17 @@ public class Product {
     private String   productName;
     private String   productDescription;
     private String   measurementUnit;
+    private float    weight;
     private float    purchasePrice;
     private float    sellingPrice;
     private int      stock;
     
-    public Product(String productName, String productDescription, String measurementUnit, float purchasePrice, float sellingPrice, int stock)
+    public Product(String productName, String productDescription, String measurementUnit, float weight, float purchasePrice, float sellingPrice, int stock)
     {
         this.productName            = productName;
         this.productDescription     = productDescription;
         this.measurementUnit        = measurementUnit;
+        this.weight                 = weight;
         this.purchasePrice          = purchasePrice;
         this.sellingPrice           = sellingPrice;
         this.stock                  = stock;
@@ -45,7 +47,14 @@ public class Product {
     public void setMeasurementUnit(String measurementUnit) {
         this.measurementUnit = measurementUnit;
     }
+    
+    public float getWeight() {
+        return weight;
+    }
 
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
     public float getPurchasePrice() {
         return purchasePrice;
     }

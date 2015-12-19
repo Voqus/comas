@@ -252,7 +252,7 @@ public class AddClientScreen extends javax.swing.JFrame {
         if (new ClientDatabase().insertClient(client)) {
             JOptionPane.showMessageDialog(null,
                     "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
-                    "Επιτυχείς Καταχώριση",
+                    "Επιτυχής Καταχώριση",
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadClientTable();
             this.dispose();

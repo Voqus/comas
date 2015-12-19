@@ -61,11 +61,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x39d;&#x3b5;&#x3b1; &#x391;&#x3b3;&#x3bf;&#x3c1;&#x3ac;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newPurchaseActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="newSell">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x39d;&#x3ad;&#x3b1; &#x3a0;&#x3cc;&#x3bb;&#x3b7;&#x3c3;&#x3b7;"/>
+                <Property name="text" type="java.lang.String" value="&#x39d;&#x3ad;&#x3b1; &#x3a0;&#x3ce;&#x3bb;&#x3b7;&#x3c3;&#x3b7;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newSellActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -55,8 +55,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     public static void loadStorageTable() {
         //  Selects the StorageId, ProductName, ProductDescription, Supplier's TaxRegister, Product's SellingPrice and Product's Stock
-        final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.ProductDescription, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock"
-                + " FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
+        final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
+                + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
                 + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
         StorageDatabase database = new StorageDatabase();
         database.connect();
@@ -328,9 +328,19 @@ public class MainScreen extends javax.swing.JFrame {
         actionMenu.add(seperator);
 
         newPurchase.setText("Νεα Αγορά");
+        newPurchase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPurchaseActionPerformed(evt);
+            }
+        });
         actionMenu.add(newPurchase);
 
-        newSell.setText("Νέα Πόληση");
+        newSell.setText("Νέα Πώληση");
+        newSell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newSellActionPerformed(evt);
+            }
+        });
         actionMenu.add(newSell);
 
         menuBar.add(actionMenu);
@@ -434,6 +444,20 @@ public class MainScreen extends javax.swing.JFrame {
             new EditSupplierScreen(client, clientId).setVisible(true);
         }
     }//GEN-LAST:event_supplierTableMouseClicked
+
+    private void newPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPurchaseActionPerformed
+       new AddPurchaseScreen().setVisible(true);
+    }//GEN-LAST:event_newPurchaseActionPerformed
+
+    private void newSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSellActionPerformed
+       //TODO
+       //1. new panel
+       //2. product textfields - X stock, if not enough return errors.
+       //3. client taxregister textfield to associate on the tables
+       //4. insert.
+       //5. load on jtable, if success.
+       //6. seperate option for pdf extraction
+    }//GEN-LAST:event_newSellActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;
