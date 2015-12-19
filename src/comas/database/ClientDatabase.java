@@ -163,11 +163,11 @@ public class ClientDatabase extends Database {
     }
 
     
-    public boolean deleteClient(String TaxReg){
+    public boolean deleteClient(final int TaxReg){
         connect();
         try{
             dbStatement = dbConnection.prepareStatement("DELETE FROM Clients WHERE TaxRegister = ?");
-            dbStatement.setString(1,TaxReg);
+            dbStatement.setInt(1,TaxReg);
             dbStatement.executeUpdate();
             close();
             return true;

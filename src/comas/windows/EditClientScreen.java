@@ -5,7 +5,7 @@ import comas.database.ClientDatabase;
 import javax.swing.JOptionPane;
 
 public class EditClientScreen extends javax.swing.JFrame {
-    private String clientTaxReg;
+
     private int clientId;
 
     /**
@@ -30,9 +30,7 @@ public class EditClientScreen extends javax.swing.JFrame {
         postalCodeField.setText(client.getPostalCode());
         taxRegisterField.setText(client.getTaxRegister());
         professionCodeField.setText(client.getProfessionCode());
-
         
-        clientTaxReg = taxRegisterField.getText();
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     }
@@ -306,7 +304,7 @@ public class EditClientScreen extends javax.swing.JFrame {
         Object[] options = {"Ναι",
                             "Όχι"};
         int selectedOption = JOptionPane.showOptionDialog(this,
-                                                          "Είστε Σίγουροι για την διαγραφή του πελάτη με ΑΦΜ:"+clientTaxReg,
+                                                          "Είστε Σίγουροι για την διαγραφή του πελάτη με ID: "+clientId,
                                                           "Επιβεβαίωση",
                                                           JOptionPane.YES_NO_OPTION,
                                                           JOptionPane.INFORMATION_MESSAGE,
@@ -316,7 +314,7 @@ public class EditClientScreen extends javax.swing.JFrame {
         
         if (selectedOption == 0){   
             ClientDatabase database = new ClientDatabase();
-            if(database.deleteClient(clientTaxReg)){
+            if(database.deleteClient(clientId)){
                 MainScreen.loadClientTable();
                 JOptionPane.showMessageDialog(this, "Η διαγραφή του πελάτη ολοκληρώθηκε επιτυχώς", "Επιτυχής Διαγραφή",JOptionPane.INFORMATION_MESSAGE);  
                 this.dispose();
