@@ -11,3 +11,11 @@ Later on, there will be a setup.exe for the installation of the software but rig
 ### Team Members ###
 * Vasilis Chados
 * Mellides Gabriel
+
+### TODO List: ###
+* Validation checks on each sub-window for each textfield, etc.
+* Singleton pattern for only one instance creation of each sub-window.
+* CashDesk pane, to set/update labels correctly.
+* UML class diagram
+* Use case  diagram
+* Database relationships diagarm
