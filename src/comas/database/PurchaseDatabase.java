@@ -51,7 +51,13 @@ public class PurchaseDatabase extends Database {
         close();
         return null;
     }
-
+    
+    /**
+     * Insertion method for purchase functionality of the GUI.
+     * @param product
+     * @param supplierId
+     * @return 
+     */
     public boolean insertPurchase(Product product, final int supplierId) {
         int productId = 0;
         //TODO: validation check if supplierId actually exists.
@@ -78,7 +84,13 @@ public class PurchaseDatabase extends Database {
             
             //if succeeded, save it to a local variable
             if(dataResults.next())
+            {
                 productId = dataResults.getInt("ProductId");
+            }
+            else // if it didn't, terminate the program and return false
+            {
+                return false;
+            }
             
             //add foreign keys to table
             dbStatement = dbConnection.prepareStatement("INSERT INTO SuppliersProducts (SuppliersProductsId, SuppliersId, ProductsId) VALUES(?,?,?)");

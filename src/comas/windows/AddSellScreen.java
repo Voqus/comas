@@ -5,6 +5,10 @@
  */
 package comas.windows;
 
+import comas.base.Product;
+import comas.database.SellDatabase;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Vasilis
@@ -34,10 +38,10 @@ public class AddSellScreen extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         productNameLabel = new javax.swing.JLabel();
         clientIdLabel = new javax.swing.JLabel();
-        productStock = new javax.swing.JLabel();
+        productStockLabel = new javax.swing.JLabel();
         productNameTextfield = new javax.swing.JTextField();
         clientIdTextfield = new javax.swing.JTextField();
-        stockTextField = new javax.swing.JTextField();
+        stockTextfield = new javax.swing.JTextField();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         invoiceCheckbox = new javax.swing.JCheckBox();
@@ -53,7 +57,7 @@ public class AddSellScreen extends javax.swing.JFrame {
         clientIdLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         clientIdLabel.setText("ID πελάτη:");
 
-        productStock.setText("Τεμάχια:");
+        productStockLabel.setText("Τεμάχια:");
 
         confirmButton.setText("Επιβεβαίωση");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,14 +84,14 @@ public class AddSellScreen extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(clientIdLabel)
                     .addComponent(productNameLabel)
-                    .addComponent(productStock))
+                    .addComponent(productStockLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitle)
                     .addComponent(productNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clientIdTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(stockTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stockTextfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
                             .addGap(5, 5, 5)
                             .addComponent(confirmButton)
@@ -114,8 +118,8 @@ public class AddSellScreen extends javax.swing.JFrame {
                     .addComponent(clientIdTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productStock)
-                    .addComponent(stockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(productStockLabel)
+                    .addComponent(stockTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(invoiceCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
@@ -144,7 +148,22 @@ public class AddSellScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO
+        String  productName = productNameTextfield.getText();
+        int     stock       = Integer.parseInt(stockTextfield.getText());
+        int     clientId    = Integer.parseInt(clientIdTextfield.getText());
+        
+        if(new SellDatabase().insertSell(productName, clientId, stock))
+        {
+            // TODO: invoice functionality.
+            JOptionPane.showMessageDialog (null, "Η καταχώριση πώλησης καταχωρίθηκε με επιτυχία", "Επιτυχής Καταχώριση", JOptionPane.INFORMATION_MESSAGE);
+            MainScreen.loadSellTable();
+            MainScreen.loadStorageTable();
+            this.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -157,7 +176,7 @@ public class AddSellScreen extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel productNameLabel;
     private javax.swing.JTextField productNameTextfield;
-    private javax.swing.JLabel productStock;
-    private javax.swing.JTextField stockTextField;
+    private javax.swing.JLabel productStockLabel;
+    private javax.swing.JTextField stockTextfield;
     // End of variables declaration//GEN-END:variables
 }

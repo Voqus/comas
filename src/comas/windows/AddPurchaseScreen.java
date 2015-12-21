@@ -203,8 +203,7 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
 
         
         if (new PurchaseDatabase().insertPurchase(product,supplierId)) {
-            JOptionPane.showMessageDialog(null,
-                    "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
+            JOptionPane.showMessageDialog(null, "Η καταχώριση αγοράς καταχωρίθηκε με επιτυχία",
                     "Επιτυχής Καταχώριση",
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadStorageTable();

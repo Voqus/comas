@@ -327,7 +327,7 @@ public class MainScreen extends javax.swing.JFrame {
         actionMenu.add(addProductMenu);
         actionMenu.add(seperator);
 
-        newPurchase.setText("Νεα Αγορά");
+        newPurchase.setText("Νέα Αγορά");
         newPurchase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newPurchaseActionPerformed(evt);
