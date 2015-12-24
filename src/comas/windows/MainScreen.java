@@ -5,7 +5,6 @@ import comas.base.Client;
 import comas.base.Supplier;
 import comas.database.ClientDatabase;
 import comas.database.Database;
-import comas.database.PurchaseDatabase;
 import comas.database.SupplierDatabase;
 import java.io.File;
 import java.io.IOException;
@@ -53,8 +52,6 @@ public class MainScreen extends javax.swing.JFrame {
         final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
                 + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
                 + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
-        Database database = new Database();
-
         DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         storageTable.setModel(dtm);
     }
@@ -416,13 +413,12 @@ public class MainScreen extends javax.swing.JFrame {
     private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
       if (evt.getClickCount() > 1) {
             int rowIndex = supplierTable.getSelectedRow();
-            String supplierId = supplierTable.getModel().getValueAt(rowIndex, 0).toString();
-            int clientId = Integer.parseInt(supplierTable.getModel().getValueAt(rowIndex, 0).toString());
+            int supplierId = Integer.parseInt(supplierTable.getModel().getValueAt(rowIndex, 0).toString());
             final String QUERY = "SELECT * FROM Suppliers WHERE SupplierId=" + supplierId ;
             
-            Supplier client = new SupplierDatabase().selectSupplier(QUERY);
+            Supplier supplier = new SupplierDatabase().selectSupplier(QUERY);
 
-            new EditSupplierScreen(client, clientId).setVisible(true);
+            new EditSupplierScreen(supplier, supplierId).setVisible(true);
         }
     }//GEN-LAST:event_supplierTableMouseClicked
 

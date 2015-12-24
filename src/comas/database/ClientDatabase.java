@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class ClientDatabase extends Database {
     /**
-     * Executes insert query in order to insert a new client on database.
+     * Executes insert query in order to insert a new client in the database.
      * Returns true if succeeded or false following with JOptionPane error.
      * @param client
      * @return boolean
@@ -41,7 +41,7 @@ public class ClientDatabase extends Database {
     }
 
     /**
-     * Executes update query in order to update an already existing client on database.
+     * Executes update query in order to update an already existing client in the database.
      * Returns true if succeeded or false following with JOptionPane error.
      * @param client
      * @param clientId
@@ -117,7 +117,12 @@ public class ClientDatabase extends Database {
         return client;
     }
 
-    
+    /**
+     * Executes delete query in order to delete a client from the database.
+     * Returns true if succeeded or false following with JOptionPane error.
+     * @param clientId
+     * @return 
+     */
     public boolean deleteClient(final int clientId){
         connect();
         try{
