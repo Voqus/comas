@@ -6,7 +6,16 @@ import javax.swing.JOptionPane;
 
 public class EditClientScreen extends javax.swing.JFrame {
 
+    private static volatile EditClientScreen object;
     private int clientId;
+    
+    public static synchronized EditClientScreen getInstance(Client client, final int clientId)
+    {
+        if ( object == null )
+            object = new EditClientScreen(client, clientId);
+        
+        return object;
+    }
 
     /**
      * Creates new form EditClientScreen
@@ -14,7 +23,7 @@ public class EditClientScreen extends javax.swing.JFrame {
      * @param client
      * @param clientId
      */
-    public EditClientScreen(Client client, final int clientId) {
+    private EditClientScreen(Client client, final int clientId) {
         initComponents();
 
         this.clientId = clientId;
@@ -75,6 +84,7 @@ public class EditClientScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Επεξεργασία Στοιχείων Πελάτη");
+        setResizable(false);
 
         firstNameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         firstNameLabel.setText("Όνομα:");

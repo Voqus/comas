@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MainScreen extends javax.swing.JFrame {
@@ -102,7 +101,6 @@ public class MainScreen extends javax.swing.JFrame {
         actionMenu = new javax.swing.JMenu();
         addClientMenu = new javax.swing.JMenuItem();
         addSupplierMenu = new javax.swing.JMenuItem();
-        addProductMenu = new javax.swing.JMenuItem();
         seperator = new javax.swing.JPopupMenu.Separator();
         newPurchase = new javax.swing.JMenuItem();
         newSell = new javax.swing.JMenuItem();
@@ -306,9 +304,6 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         actionMenu.add(addSupplierMenu);
-
-        addProductMenu.setText("Καταχώριση Προιόντος");
-        actionMenu.add(addProductMenu);
         actionMenu.add(seperator);
 
         newPurchase.setText("Νέα Αγορά");
@@ -398,16 +393,16 @@ public class MainScreen extends javax.swing.JFrame {
 
             Client client = new ClientDatabase().selectClient(QUERY);
 
-            new EditClientScreen(client, clientId).setVisible(true);
+            EditClientScreen.getInstance(client, clientId).setVisible(true);
         }
     }//GEN-LAST:event_clientTableMouseClicked
 
     private void addClientMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClientMenuActionPerformed
-        new AddClientScreen().setVisible(true);
+        AddClientScreen.getInstance().setVisible(true);
     }//GEN-LAST:event_addClientMenuActionPerformed
 
     private void addSupplierMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierMenuActionPerformed
-       new AddSupplierScreen().setVisible(true);
+       AddSupplierScreen.getInstance().setVisible(true);
     }//GEN-LAST:event_addSupplierMenuActionPerformed
 
     private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
@@ -418,30 +413,22 @@ public class MainScreen extends javax.swing.JFrame {
             
             Supplier supplier = new SupplierDatabase().selectSupplier(QUERY);
 
-            new EditSupplierScreen(supplier, supplierId).setVisible(true);
+            EditSupplierScreen.getInstance(supplier, supplierId).setVisible(true);
         }
     }//GEN-LAST:event_supplierTableMouseClicked
 
     private void newPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPurchaseActionPerformed
-       new AddPurchaseScreen().setVisible(true);
+       AddPurchaseScreen.getInstance().setVisible(true);
     }//GEN-LAST:event_newPurchaseActionPerformed
 
     private void newSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSellActionPerformed
-       //TODO
-       //1. new panel
-       //2. product textfields - X stock, if not enough return errors.
-       //3. client id textfield to associate on the tables
-       //4. insert.
-       //5. load on jtable, if success.
-       //6. separate option for pdf extraction
-       new AddSellScreen().setVisible(true);
+        AddSellScreen.getInstance().setVisible(true);
     }//GEN-LAST:event_newSellActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;
     private javax.swing.JMenu actionMenu;
     private javax.swing.JMenuItem addClientMenu;
-    private javax.swing.JMenuItem addProductMenu;
     private javax.swing.JMenuItem addSupplierMenu;
     private javax.swing.JScrollPane clientPane;
     public static javax.swing.JTable clientTable;

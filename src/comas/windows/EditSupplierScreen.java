@@ -1,24 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package comas.windows;
 
 import comas.base.Supplier;
 import comas.database.SupplierDatabase;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author gabri
- */
 public class EditSupplierScreen extends javax.swing.JFrame {
+    
+    public static volatile EditSupplierScreen object;
     private int supplierId;
+    
+    public static synchronized EditSupplierScreen getInstance(Supplier supplier, final int supplierId)
+    {
+        if ( object == null )
+            object = new EditSupplierScreen(supplier, supplierId);
+        
+        return object;
+    }
+    
     /**
      * Creates new form EditSupplierScreen
      */
-    public EditSupplierScreen(Supplier supplier,final int supplierId) {
+    private EditSupplierScreen(Supplier supplier,final int supplierId) {
         initComponents();
         
         this.supplierId = supplierId;
@@ -67,6 +69,7 @@ public class EditSupplierScreen extends javax.swing.JFrame {
         taxRegisterField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         titleLabel.setText("Επεξεργασία Στοιχείων Προμηθευτή");

@@ -6,10 +6,19 @@ import javax.swing.JOptionPane;
 
 public class AddClientScreen extends javax.swing.JFrame {
 
+    private static volatile AddClientScreen object;
+    
+    public static synchronized AddClientScreen getInstance()
+    {
+        if(object == null)
+            object = new AddClientScreen();
+        return object;
+    }
+    
     /**
      * Creates new form AddClientScreen
      */
-    public AddClientScreen() {
+    private AddClientScreen() {
         initComponents();
 
         //  Set window's location to the center of the screen
@@ -51,6 +60,7 @@ public class AddClientScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Καταχώριση Πελάτη");
+        setResizable(false);
 
         firstNameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         firstNameLabel.setText("Όνομα:");

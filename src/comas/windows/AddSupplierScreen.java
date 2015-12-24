@@ -6,11 +6,24 @@ import javax.swing.JOptionPane;
 
 public class AddSupplierScreen extends javax.swing.JFrame {
 
+    private static volatile AddSupplierScreen object;
+    
+    public static synchronized AddSupplierScreen getInstance()
+    {
+        if ( object == null )
+            object = new AddSupplierScreen();
+        
+        return object;
+    }
+    
     /**
      * Creates new form AddSupplierScreen
      */
-    public AddSupplierScreen() {
+    private AddSupplierScreen() {
         initComponents();
+        
+        //  Set window's location to the center of the screen
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +58,7 @@ public class AddSupplierScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Καταχώριση Προμηθευτή");
+        setResizable(false);
 
         btnClose.setText("Άκυρο");
         btnClose.addActionListener(new java.awt.event.ActionListener() {

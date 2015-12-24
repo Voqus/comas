@@ -1,24 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package comas.windows;
 
-import comas.base.Product;
 import comas.database.SellDatabase;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Vasilis
- */
 public class AddSellScreen extends javax.swing.JFrame {
 
+    private static volatile AddSellScreen object;
+    
+    public static synchronized AddSellScreen getInstance()
+    {
+        if ( object == null )
+            object = new AddSellScreen();
+        
+        return object;
+    }
+    
     /**
      * Creates new form AddSellScreen
      */
-    public AddSellScreen() {
+    private AddSellScreen() {
         initComponents();
 
         //  Set window's location to the center of the screen
@@ -47,6 +47,7 @@ public class AddSellScreen extends javax.swing.JFrame {
         invoiceCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTitle.setText("Καταχώριση Πώλησης");
