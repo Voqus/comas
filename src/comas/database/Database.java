@@ -6,7 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * Database class.
@@ -23,7 +26,7 @@ public class Database {
      *
      * @return
      */
-    public boolean connect() {
+    protected boolean connect() {
 
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -41,7 +44,7 @@ public class Database {
     /**
      * Closes the database
      */
-    public void close() {
+    protected void close() {
 
         try {
             if (dbConnection != null) {
@@ -57,5 +60,47 @@ public class Database {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+    
+     /**
+     * Loads the table with data then returns the tablemodel.
+     * @param Query
+     * @return TableModel
+     */
+    public TableModel selectTable(final String Query) {
+        connect();
+        try {
+            dbStatement = dbConnection.prepareStatement(Query);
+            dataResults = dbStatement.executeQuery();
+            int columnNumber = dataResults.getMetaData().getColumnCount();
+
+            Vector columns = new Vector();
+            for (int i = 1; i <= columnNumber; i++) {
+                columns.addElement(dataResults.getMetaData().getColumnName(i));
+            }
+
+            Vector rows = new Vector();
+            while (dataResults.next()) {
+                Vector newRow = new Vector();
+                for (int i = 1; i <= columnNumber; i++) {
+                    newRow.addElement(dataResults.getString(i));
+                }
+                rows.addElement(newRow);
+            }
+
+            close();
+            return new DefaultTableModel(rows, columns) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            System.exit(1);
+        }
+        close();
+        return null;
     }
 }

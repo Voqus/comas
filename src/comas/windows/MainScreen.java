@@ -4,14 +4,15 @@ import comas.Comas;
 import comas.base.Client;
 import comas.base.Supplier;
 import comas.database.ClientDatabase;
+import comas.database.Database;
 import comas.database.PurchaseDatabase;
-import comas.database.StorageDatabase;
 import comas.database.SupplierDatabase;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MainScreen extends javax.swing.JFrame {
@@ -34,23 +35,17 @@ public class MainScreen extends javax.swing.JFrame {
     public static void loadClientTable() {
 
         final String QUERY = "SELECT * FROM Clients";
-        ClientDatabase database = new ClientDatabase();
-        database.connect();
 
-        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         clientTable.setModel(dtm);
-        database.close();
     }
 
     public static void loadSupplierTable() {
 
         final String QUERY = "SELECT * FROM Suppliers";
-        SupplierDatabase database = new SupplierDatabase();
-        database.connect();
 
-        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         supplierTable.setModel(dtm);
-        database.close();
     }
 
     public static void loadStorageTable() {
@@ -58,33 +53,25 @@ public class MainScreen extends javax.swing.JFrame {
         final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
                 + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
                 + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
-        StorageDatabase database = new StorageDatabase();
-        database.connect();
+        Database database = new Database();
 
-        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         storageTable.setModel(dtm);
-        database.close();
     }
 
     public static void loadPurchaseTable() {
         final String QUERY = "SELECT * FROM Purchases";
-        PurchaseDatabase database = new PurchaseDatabase();
-        database.connect();
 
-        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         purchaseTable.setModel(dtm);
-        database.close();
     }
 
     public static void loadSellTable() {
         final String QUERY = "SELECT Sells.SellId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
                 + "FROM Sells, Products, Clients WHERE Sells.ProductsId = Products.ProductId AND Sells.ClientId=Clients.ClientId";
-        PurchaseDatabase database = new PurchaseDatabase();
-        database.connect();
 
-        DefaultTableModel dtm = (DefaultTableModel) database.selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         sellTable.setModel(dtm);
-        database.close();
     }
 
     @SuppressWarnings("unchecked")
@@ -412,10 +399,7 @@ public class MainScreen extends javax.swing.JFrame {
             int clientId = Integer.parseInt(clientTable.getModel().getValueAt(rowIndex, 0).toString());
             final String QUERY = "SELECT * FROM Clients WHERE FirstName='" + clientName + "'";
 
-            ClientDatabase database = new ClientDatabase();
-            database.connect();
-            Client client = database.selectClient(QUERY);
-            database.close();
+            Client client = new ClientDatabase().selectClient(QUERY);
 
             new EditClientScreen(client, clientId).setVisible(true);
         }
@@ -435,11 +419,8 @@ public class MainScreen extends javax.swing.JFrame {
             String supplierId = supplierTable.getModel().getValueAt(rowIndex, 0).toString();
             int clientId = Integer.parseInt(supplierTable.getModel().getValueAt(rowIndex, 0).toString());
             final String QUERY = "SELECT * FROM Suppliers WHERE SupplierId=" + supplierId ;
-   
-          SupplierDatabase database = new SupplierDatabase();
-            database.connect();
-            Supplier client = database.selectSupplier(QUERY);
-            database.close();
+            
+            Supplier client = new SupplierDatabase().selectSupplier(QUERY);
 
             new EditSupplierScreen(client, clientId).setVisible(true);
         }

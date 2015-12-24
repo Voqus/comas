@@ -2,54 +2,9 @@ package comas.database;
 
 import comas.base.Client;
 import java.sql.SQLException;
-import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class ClientDatabase extends Database {
-    /**
-     * Builds the table with data then returns the tablemodel.
-     * @param Query
-     * @return TableModel
-     */
-    public TableModel selectTable(final String Query) {
-        connect();
-        try {
-            dbStatement = dbConnection.prepareStatement(Query);
-            dataResults = dbStatement.executeQuery();
-            int columnNumber = dataResults.getMetaData().getColumnCount();
-
-            Vector columns = new Vector();
-            for (int i = 1; i <= columnNumber; i++) {
-                columns.addElement(dataResults.getMetaData().getColumnName(i));
-            }
-
-            Vector rows = new Vector();
-            while (dataResults.next()) {
-                Vector newRow = new Vector();
-                for (int i = 1; i <= columnNumber; i++) {
-                    newRow.addElement(dataResults.getString(i));
-                }
-                rows.addElement(newRow);
-            }
-
-            close();
-            return new DefaultTableModel(rows, columns) {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            };
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-            System.exit(1);
-        }
-        close();
-        return null;
-    }
-
     /**
      * Executes insert query in order to insert a new client on database.
      * Returns true if succeeded or false following with JOptionPane error.
