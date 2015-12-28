@@ -262,14 +262,14 @@ public class EditSupplierScreen extends javax.swing.JFrame {
                                          postalCodeField.getText(),
                                          taxRegisterField.getText());
         if (new SupplierDatabase().updateSupplier(supplier, supplierId)) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(this,
                     "Τα στοιχεία ενημερώθηκαν με επιτυχία",
                     "Επιτυχείς Ενημέρωση",
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadSupplierTable();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(this,
                     "Δεν ήταν επιτυχής η ενημέρωση παρακαλώ προσπαθήστε ξανά",
                     "Ανεπιτυχής Ενημέρωση",
                     JOptionPane.ERROR_MESSAGE);

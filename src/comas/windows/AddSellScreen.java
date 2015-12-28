@@ -36,15 +36,14 @@ public class AddSellScreen extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        productNameLabel = new javax.swing.JLabel();
+        productIdLabel = new javax.swing.JLabel();
         clientIdLabel = new javax.swing.JLabel();
         productStockLabel = new javax.swing.JLabel();
-        productNameTextfield = new javax.swing.JTextField();
+        productIdTextfield = new javax.swing.JTextField();
         clientIdTextfield = new javax.swing.JTextField();
         stockTextfield = new javax.swing.JTextField();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        invoiceCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -52,8 +51,8 @@ public class AddSellScreen extends javax.swing.JFrame {
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTitle.setText("Καταχώριση Πώλησης");
 
-        productNameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        productNameLabel.setText("Όνομα προϊόντος:");
+        productIdLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        productIdLabel.setText("ID προϊόντος:");
 
         clientIdLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         clientIdLabel.setText("ID πελάτη:");
@@ -74,8 +73,6 @@ public class AddSellScreen extends javax.swing.JFrame {
             }
         });
 
-        invoiceCheckbox.setText("Έκδοση τιμολογίου");
-
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -83,26 +80,24 @@ public class AddSellScreen extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(clientIdLabel)
-                    .addComponent(productNameLabel)
-                    .addComponent(productStockLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle)
-                    .addComponent(productNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clientIdTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(stockTextfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addComponent(confirmButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cancelButton))))
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(invoiceCheckbox)
-                .addGap(121, 121, 121))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(clientIdLabel)
+                            .addComponent(productIdLabel)
+                            .addComponent(productStockLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(productIdTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientIdTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stockTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(lblTitle))))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(confirmButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancelButton)))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,8 +106,8 @@ public class AddSellScreen extends javax.swing.JFrame {
                 .addComponent(lblTitle)
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productNameLabel)
-                    .addComponent(productNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(productIdLabel)
+                    .addComponent(productIdTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clientIdLabel)
@@ -121,9 +116,7 @@ public class AddSellScreen extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productStockLabel)
                     .addComponent(stockTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(invoiceCheckbox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
                     .addComponent(cancelButton))
@@ -149,21 +142,30 @@ public class AddSellScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        String  productName = productNameTextfield.getText();
-        int     stock       = Integer.parseInt(stockTextfield.getText());
-        int     clientId    = Integer.parseInt(clientIdTextfield.getText());
-        
-        if(new SellDatabase().insertSell(productName, clientId, stock))
+        if(productIdTextfield.getText().isEmpty() || stockTextfield.getText().isEmpty() || clientIdTextfield.getText().isEmpty())
         {
-            // TODO: invoice functionality.
-            JOptionPane.showMessageDialog (null, "Η καταχώριση πώλησης καταχωρίθηκε με επιτυχία", "Επιτυχής Καταχώριση", JOptionPane.INFORMATION_MESSAGE);
-            MainScreen.loadSellTable();
+            JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int productId   = Integer.parseInt(productIdTextfield.getText());
+        int stock       = Integer.parseInt(stockTextfield.getText());
+        int clientId    = Integer.parseInt(clientIdTextfield.getText());
+        
+        if( stock == 0 )
+        {
+            JOptionPane.showMessageDialog (this, "Τα τεμάχια δεν μπορεί να είναι μηδέν", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(new SellDatabase().insertSell(productId, clientId, stock))
+        {
+            JOptionPane.showMessageDialog (this, "Η καταχώριση πώλησης καταχωρίθηκε με επιτυχία", "Επιτυχής Καταχώριση", JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadStorageTable();
+            MainScreen.loadSellTable();
             this.dispose();
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
@@ -172,11 +174,10 @@ public class AddSellScreen extends javax.swing.JFrame {
     private javax.swing.JLabel clientIdLabel;
     private javax.swing.JTextField clientIdTextfield;
     private javax.swing.JButton confirmButton;
-    private javax.swing.JCheckBox invoiceCheckbox;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JLabel productNameLabel;
-    private javax.swing.JTextField productNameTextfield;
+    private javax.swing.JLabel productIdLabel;
+    private javax.swing.JTextField productIdTextfield;
     private javax.swing.JLabel productStockLabel;
     private javax.swing.JTextField stockTextfield;
     // End of variables declaration//GEN-END:variables

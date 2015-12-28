@@ -48,7 +48,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     public static void loadStorageTable() {
         //  Selects the StorageId, ProductName, ProductDescription, Supplier's TaxRegister, Product's SellingPrice and Product's Stock
-        final String QUERY = "SELECT Storage.StorageId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
+        final String QUERY = "SELECT Storage.StorageId, Storage.ProductId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
                 + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
                 + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
         DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
@@ -56,7 +56,8 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     public static void loadPurchaseTable() {
-        final String QUERY = "SELECT * FROM Purchases";
+        final String QUERY = "SELECT Purchases.purchaseId, Purchases.ProductsId, Products.ProductName, Suppliers.FirstName, Suppliers.LastName, Purchases.Stock, Purchases.FinalPrice "
+                + "FROM Purchases,Products,Suppliers WHERE Purchases.ProductsId=Products.ProductId AND Purchases.SupplierId=Suppliers.SupplierId";
 
         DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         purchaseTable.setModel(dtm);
@@ -99,11 +100,13 @@ public class MainScreen extends javax.swing.JFrame {
         programMenuSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         actionMenu = new javax.swing.JMenu();
-        addClientMenu = new javax.swing.JMenuItem();
-        addSupplierMenu = new javax.swing.JMenuItem();
-        seperator = new javax.swing.JPopupMenu.Separator();
-        newPurchase = new javax.swing.JMenuItem();
-        newSell = new javax.swing.JMenuItem();
+        addClientMenuItem = new javax.swing.JMenuItem();
+        addSupplierMenuItem = new javax.swing.JMenuItem();
+        insertSeparator = new javax.swing.JPopupMenu.Separator();
+        newPurchaseMenuItem = new javax.swing.JMenuItem();
+        newSellMenuItem = new javax.swing.JMenuItem();
+        newSeparator = new javax.swing.JPopupMenu.Separator();
+        invoiceMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpProgramMenuItem = new javax.swing.JMenuItem();
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
@@ -168,6 +171,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Αποθήκη", storagePane);
 
+        sellTable.setAutoCreateRowSorter(true);
         sellTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -289,38 +293,47 @@ public class MainScreen extends javax.swing.JFrame {
 
         actionMenu.setText("Ενέργειες");
 
-        addClientMenu.setText("Καταχώριση Πελάτη");
-        addClientMenu.addActionListener(new java.awt.event.ActionListener() {
+        addClientMenuItem.setText("Καταχώριση Πελάτη");
+        addClientMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addClientMenuActionPerformed(evt);
+                addClientMenuItemActionPerformed(evt);
             }
         });
-        actionMenu.add(addClientMenu);
+        actionMenu.add(addClientMenuItem);
 
-        addSupplierMenu.setText("Καταχώριση Προμηθευτή");
-        addSupplierMenu.addActionListener(new java.awt.event.ActionListener() {
+        addSupplierMenuItem.setText("Καταχώριση Προμηθευτή");
+        addSupplierMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSupplierMenuActionPerformed(evt);
+                addSupplierMenuItemActionPerformed(evt);
             }
         });
-        actionMenu.add(addSupplierMenu);
-        actionMenu.add(seperator);
+        actionMenu.add(addSupplierMenuItem);
+        actionMenu.add(insertSeparator);
 
-        newPurchase.setText("Νέα Αγορά");
-        newPurchase.addActionListener(new java.awt.event.ActionListener() {
+        newPurchaseMenuItem.setText("Νέα Αγορά");
+        newPurchaseMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newPurchaseActionPerformed(evt);
+                newPurchaseMenuItemActionPerformed(evt);
             }
         });
-        actionMenu.add(newPurchase);
+        actionMenu.add(newPurchaseMenuItem);
 
-        newSell.setText("Νέα Πώληση");
-        newSell.addActionListener(new java.awt.event.ActionListener() {
+        newSellMenuItem.setText("Νέα Πώληση");
+        newSellMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newSellActionPerformed(evt);
+                newSellMenuItemActionPerformed(evt);
             }
         });
-        actionMenu.add(newSell);
+        actionMenu.add(newSellMenuItem);
+        actionMenu.add(newSeparator);
+
+        invoiceMenuItem.setText("Έκδοση τιμολογίου");
+        invoiceMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceMenuItemActionPerformed(evt);
+            }
+        });
+        actionMenu.add(invoiceMenuItem);
 
         menuBar.add(actionMenu);
 
@@ -397,13 +410,13 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clientTableMouseClicked
 
-    private void addClientMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClientMenuActionPerformed
+    private void addClientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClientMenuItemActionPerformed
         AddClientScreen.getInstance().setVisible(true);
-    }//GEN-LAST:event_addClientMenuActionPerformed
+    }//GEN-LAST:event_addClientMenuItemActionPerformed
 
-    private void addSupplierMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierMenuActionPerformed
+    private void addSupplierMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierMenuItemActionPerformed
        AddSupplierScreen.getInstance().setVisible(true);
-    }//GEN-LAST:event_addSupplierMenuActionPerformed
+    }//GEN-LAST:event_addSupplierMenuItemActionPerformed
 
     private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
       if (evt.getClickCount() > 1) {
@@ -417,19 +430,40 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_supplierTableMouseClicked
 
-    private void newPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPurchaseActionPerformed
+    private void newPurchaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPurchaseMenuItemActionPerformed
        AddPurchaseScreen.getInstance().setVisible(true);
-    }//GEN-LAST:event_newPurchaseActionPerformed
+    }//GEN-LAST:event_newPurchaseMenuItemActionPerformed
 
-    private void newSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSellActionPerformed
+    private void newSellMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSellMenuItemActionPerformed
         AddSellScreen.getInstance().setVisible(true);
-    }//GEN-LAST:event_newSellActionPerformed
+    }//GEN-LAST:event_newSellMenuItemActionPerformed
+
+    private void invoiceMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceMenuItemActionPerformed
+        int selectedRow[] = sellTable.getSelectedRows();
+        
+        // TODO: invoice function
+        // pdf structure:
+        // title
+        // businessData.ini passed data in here
+        // client's firstname + lastname
+        // build table from the selectedRows (now made a lot easier to do this part)
+        
+        for(int i : selectedRow)
+        {
+            System.out.println("FirstName: "    + sellTable.getValueAt(i, 1));
+            System.out.println("LastName: "     + sellTable.getValueAt(i, 2));
+            System.out.println("ProductName: "  + sellTable.getValueAt(i, 3));
+            System.out.println("Stock: "        + sellTable.getValueAt(i, 4));
+            System.out.println("FinalPrice: "   + sellTable.getValueAt(i, 5));
+            System.out.println("------------------------------");
+        }
+    }//GEN-LAST:event_invoiceMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;
     private javax.swing.JMenu actionMenu;
-    private javax.swing.JMenuItem addClientMenu;
-    private javax.swing.JMenuItem addSupplierMenu;
+    private javax.swing.JMenuItem addClientMenuItem;
+    private javax.swing.JMenuItem addSupplierMenuItem;
     private javax.swing.JScrollPane clientPane;
     public static javax.swing.JTable clientTable;
     private javax.swing.JMenuItem contactMenuItem;
@@ -437,6 +471,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator helpMenuSeparator;
     private javax.swing.JMenuItem helpProgramMenuItem;
+    private javax.swing.JPopupMenu.Separator insertSeparator;
+    private javax.swing.JMenuItem invoiceMenuItem;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblMg3;
     private javax.swing.JLabel lblMsg1;
@@ -447,15 +483,15 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JScrollPane marketPane;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem newPurchase;
-    private javax.swing.JMenuItem newSell;
+    private javax.swing.JMenuItem newPurchaseMenuItem;
+    private javax.swing.JMenuItem newSellMenuItem;
+    private javax.swing.JPopupMenu.Separator newSeparator;
     private javax.swing.JMenu programMenu;
     private javax.swing.JPopupMenu.Separator programMenuSeparator;
     public static javax.swing.JTable purchaseTable;
     private javax.swing.JMenuItem restartMenuItem;
     public static javax.swing.JTable sellTable;
     private javax.swing.JScrollPane sellsPane;
-    private javax.swing.JPopupMenu.Separator seperator;
     private javax.swing.JScrollPane storagePane;
     public static javax.swing.JTable storageTable;
     private javax.swing.JScrollPane supplierPane;

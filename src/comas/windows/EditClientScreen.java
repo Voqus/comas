@@ -311,20 +311,13 @@ public class EditClientScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        Object[] options = {"Ναι",
-                            "Όχι"};
-        int selectedOption = JOptionPane.showOptionDialog(this,
-                                                          "Είστε Σίγουροι για την διαγραφή του πελάτη με ID: "+clientId,
-                                                          "Επιβεβαίωση",
-                                                          JOptionPane.YES_NO_OPTION,
-                                                          JOptionPane.INFORMATION_MESSAGE,
-                                                          null,
-                                                          options,
-                                                          options[1]);
+        Object[] options = {"Ναι", "Όχι"};
+        int selectedOption = JOptionPane.showOptionDialog(this, "Είστε σίγουροι για την διαγραφή του πελάτη με ID: "+clientId,
+                             "Επιβεβαίωση", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                             null,options,options[1]);
         
-        if (selectedOption == 0){   
-            ClientDatabase database = new ClientDatabase();
-            if(database.deleteClient(clientId)){
+        if (selectedOption == 0){
+            if(new ClientDatabase().deleteClient(clientId)){
                 MainScreen.loadClientTable();
                 JOptionPane.showMessageDialog(this, "Η διαγραφή του πελάτη ολοκληρώθηκε επιτυχώς", "Επιτυχής Διαγραφή",JOptionPane.INFORMATION_MESSAGE);  
                 this.dispose();

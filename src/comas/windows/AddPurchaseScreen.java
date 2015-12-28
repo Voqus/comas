@@ -204,14 +204,14 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
 
         
         if (new PurchaseDatabase().insertPurchase(product,supplierId)) {
-            JOptionPane.showMessageDialog(null, "Η καταχώριση αγοράς καταχωρίθηκε με επιτυχία",
+            JOptionPane.showMessageDialog(this, "Η καταχώριση αγοράς καταχωρίθηκε με επιτυχία",
                     "Επιτυχής Καταχώριση",
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadStorageTable();
             MainScreen.loadPurchaseTable();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(this,
                     "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",
                     "Ανεπιτυχής Καταχώριση",
                     JOptionPane.ERROR_MESSAGE);

@@ -39,34 +39,33 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="clientIdLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="productNameLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="productStockLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                      <Component id="productNameTextfield" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="clientIdTextfield" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="stockTextfield" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="confirmButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="clientIdLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="productIdLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="productStockLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="productIdTextfield" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="clientIdTextfield" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="stockTextfield" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="confirmButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="invoiceCheckbox" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                  <EmptySpace pref="111" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -77,8 +76,8 @@
                   <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="productNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="productNameTextfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="productIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="productIdTextfield" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -90,9 +89,7 @@
                       <Component id="productStockLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="stockTextfield" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="invoiceCheckbox" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                  <EmptySpace pref="109" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="confirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -111,12 +108,12 @@
             <Property name="text" type="java.lang.String" value="&#x39a;&#x3b1;&#x3c4;&#x3b1;&#x3c7;&#x3ce;&#x3c1;&#x3b9;&#x3c3;&#x3b7; &#x3a0;&#x3ce;&#x3bb;&#x3b7;&#x3c3;&#x3b7;&#x3c2;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="productNameLabel">
+        <Component class="javax.swing.JLabel" name="productIdLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x38c;&#x3bd;&#x3bf;&#x3bc;&#x3b1; &#x3c0;&#x3c1;&#x3bf;&#x3ca;&#x3cc;&#x3bd;&#x3c4;&#x3bf;&#x3c2;:"/>
+            <Property name="text" type="java.lang.String" value="ID &#x3c0;&#x3c1;&#x3bf;&#x3ca;&#x3cc;&#x3bd;&#x3c4;&#x3bf;&#x3c2;:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="clientIdLabel">
@@ -132,7 +129,7 @@
             <Property name="text" type="java.lang.String" value="&#x3a4;&#x3b5;&#x3bc;&#x3ac;&#x3c7;&#x3b9;&#x3b1;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="productNameTextfield">
+        <Component class="javax.swing.JTextField" name="productIdTextfield">
         </Component>
         <Component class="javax.swing.JTextField" name="clientIdTextfield">
         </Component>
@@ -153,11 +150,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="invoiceCheckbox">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x388;&#x3ba;&#x3b4;&#x3bf;&#x3c3;&#x3b7; &#x3c4;&#x3b9;&#x3bc;&#x3bf;&#x3bb;&#x3bf;&#x3b3;&#x3af;&#x3bf;&#x3c5;"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

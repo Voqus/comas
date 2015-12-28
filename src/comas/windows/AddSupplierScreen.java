@@ -199,14 +199,14 @@ public class AddSupplierScreen extends javax.swing.JFrame {
                                          txtPostalCode.getText(),
                                          txtTaxReg.getText());
        if(new SupplierDatabase().insertSupplier(supplier)){
-          JOptionPane.showMessageDialog (null,
+          JOptionPane.showMessageDialog (this,
                                            "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
                                            "Επιτυχής Καταχώριση",
                                            JOptionPane.INFORMATION_MESSAGE);
           MainScreen.loadSupplierTable();
           this.dispose();
         }else{
-            JOptionPane.showMessageDialog (null,
+            JOptionPane.showMessageDialog (this,
                                            "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",
                                            "Ανεπιτυχής Καταχώριση",
                                            JOptionPane.ERROR_MESSAGE);
