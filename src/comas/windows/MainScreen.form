@@ -96,6 +96,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x395;&#x3c0;&#x3b9;&#x3ba;&#x3bf;&#x3b9;&#x3bd;&#x3c9;&#x3bd;&#x3af;&#x3b1;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="contactMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

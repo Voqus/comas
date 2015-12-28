@@ -1,18 +1,35 @@
 package comas.windows;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import comas.Comas;
 import comas.base.Client;
 import comas.base.Supplier;
 import comas.database.ClientDatabase;
 import comas.database.Database;
 import comas.database.SupplierDatabase;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import static com.itextpdf.text.Chunk.NEWLINE;
 public class MainScreen extends javax.swing.JFrame {
 
     /**
@@ -64,7 +81,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     public static void loadSellTable() {
-        final String QUERY = "SELECT Sells.SellId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
+        final String QUERY = "SELECT Sells.SellId, Sells.ProductsId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
                 + "FROM Sells, Products, Clients WHERE Sells.ProductsId = Products.ProductId AND Sells.ClientId=Clients.ClientId";
 
         DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
@@ -344,6 +361,11 @@ public class MainScreen extends javax.swing.JFrame {
         helpMenu.add(helpMenuSeparator);
 
         contactMenuItem.setText("Επικοινωνία");
+        contactMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contactMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(contactMenuItem);
 
         menuBar.add(helpMenu);
@@ -415,15 +437,15 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_addClientMenuItemActionPerformed
 
     private void addSupplierMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierMenuItemActionPerformed
-       AddSupplierScreen.getInstance().setVisible(true);
+        AddSupplierScreen.getInstance().setVisible(true);
     }//GEN-LAST:event_addSupplierMenuItemActionPerformed
 
     private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
-      if (evt.getClickCount() > 1) {
+        if (evt.getClickCount() > 1) {
             int rowIndex = supplierTable.getSelectedRow();
             int supplierId = Integer.parseInt(supplierTable.getModel().getValueAt(rowIndex, 0).toString());
-            final String QUERY = "SELECT * FROM Suppliers WHERE SupplierId=" + supplierId ;
-            
+            final String QUERY = "SELECT * FROM Suppliers WHERE SupplierId=" + supplierId;
+
             Supplier supplier = new SupplierDatabase().selectSupplier(QUERY);
 
             EditSupplierScreen.getInstance(supplier, supplierId).setVisible(true);
@@ -431,7 +453,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_supplierTableMouseClicked
 
     private void newPurchaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPurchaseMenuItemActionPerformed
-       AddPurchaseScreen.getInstance().setVisible(true);
+        AddPurchaseScreen.getInstance().setVisible(true);
     }//GEN-LAST:event_newPurchaseMenuItemActionPerformed
 
     private void newSellMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSellMenuItemActionPerformed
@@ -441,23 +463,122 @@ public class MainScreen extends javax.swing.JFrame {
     private void invoiceMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceMenuItemActionPerformed
         int selectedRow[] = sellTable.getSelectedRows();
         
-        // TODO: invoice function
-        // pdf structure:
-        // title
-        // businessData.ini passed data in here
-        // client's firstname + lastname
-        // build table from the selectedRows (now made a lot easier to do this part)
+        if(selectedRow.length == 0)
+        {
+            JOptionPane.showMessageDialog(this, "<html>Πρώτα πρέπει να επιλέξετε <b>μία εγγραφή πώλησης"
+                    + " ενός και μόνο πελάτη</b> για την έκδοση τιμολογίου","Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String clientName = sellTable.getValueAt(selectedRow[0],2).toString();
+        String clientLastName = sellTable.getValueAt(selectedRow[0],3).toString();
         
         for(int i : selectedRow)
         {
-            System.out.println("FirstName: "    + sellTable.getValueAt(i, 1));
-            System.out.println("LastName: "     + sellTable.getValueAt(i, 2));
-            System.out.println("ProductName: "  + sellTable.getValueAt(i, 3));
-            System.out.println("Stock: "        + sellTable.getValueAt(i, 4));
-            System.out.println("FinalPrice: "   + sellTable.getValueAt(i, 5));
-            System.out.println("------------------------------");
+            String newName = sellTable.getValueAt(i, 2).toString();
+            String newLastName = sellTable.getValueAt(i,3).toString();
+            if(!((clientName+clientLastName).equals(newName+newLastName)))
+            {
+                JOptionPane.showMessageDialog(this, "<html>Διαλέξατε δύο διαφορετικούς πελάτες για την έκδοση τιμολογίου.<br/>"
+                        + "Η έκδοση τιμολογίου γίνεται για κάθε άτομο ξεχωριστά.</html>","Σφάλμα", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("src/comas/res/BusinessData.ini"))) {
+            String[] lines = {};
+            String line;
+
+            line = br.readLine();
+            lines = line.split("//");
+
+            String compName = lines[0];
+            String compTaxOffice = lines[1];
+            String compTaxRegister = lines[2];
+            String compTelephone = lines[3];
+            String compFax = lines[4];
+            String compCity = lines[5];
+            String compAddress = lines[6];
+
+            FontFactory.register("src/comas/res/fonts/Verdana.ttf", "VERDANA_PLAIN_FONT");
+            FontFactory.register("src/comas/res/fonts/Verdanab.ttf", "VERDANA_BOLD_FONT");
+            Document document = new Document(PageSize.A4);
+            PdfWriter.getInstance(document, new FileOutputStream("invoice.pdf")).setInitialLeading(16);
+            document.open();
+
+            Font boldFont = FontFactory.getFont("VERDANA_BOLD_FONT", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            boldFont.setSize(10);
+
+            Font plainFont = FontFactory.getFont("VERDANA_PLAIN_FONT", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            plainFont.setSize(10);
+            
+            Paragraph title = new Paragraph("ΕΚΔΟΣΗ ΤΙΜΟΛΟΓΙΟΥ", boldFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+            document.add(NEWLINE);
+            document.add(new Paragraph("ΟΝΟΜΑ ΕΠΙΧΕΙΡΗΣΗΣ: " + compName, plainFont));
+            document.add(new Paragraph("Δ.Ο.Υ ΕΠΙΧΕΙΡΗΣΗΣ: " + compTaxOffice, plainFont));
+            document.add(new Paragraph("Α.Φ.Μ ΕΠΙΧΕΙΡΗΣΗΣ: " + compTaxRegister, plainFont));
+            document.add(new Paragraph("ΤΗΛΕΦΩΝΟ ΕΠΙΧΕΙΡΗΣΗΣ: " + compTelephone, plainFont));
+            document.add(new Paragraph("ΦΑΞ ΕΠΙΧΕΙΡΗΣΗΣ: " + compFax, plainFont));
+            document.add(new Paragraph("ΠΟΛΗ ΕΠΙΧΕΙΡΗΣΗΣ: " + compCity, plainFont));
+            document.add(new Paragraph("ΔΙΕΥΘΥΝΣΗ ΕΠΙΧΕΙΡΗΣΗΣ: " + compAddress, plainFont));
+            document.add(NEWLINE);
+            
+            document.add(new Paragraph("ΟΝΟΜΑΤΕΠΩΝΥΜΟ ΠΕΛΑΤΗ: " + clientName + " " + clientLastName, plainFont));
+            document.add(NEWLINE);
+            
+            PdfPTable table = new PdfPTable(4);
+
+            PdfPCell c1 = new PdfPCell(new Phrase("ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ", boldFont));
+            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(c1);
+
+            c1 = new PdfPCell(new Phrase("ΟΝΟΜΑ ΠΡΟΙΟΝΤΟΣ", boldFont));
+            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(c1);
+
+            c1 = new PdfPCell(new Phrase("ΠΟΣΟΤΗΤΑ", boldFont));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+
+            c1 = new PdfPCell(new Phrase("ΤΙΜΗ", boldFont));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            
+            float totalSum = 0.0f;
+            for (int i : selectedRow) {
+                table.addCell(new Paragraph(sellTable.getValueAt(i,1).toString(), plainFont));
+                table.addCell(new Paragraph(sellTable.getValueAt(i,4).toString(), plainFont));
+                table.addCell(new Paragraph(sellTable.getValueAt(i,5).toString(), plainFont));
+                table.addCell(new Paragraph(sellTable.getValueAt(i,6).toString(), plainFont));
+                totalSum += Float.parseFloat(sellTable.getValueAt(i,6).toString());
+            }
+            
+            table.addCell( new Paragraph("ΣΥΝΟΛΟ: ", boldFont));
+            table.addCell("");
+            table.addCell("");
+            table.addCell(new Paragraph(String.valueOf(totalSum)+" €", boldFont));
+            document.add(table);
+            
+            document.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Σφάλμα", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
+            return;
+        } catch (DocumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Σφάλμα", JOptionPane.INFORMATION_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "<html>Το τιμολόγιο εκδόθηκε επιτυχώς.</html>", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_invoiceMenuItemActionPerformed
+
+    private void contactMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactMenuItemActionPerformed
+        JOptionPane.showMessageDialog(this, "<html><center>Developers: <hr/><br/>Vasilis Chados: "
+                + "vasichad@students.kastoria.teikoz.gr<br/>Gabriel Mellides: "
+                + "gabmel@students.kastoria.teikoz.gr</center></html>", "Επικοινωνία", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_contactMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeskPane;
