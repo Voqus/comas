@@ -484,7 +484,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         }
         
-        try (BufferedReader br = new BufferedReader(new FileReader("src/comas/res/BusinessData.ini"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini")))){
             String[] lines = {};
             String line;
 

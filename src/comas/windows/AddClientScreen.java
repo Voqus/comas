@@ -98,6 +98,30 @@ public class AddClientScreen extends javax.swing.JFrame {
         taxRegisterLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         taxRegisterLabel.setText("Α.Φ.Μ:");
 
+        firstNameField.setToolTipText("π.χ Νίκος");
+
+        lastNameField.setToolTipText("π.χ Παπαδόπουλος");
+
+        businessNameField.setToolTipText("π.χ Παπαδόπουλος Α.Ε");
+
+        professionField.setToolTipText("π.χ Ελεύθερος Επαγγελματίας");
+
+        professionCodeField.setToolTipText("π.χ 01234-01234");
+
+        addressField.setToolTipText("π.χ Μαρτίου 44");
+
+        cityField.setToolTipText("π.χ Αθήνα");
+
+        telephoneAField.setToolTipText("π.χ 0030-0123456789");
+
+        telephoneBField.setToolTipText("π.χ 0030-0123456789");
+
+        faxField.setToolTipText("π.χ 0030-0123456789");
+
+        postalCodeField.setToolTipText("π.χ 01234");
+
+        taxRegisterField.setToolTipText("π.χ GR0123456789 // Κωδικός χώρας + 8 με 10 ψηφία");
+
         confirmLabel.setText("Επιβεβαίωση");
         confirmLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,6 +269,43 @@ public class AddClientScreen extends javax.swing.JFrame {
 
     // Saves Clients Data to Database {Returns message on jOptionPane}
     private void confirmLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmLabelActionPerformed
+        if(businessNameField.getText().isEmpty() || firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || professionField.getText().isEmpty()
+                || addressField.getText().isEmpty() || cityField.getText().isEmpty() || telephoneAField.getText().isEmpty() || telephoneBField.getText().isEmpty()
+                || faxField.getText().isEmpty() || postalCodeField.getText().isEmpty() || taxRegisterField.getText().isEmpty() || professionCodeField.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(firstNameField.getText().matches("\\w[A-Za-z]*")) || !(lastNameField.getText().matches("\\w[A-Za-z]*")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν αριθμούς.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(professionCodeField.getText().matches("[0-9]{5}\\-[0-9]{5}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του κωδικού επαγγέλματος πρέπει να περιέχει μόνο αριθμούς "
+                    + "και να έχει την μορφή: <b>012345-012345</b></html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(telephoneAField.getText().matches("[0-9]{4}-[0-9]{10}")) || !(telephoneBField.getText().matches("[0-9]{4}-[0-9]{10}")) 
+                || !(faxField.getText().matches("[0-9]{4}-[0-9]{10}|-")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία τηλεφώνων μπορούν να πάρουν την μορφή : <b>0030-0123456789</b> .</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(postalCodeField.getText().matches("[0-9]{5}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ταχυδρομικού κώδικα πρέπει να περιέχει 5 αριθμούς.<br/>"
+                    + "Π.χ 01234</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(taxRegisterField.getText().matches("[A-Z]{2}[0-9]{8,10}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του Α.Φ.Μ πρέπει να έχει την μορφή : <b>GR0123456789</b>.<br/>"
+                    + "Οι αριθμοί μπορεί να είναι 8 εώς 10.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Client client = new Client(businessNameField.getText(),
                 firstNameField.getText(),
                 lastNameField.getText(),

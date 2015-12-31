@@ -130,10 +130,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="productIdTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 1"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="clientIdTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 1"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="stockTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 1"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="confirmButton">
           <Properties>

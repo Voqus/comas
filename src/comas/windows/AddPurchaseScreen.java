@@ -86,6 +86,22 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
         supplierIdLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         supplierIdLabel.setText("ID προμηθευτή:");
 
+        pNameTextfield.setToolTipText("π.χ Προϊόν 1");
+
+        pDescTextfield.setToolTipText("π.χ υπολογιστές");
+
+        mUnitTextfield.setToolTipText("π.χ Kg/K/g/T");
+
+        pWeightTextfield.setToolTipText("π.χ 50.40");
+
+        pPurchPriceTextfield.setToolTipText("π.χ 114.40");
+
+        pSellPriceTextfield.setToolTipText("π.χ 123.45");
+
+        pStockTextfield.setToolTipText("π.χ 99");
+
+        supplierIdTextfield.setToolTipText("π.χ 1");
+
         confirmButton.setText("Επιβεβαίωση");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +150,7 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
                                 .addComponent(confirmButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cancelButton)))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,6 +211,37 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        if(pNameTextfield.getText().isEmpty() || pDescTextfield.getText().isEmpty() || mUnitTextfield.getText().isEmpty() || pWeightTextfield.getText().isEmpty()
+                || pPurchPriceTextfield.getText().isEmpty() || pSellPriceTextfield.getText().isEmpty() || pStockTextfield.getText().isEmpty() || supplierIdTextfield.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(mUnitTextfield.getText().matches("\\w[A-Za-z]{0,1}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο της μονάδας μέτρησης μπορεί να πάρει την μορφή : <b>K</b>, "
+                    + "<b>Kg</b>, <b>G</b>, <b>T</b>.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(pWeightTextfield.getText().matches("[0-9]+.[0-9]+")) || !(pPurchPriceTextfield.getText().matches("[0-9]+.[0-9]+"))
+                || !(pSellPriceTextfield.getText().matches("[0-9]+.[0-9]+")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του βάρους, και των τιμών μπορούν να πάρουν την μορφή : "
+                    + "<b>50.430</b>. Ακόμα και εάν είναι στρογγυλό ποσό π.χ 50 κιλά, πρέπει να γραφτεί 50.0</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(pStockTextfield.getText().matches("^[1-9]\\d*$")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο των τεμαχιών μπορούν να πάρουν την μορφή ακεραίου, εκτός του μηδενός."
+                    + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(supplierIdTextfield.getText().matches("[0-9]*")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ID του προμηθευτή μπορεί να πάρει μόνο την μορφή ακεραίου."
+                    + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         Product product = new Product(pNameTextfield.getText(), pDescTextfield.getText(), mUnitTextfield.getText(),
                 Float.parseFloat(pWeightTextfield.getText()), Float.parseFloat(pPurchPriceTextfield.getText()),

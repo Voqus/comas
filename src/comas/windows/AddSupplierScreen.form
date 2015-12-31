@@ -169,6 +169,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFirstName">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x39d;&#x3af;&#x3ba;&#x3bf;&#x3c2;"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMsgLastName">
           <Properties>
@@ -176,6 +179,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtLastName">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x3a0;&#x3b1;&#x3c0;&#x3b1;&#x3b4;&#x3cc;&#x3c0;&#x3bf;&#x3c5;&#x3bb;&#x3bf;&#x3c2;"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMsgPhoneA">
           <Properties>
@@ -183,6 +189,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPhoneA">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 0030-0123456789"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMsgPhoneB">
           <Properties>
@@ -190,6 +199,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPhoneB">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 0030-0123456789"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMsgAddress">
           <Properties>
@@ -202,8 +214,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAddress">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x39c;&#x3b1;&#x3c1;&#x3c4;&#x3af;&#x3bf;&#x3c5; 44"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCity">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x391;&#x3b8;&#x3ae;&#x3bd;&#x3b1;"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMsgPostalCode">
           <Properties>
@@ -211,6 +229,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPostalCode">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 01234"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMsgTaxReg">
           <Properties>
@@ -218,6 +239,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTaxReg">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; GR0123456789 // &#x39a;&#x3c9;&#x3b4;&#x3b9;&#x3ba;&#x3cc;&#x3c2; &#x3c7;&#x3ce;&#x3c1;&#x3b1;&#x3c2; + 8 &#x3bc;&#x3b5; 10 &#x3c8;&#x3b7;&#x3c6;&#x3af;&#x3b1;"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -97,19 +97,35 @@ public class EditSupplierScreen extends javax.swing.JFrame {
 
         firstnameLabel.setText("Όνομα:");
 
+        firstnameField.setToolTipText("π.χ Νίκος");
+
         lastnameLabel.setText("Επώνυμο:");
+
+        lastnameField.setToolTipText("π.χ Παπαδόπουλος");
 
         phoneALabel.setText("Τηλέφωνο Α:");
 
+        phoneAField.setToolTipText("π.χ 0030-0123456789");
+
         phoneBLabel.setText("Τηλέφωνο Β:");
+
+        phoneBField.setToolTipText("π.χ 0030-0123456789");
 
         addressLabel.setText("Διεύθυνση:");
 
+        addressField.setToolTipText("π.χ Μαρτίου 44");
+
         cityLabel.setText("Πόλη:");
+
+        cityField.setToolTipText("π.χ Αθήνα");
 
         postalCodeLabel.setText("Ταχ. Κώδικας:");
 
+        postalCodeField.setToolTipText("π.χ 01234");
+
         taxRegisterLabel.setText("Α.Φ.Μ.:");
+
+        taxRegisterField.setToolTipText("π.χ GR0123456789 // Κωδικός χώρας + 8 με 10 ψηφία");
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -253,6 +269,35 @@ public class EditSupplierScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        if(firstnameField.getText().isEmpty() || lastnameField.getText().isEmpty() || addressField.getText().isEmpty() || cityField.getText().isEmpty()
+                || phoneAField.getText().isEmpty() || phoneBField.getText().isEmpty() || postalCodeField.getText().isEmpty() ||
+                taxRegisterField.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(firstnameField.getText().matches("\\w[A-Za-z]*")) || !(lastnameField.getText().matches("\\w[A-Za-z]*")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν αριθμούς.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(phoneAField.getText().matches("[0-9]{4}-[0-9]{10}")) || !(phoneBField.getText().matches("[0-9]{4}-[0-9]{10}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία τηλεφώνων μπορούν να πάρουν να πάρει την μορφή : <b>0030-0123456789</b> .</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(postalCodeField.getText().matches("[0-9]{5}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ταχυδρομικού κώδικα πρέπει να περιέχει 5 αριθμούς.<br/>"
+                    + "Π.χ 01234</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(taxRegisterField.getText().matches("[A-Z]{2}[0-9]{8,10}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του Α.Φ.Μ πρέπει να έχει την μορφή : <b>GR0123456789</b>.<br/>"
+                    + "Οι αριθμοί μπορεί να είναι 8 εώς 10.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Supplier supplier = new Supplier(firstnameField.getText(),
                                          lastnameField.getText(),
                                          addressField.getText(),

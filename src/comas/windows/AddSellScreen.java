@@ -59,6 +59,12 @@ public class AddSellScreen extends javax.swing.JFrame {
 
         productStockLabel.setText("Τεμάχια:");
 
+        productIdTextfield.setToolTipText("π.χ 1");
+
+        clientIdTextfield.setToolTipText("π.χ 1");
+
+        stockTextfield.setToolTipText("π.χ 1");
+
         confirmButton.setText("Επιβεβαίωση");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,15 +153,28 @@ public class AddSellScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(!(productIdTextfield.getText().matches("[0-9]*")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ID του προϊόντος μπορεί να πάρει μόνο την μορφή ακεραίου."
+                    + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(clientIdTextfield.getText().matches("[0-9]*")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ID του πελάτη μπορεί να πάρει μόνο την μορφή ακεραίου."
+                    + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(stockTextfield.getText().matches("^[1-9]\\d*$")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο των τεμαχιών μπορούν να πάρουν την μορφή ακεραίου, εκτός του μηδενός."
+                    + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int productId   = Integer.parseInt(productIdTextfield.getText());
         int stock       = Integer.parseInt(stockTextfield.getText());
         int clientId    = Integer.parseInt(clientIdTextfield.getText());
         
-        if( stock == 0 )
-        {
-            JOptionPane.showMessageDialog (this, "Τα τεμάχια δεν μπορεί να είναι μηδέν", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         if(new SellDatabase().insertSell(productId, clientId, stock))
         {
             JOptionPane.showMessageDialog (this, "Η καταχώριση πώλησης καταχωρίθηκε με επιτυχία", "Επιτυχής Καταχώριση", JOptionPane.INFORMATION_MESSAGE);

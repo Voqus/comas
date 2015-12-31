@@ -58,7 +58,7 @@
                               <Component id="productStockLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="supplierIdLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="pNameTextfield" min="-2" pref="180" max="-2" attributes="0"/>
                               <Component id="pDescTextfield" min="-2" pref="180" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="83" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -209,20 +209,44 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pNameTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x3a0;&#x3c1;&#x3bf;&#x3ca;&#x3cc;&#x3bd; 1"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pDescTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x3c5;&#x3c0;&#x3bf;&#x3bb;&#x3bf;&#x3b3;&#x3b9;&#x3c3;&#x3c4;&#x3ad;&#x3c2;"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="mUnitTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; Kg/K/g/T"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pWeightTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 50.40"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pPurchPriceTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 114.40"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pSellPriceTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 123.45"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="pStockTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 99"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="supplierIdTextfield">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; 1"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="confirmButton">
           <Properties>

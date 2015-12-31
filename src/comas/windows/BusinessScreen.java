@@ -68,6 +68,20 @@ public class BusinessScreen extends javax.swing.JFrame {
 
         compAddressLabel.setText("Διεύθυνση:");
 
+        compNameTextfield.setToolTipText("π.χ Παπαδόπουλος Α.Ε");
+
+        compTaxOfficeTextfield.setToolTipText("π.χ ΦΑΕ Πειραιά");
+
+        compTaxRegisterTextfield.setToolTipText("π.χ GR0123456789 // Κωδικός χώρας + 8 με 10 ψηφία");
+
+        compTelephoneTextfield.setToolTipText("π.χ 0030-0123456789");
+
+        compFaxTextfield.setToolTipText("π.χ 0030-0123456789");
+
+        compCityTextfield.setToolTipText("π.χ Αθήνα");
+
+        compAddressTextfield.setToolTipText("π.χ Μαρτίου 44");
+
         confirmButton.setText("Ολοκλήρωση");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +175,25 @@ public class BusinessScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        Object[] options        = {"Ναι", "Όχι"};
+        // Validation check for empty fields
+        if ((compNameTextfield.getText().isEmpty()) || (compTaxOfficeTextfield.getText().isEmpty()) || (compTaxRegisterTextfield.getText().isEmpty()) || 
+                (compTelephoneTextfield.getText().isEmpty()) || (compFaxTextfield.getText().isEmpty()) || (compCityTextfield.getText().isEmpty()) ||
+                (compAddressTextfield.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(!(compTaxRegisterTextfield.getText().matches("[A-Z]{2}[0-9]{8,10}")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο του Α.Φ.Μ πρέπει να έχει την μορφή : <b>GR0123456789</b>.<br/>"
+                    + "Οι αριθμοί μπορεί να είναι 8 εώς 10.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!(compTelephoneTextfield.getText().matches("[0-9]{4}-[0-9]{10}")) || !(compFaxTextfield  .getText().matches("[0-9]{4}-[0-9]{10}|-")))
+        {
+            JOptionPane.showMessageDialog(this, "<html>Το πεδίο τηλεφώνων μπορεί να πάρει την μορφή : <b>0030-0123456789</b> .</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String compName         = compNameTextfield.getText();
         String compTaxOffice    = compTaxOfficeTextfield.getText();
         String compTaxRegister  = compTaxRegisterTextfield.getText();
@@ -169,13 +201,7 @@ public class BusinessScreen extends javax.swing.JFrame {
         String compFax          = compFaxTextfield.getText();
         String compCity         = compCityTextfield.getText();
         String compAddress      = compAddressTextfield.getText();
-
-        // Validation check for empty fields
-        if ((compName.isEmpty()) || (compTaxOffice.isEmpty()) || (compTaxRegister.isEmpty()) || 
-                (compTelephone.isEmpty()) || (compFax.isEmpty()) || (compCity.isEmpty()) || (compAddress.isEmpty())) {
-            JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        Object[] options        = {"Ναι", "Όχι"};
 
         int answer = JOptionPane.showOptionDialog(this, "<html><center>Είστε σίγουροι ότι δώσατε τις σωστές πληροφορίες;<br/>"
                 + "Δεν θα υπάρξει τρόπος επεξεργασίας των στοιχείων αυτών ξανά.</center></html>", "Επιβεβαίωση",
