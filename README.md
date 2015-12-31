@@ -17,12 +17,7 @@ Later on, there will be a setup.exe for the installation of the software but rig
 * -~ ALMOST DONE ~-
 
 ### TODO List: ###
-* Validation checks on each sub-window for each textfield, etc.
-* -~Program's GUI restructure~-
-* -~Invoice functionality.~-
-* --BusinessData file at program start.--
-* --Singleton pattern for only one instance creation of each sub-window.--
 * CashDesk pane, to set/update labels correctly.
-* --UML class diagram--
+* --UML class diagram--  **on hold for possible changes (2 packages done)**
 * Use case  diagram
 * Database relationships diagarm
