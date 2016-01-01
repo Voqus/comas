@@ -256,6 +256,7 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadStorageTable();
             MainScreen.loadPurchaseTable();
+            MainScreen.loadDeskPane();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this,

@@ -326,6 +326,7 @@ public class AddClientScreen extends javax.swing.JFrame {
                     "Επιτυχής Καταχώριση",
                     JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadClientTable();
+            MainScreen.loadDeskPane();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null,

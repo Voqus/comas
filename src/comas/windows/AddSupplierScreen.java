@@ -250,6 +250,7 @@ public class AddSupplierScreen extends javax.swing.JFrame {
                                            "Επιτυχής Καταχώριση",
                                            JOptionPane.INFORMATION_MESSAGE);
           MainScreen.loadSupplierTable();
+          MainScreen.loadDeskPane();
           this.dispose();
         }else{
             JOptionPane.showMessageDialog (this,

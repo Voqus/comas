@@ -1,6 +1,7 @@
 package comas.windows;
 
 import comas.database.SellDatabase;
+import static comas.windows.MainScreen.loadDeskPane;
 import javax.swing.JOptionPane;
 
 public class AddSellScreen extends javax.swing.JFrame {
@@ -180,6 +181,7 @@ public class AddSellScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (this, "Η καταχώριση πώλησης καταχωρίθηκε με επιτυχία", "Επιτυχής Καταχώριση", JOptionPane.INFORMATION_MESSAGE);
             MainScreen.loadStorageTable();
             MainScreen.loadSellTable();
+            MainScreen.loadDeskPane();
             this.dispose();
         }
         else

@@ -18,6 +18,7 @@ import comas.base.Supplier;
 import comas.database.ClientDatabase;
 import comas.database.Database;
 import comas.database.SupplierDatabase;
+import comas.database.DeskDatabase;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,17 +43,49 @@ public class MainScreen extends javax.swing.JFrame {
         loadStorageTable();
         loadPurchaseTable();
         loadSellTable();
-
+        loadDeskPane();
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     }
 
     public static void loadClientTable() {
-
         final String QUERY = "SELECT * FROM Clients";
-
+        
         DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
         clientTable.setModel(dtm);
+    }
+
+     public static void loadDeskPane() {
+         
+         final String sumIncomesQUERY = "SELECT SUM(FinalPrice) FROM Sells";
+         incomesLabel.setText(String.valueOf(new DeskDatabase().sumMoney(sumIncomesQUERY)+" €"));
+        
+        //  START storageInfosPane 
+        final String countProductsQUERY = "SELECT COUNT(*) FROM Products";
+        productsLabel.setText(String.valueOf(new DeskDatabase().countRecords(countProductsQUERY)));
+        final String sumSellingPriceQUERY = "SELECT SUM(SellingPrice*Stock) FROM Products WHERE Stock > 0";
+        finalIncomesLabel.setText(String.valueOf(new DeskDatabase().sumMoney(sumSellingPriceQUERY))+" €");
+        final String lowStockQUERY = "SELECT COUNT(*) FROM Products WHERE Stock < 10";
+        lowStockLabel.setText(String.valueOf(new DeskDatabase().countRecords(lowStockQUERY)));
+        // END storageInfosPane 
+         
+        //  START outcomesPane
+        final String countPurchasesQUERY = "SELECT COUNT(*) FROM Purchases";
+        purchasesLabel.setText(String.valueOf(new DeskDatabase().countRecords(countPurchasesQUERY)));
+        final String sumOutcomesQUERY = "SELECT SUM(PurchasePrice*Stock) FROM Products WHERE Stock > 0";
+        finalOutcomesLabel.setText(String.valueOf(new DeskDatabase().sumMoney(sumOutcomesQUERY))+" €");
+        final String countSuppliersQUERY = "SELECT COUNT(*) FROM Suppliers";
+        suppliersLabel.setText(String.valueOf(new DeskDatabase().countRecords(countSuppliersQUERY)));
+        //  END outcomesPane
+        
+        // START incomesPane
+        final String countSalesQUERY = "SELECT COUNT(*) FROM Sells";
+        salesLabel.setText(String.valueOf(new DeskDatabase().countRecords(countSalesQUERY)));
+        final String sumProfitQUERY = "SELECT SUM(SellingPrice*Stock)-SUM(PurchasePrice*Stock) FROM Products WHERE Stock >0";
+        profitLabel.setText(String.valueOf(new DeskDatabase().sumMoney(sumProfitQUERY))+" €");
+        final String countClientsQUERY = "SELECT COUNT(*) FROM Clients";
+        clientsLabel.setText(String.valueOf(new DeskDatabase().countRecords(countClientsQUERY)));
+        // END incomesPane
     }
 
     public static void loadSupplierTable() {
@@ -92,6 +125,7 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         mainPanel = new javax.swing.JPanel();
         mainTabbedPane = new javax.swing.JTabbedPane();
         clientPane = new javax.swing.JScrollPane();
@@ -105,12 +139,30 @@ public class MainScreen extends javax.swing.JFrame {
         marketPane = new javax.swing.JScrollPane();
         purchaseTable = new javax.swing.JTable();
         DeskPane = new javax.swing.JPanel();
-        lblBalance = new javax.swing.JLabel();
-        lblTitle = new javax.swing.JLabel();
-        lblMsg1 = new javax.swing.JLabel();
-        lblMsg2 = new javax.swing.JLabel();
-        lblMg3 = new javax.swing.JLabel();
-        lblMsg4 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        storageInfosPane = new javax.swing.JPanel();
+        productsMsgLabel = new javax.swing.JLabel();
+        productsLabel = new javax.swing.JLabel();
+        lowStockMsgLabel = new javax.swing.JLabel();
+        lowStockLabel = new javax.swing.JLabel();
+        finalIncomesMsgLabel = new javax.swing.JLabel();
+        finalIncomesLabel = new javax.swing.JLabel();
+        incomesMsgLabel = new javax.swing.JLabel();
+        incomesLabel = new javax.swing.JLabel();
+        outcomesPane = new javax.swing.JPanel();
+        purchasesMsgLabel = new javax.swing.JLabel();
+        purchasesLabel = new javax.swing.JLabel();
+        finalOutcomesMsglabel = new javax.swing.JLabel();
+        finalOutcomesLabel = new javax.swing.JLabel();
+        suppliersMsgLabel = new javax.swing.JLabel();
+        suppliersLabel = new javax.swing.JLabel();
+        incomesPane = new javax.swing.JPanel();
+        salesMsgLabel = new javax.swing.JLabel();
+        salesLabel = new javax.swing.JLabel();
+        profitMsgLabel = new javax.swing.JLabel();
+        profitLabel = new javax.swing.JLabel();
+        clientsMsgLabel = new javax.swing.JLabel();
+        clientsLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         programMenu = new javax.swing.JMenu();
         restartMenuItem = new javax.swing.JMenuItem();
@@ -128,6 +180,8 @@ public class MainScreen extends javax.swing.JFrame {
         helpProgramMenuItem = new javax.swing.JMenuItem();
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
         contactMenuItem = new javax.swing.JMenuItem();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ΛΕΔ: Λογισμικό Εμπορικής Διαχείρησης");
@@ -213,63 +267,231 @@ public class MainScreen extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Αγορές", marketPane);
 
-        lblBalance.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblBalance.setText("0.00€");
+        titleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        titleLabel.setText("Ταμείο");
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTitle.setText("Πληροφορίες Ταμείου");
+        storageInfosPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Αποθύκη"));
 
-        lblMsg1.setText("Συνολό Πωλήσεων");
+        productsMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        productsMsgLabel.setText("Αριθμός Προιόντων:");
 
-        lblMsg2.setText("Έσοδα:");
+        productsLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        productsLabel.setText("jLabel1");
 
-        lblMg3.setText("Έξοδα:");
+        lowStockMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lowStockMsgLabel.setText("Μικρο Αποθεμα: ");
 
-        lblMsg4.setText("Χρήματα");
+        lowStockLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lowStockLabel.setText("jLabel2");
+
+        finalIncomesMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        finalIncomesMsgLabel.setText("Εκτιμομενα Εσοδα:");
+
+        finalIncomesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        finalIncomesLabel.setText("jLabel4");
+
+        javax.swing.GroupLayout storageInfosPaneLayout = new javax.swing.GroupLayout(storageInfosPane);
+        storageInfosPane.setLayout(storageInfosPaneLayout);
+        storageInfosPaneLayout.setHorizontalGroup(
+            storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(storageInfosPaneLayout.createSequentialGroup()
+                .addGroup(storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(storageInfosPaneLayout.createSequentialGroup()
+                            .addGap(11, 11, 11)
+                            .addComponent(productsMsgLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(productsLabel))
+                        .addGroup(storageInfosPaneLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lowStockMsgLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lowStockLabel)))
+                    .addGroup(storageInfosPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(finalIncomesMsgLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(finalIncomesLabel)))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        storageInfosPaneLayout.setVerticalGroup(
+            storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(storageInfosPaneLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(productsMsgLabel)
+                    .addComponent(productsLabel))
+                .addGap(48, 48, 48)
+                .addGroup(storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lowStockMsgLabel)
+                    .addComponent(lowStockLabel))
+                .addGap(42, 42, 42)
+                .addGroup(storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finalIncomesMsgLabel)
+                    .addComponent(finalIncomesLabel))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        incomesMsgLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        incomesMsgLabel.setText("Έσοδα:");
+
+        incomesLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        incomesLabel.setText("jLabel6");
+
+        outcomesPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Εξοδα Επιχειρησεις"));
+
+        purchasesMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        purchasesMsgLabel.setText("Συνολο Αγωρών:");
+
+        purchasesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        purchasesLabel.setText("jLabel8");
+
+        finalOutcomesMsglabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        finalOutcomesMsglabel.setText("Συνολικα Έξοδα:");
+
+        finalOutcomesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        finalOutcomesLabel.setText("jLabel10");
+
+        suppliersMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        suppliersMsgLabel.setText("Προμηθευτές:");
+
+        suppliersLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        suppliersLabel.setText("jLabel17");
+
+        javax.swing.GroupLayout outcomesPaneLayout = new javax.swing.GroupLayout(outcomesPane);
+        outcomesPane.setLayout(outcomesPaneLayout);
+        outcomesPaneLayout.setHorizontalGroup(
+            outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(outcomesPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(purchasesMsgLabel)
+                    .addComponent(finalOutcomesMsglabel)
+                    .addComponent(suppliersMsgLabel))
+                .addGap(18, 18, 18)
+                .addGroup(outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(suppliersLabel)
+                    .addComponent(finalOutcomesLabel)
+                    .addComponent(purchasesLabel))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        outcomesPaneLayout.setVerticalGroup(
+            outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(outcomesPaneLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(purchasesMsgLabel)
+                    .addComponent(purchasesLabel))
+                .addGap(46, 46, 46)
+                .addGroup(outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finalOutcomesMsglabel)
+                    .addComponent(finalOutcomesLabel))
+                .addGap(41, 41, 41)
+                .addGroup(outcomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(suppliersMsgLabel)
+                    .addComponent(suppliersLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        incomesPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Έσοδα "));
+        incomesPane.setToolTipText("");
+
+        salesMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        salesMsgLabel.setText("Συνολο Πολησεών");
+
+        salesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        salesLabel.setText("jLabel12");
+
+        profitMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        profitMsgLabel.setText("Κέρδος:");
+
+        profitLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        profitLabel.setText("jLabel14");
+
+        clientsMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        clientsMsgLabel.setText("Πελάτες:");
+
+        clientsLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        clientsLabel.setText("jLabel18");
+
+        javax.swing.GroupLayout incomesPaneLayout = new javax.swing.GroupLayout(incomesPane);
+        incomesPane.setLayout(incomesPaneLayout);
+        incomesPaneLayout.setHorizontalGroup(
+            incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(incomesPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(incomesPaneLayout.createSequentialGroup()
+                        .addComponent(salesMsgLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(salesLabel))
+                    .addGroup(incomesPaneLayout.createSequentialGroup()
+                        .addComponent(profitMsgLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(profitLabel))
+                    .addGroup(incomesPaneLayout.createSequentialGroup()
+                        .addComponent(clientsMsgLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(clientsLabel)))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        incomesPaneLayout.setVerticalGroup(
+            incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(incomesPaneLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salesMsgLabel)
+                    .addComponent(salesLabel))
+                .addGap(42, 42, 42)
+                .addGroup(incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(profitMsgLabel)
+                    .addComponent(profitLabel))
+                .addGap(49, 49, 49)
+                .addGroup(incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clientsMsgLabel)
+                    .addComponent(clientsLabel))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout DeskPaneLayout = new javax.swing.GroupLayout(DeskPane);
         DeskPane.setLayout(DeskPaneLayout);
         DeskPaneLayout.setHorizontalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DeskPaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(storageInfosPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(outcomesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DeskPaneLayout.createSequentialGroup()
-                        .addComponent(lblMsg1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(DeskPaneLayout.createSequentialGroup()
-                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMsg2)
-                            .addComponent(lblMg3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(incomesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
-                        .addGap(0, 330, Short.MAX_VALUE)
-                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
-                                .addComponent(lblTitle)
-                                .addGap(341, 341, 341))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
-                                .addComponent(lblMsg4)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblBalance)
-                                .addGap(21, 21, 21))))))
+                        .addComponent(incomesMsgLabel)
+                        .addGap(45, 45, 45)
+                        .addComponent(incomesLabel)
+                        .addGap(65, 65, 65))))
+            .addGroup(DeskPaneLayout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addComponent(titleLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DeskPaneLayout.setVerticalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle)
+                .addComponent(titleLabel)
                 .addGap(25, 25, 25)
-                .addComponent(lblMsg1)
-                .addGap(36, 36, 36)
-                .addComponent(lblMsg2)
-                .addGap(27, 27, 27)
-                .addComponent(lblMg3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(outcomesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(storageInfosPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(incomesPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBalance)
-                    .addComponent(lblMsg4))
-                .addGap(125, 125, 125))
+                    .addComponent(incomesMsgLabel)
+                    .addComponent(incomesLabel))
+                .addGap(17, 17, 17))
         );
 
         mainTabbedPane.addTab("Ταμείο", DeskPane);
@@ -587,19 +809,25 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem addSupplierMenuItem;
     private javax.swing.JScrollPane clientPane;
     public static javax.swing.JTable clientTable;
+    private static javax.swing.JLabel clientsLabel;
+    private javax.swing.JLabel clientsMsgLabel;
     private javax.swing.JMenuItem contactMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
+    private static javax.swing.JLabel finalIncomesLabel;
+    private javax.swing.JLabel finalIncomesMsgLabel;
+    private static javax.swing.JLabel finalOutcomesLabel;
+    private javax.swing.JLabel finalOutcomesMsglabel;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator helpMenuSeparator;
     private javax.swing.JMenuItem helpProgramMenuItem;
+    private static javax.swing.JLabel incomesLabel;
+    private javax.swing.JLabel incomesMsgLabel;
+    private javax.swing.JPanel incomesPane;
     private javax.swing.JPopupMenu.Separator insertSeparator;
     private javax.swing.JMenuItem invoiceMenuItem;
-    private javax.swing.JLabel lblBalance;
-    private javax.swing.JLabel lblMg3;
-    private javax.swing.JLabel lblMsg1;
-    private javax.swing.JLabel lblMsg2;
-    private javax.swing.JLabel lblMsg4;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField jTextField1;
+    private static javax.swing.JLabel lowStockLabel;
+    private javax.swing.JLabel lowStockMsgLabel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JScrollPane marketPane;
@@ -607,15 +835,28 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem newPurchaseMenuItem;
     private javax.swing.JMenuItem newSellMenuItem;
     private javax.swing.JPopupMenu.Separator newSeparator;
+    private static javax.swing.JPanel outcomesPane;
+    private static javax.swing.JLabel productsLabel;
+    private javax.swing.JLabel productsMsgLabel;
+    private static javax.swing.JLabel profitLabel;
+    private javax.swing.JLabel profitMsgLabel;
     private javax.swing.JMenu programMenu;
     private javax.swing.JPopupMenu.Separator programMenuSeparator;
     public static javax.swing.JTable purchaseTable;
+    private static javax.swing.JLabel purchasesLabel;
+    private javax.swing.JLabel purchasesMsgLabel;
     private javax.swing.JMenuItem restartMenuItem;
+    private static javax.swing.JLabel salesLabel;
+    private javax.swing.JLabel salesMsgLabel;
     public static javax.swing.JTable sellTable;
     private javax.swing.JScrollPane sellsPane;
+    private javax.swing.JPanel storageInfosPane;
     private javax.swing.JScrollPane storagePane;
     public static javax.swing.JTable storageTable;
     private javax.swing.JScrollPane supplierPane;
     public static javax.swing.JTable supplierTable;
+    private static javax.swing.JLabel suppliersLabel;
+    private javax.swing.JLabel suppliersMsgLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
