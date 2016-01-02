@@ -32,7 +32,7 @@ public class Client {
        this.postalCode      = postalCode;
        this.taxRegister     = taxRegister;
        this.professionCode  = professionCode;
-    }
+    } // Client
     
     public String getBusinessName() {
         return businessName;

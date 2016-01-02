@@ -24,7 +24,7 @@ public class Supplier {
         this.telephoneB     = telephoneB;
         this.postalCode     = postalCode;
         this.taxRegister    = taxRegister;
-    }
+    } // Supplier
 
     public String getFirstName() {
         return firstName;

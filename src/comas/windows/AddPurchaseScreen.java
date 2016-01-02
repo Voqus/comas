@@ -4,7 +4,8 @@ import comas.base.Product;
 import comas.database.PurchaseDatabase;
 import javax.swing.JOptionPane;
 
-public class AddPurchaseScreen extends javax.swing.JFrame {
+public class AddPurchaseScreen extends javax.swing.JFrame
+{
 
     private static volatile AddPurchaseScreen object;
     
@@ -14,7 +15,8 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
             object = new AddPurchaseScreen();
         
         return object;
-    }
+    } // getInstance
+    
     /**
      * Creates new form AddPurchaseScreen
      */
@@ -23,7 +25,7 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
 
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
-    }
+    } // AddPurchaseScreen
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,32 +218,32 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(mUnitTextfield.getText().matches("\\w[A-Za-z]{0,1}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο της μονάδας μέτρησης μπορεί να πάρει την μορφή : <b>K</b>, "
                     + "<b>Kg</b>, <b>G</b>, <b>T</b>.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(pWeightTextfield.getText().matches("[0-9]+.[0-9]+")) || !(pPurchPriceTextfield.getText().matches("[0-9]+.[0-9]+"))
                 || !(pSellPriceTextfield.getText().matches("[0-9]+.[0-9]+")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του βάρους, και των τιμών μπορούν να πάρουν την μορφή : "
                     + "<b>50.430</b>. Ακόμα και εάν είναι στρογγυλό ποσό π.χ 50 κιλά, πρέπει να γραφτεί 50.0</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(pStockTextfield.getText().matches("^[1-9]\\d*$")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο των τεμαχιών μπορούν να πάρουν την μορφή ακεραίου, εκτός του μηδενός."
                     + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(supplierIdTextfield.getText().matches("[0-9]*")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ID του προμηθευτή μπορεί να πάρει μόνο την μορφή ακεραίου."
                     + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         
         Product product = new Product(pNameTextfield.getText(), pDescTextfield.getText(), mUnitTextfield.getText(),
                 Float.parseFloat(pWeightTextfield.getText()), Float.parseFloat(pPurchPriceTextfield.getText()),
@@ -250,7 +252,8 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
         int supplierId = Integer.parseInt(supplierIdTextfield.getText());
 
         
-        if (new PurchaseDatabase().insertPurchase(product,supplierId)) {
+        if (new PurchaseDatabase().insertPurchase(product,supplierId))
+        {
             JOptionPane.showMessageDialog(this, "Η καταχώριση αγοράς καταχωρίθηκε με επιτυχία",
                     "Επιτυχής Καταχώριση",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -258,12 +261,14 @@ public class AddPurchaseScreen extends javax.swing.JFrame {
             MainScreen.loadPurchaseTable();
             MainScreen.loadDeskPane();
             this.dispose();
-        } else {
+        } // if
+        else
+        {
             JOptionPane.showMessageDialog(this,
                     "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",
                     "Ανεπιτυχής Καταχώριση",
                     JOptionPane.ERROR_MESSAGE);
-        }
+        } // else
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

@@ -4,7 +4,8 @@ import comas.base.Client;
 import comas.database.ClientDatabase;
 import javax.swing.JOptionPane;
 
-public class AddClientScreen extends javax.swing.JFrame {
+public class AddClientScreen extends javax.swing.JFrame
+{
 
     private static volatile AddClientScreen object;
     
@@ -13,17 +14,18 @@ public class AddClientScreen extends javax.swing.JFrame {
         if(object == null)
             object = new AddClientScreen();
         return object;
-    }
+    } // getInstance
     
     /**
      * Creates new form AddClientScreen
      */
-    private AddClientScreen() {
+    private AddClientScreen()
+    {
         initComponents();
 
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
-    }
+    } // AddClientScreen
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -275,36 +277,36 @@ public class AddClientScreen extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(firstNameField.getText().matches("\\w[A-Za-z]*")) || !(lastNameField.getText().matches("\\w[A-Za-z]*")))
         {
             JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν αριθμούς.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(professionCodeField.getText().matches("[0-9]{5}\\-[0-9]{5}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του κωδικού επαγγέλματος πρέπει να περιέχει μόνο αριθμούς "
                     + "και να έχει την μορφή: <b>012345-012345</b></html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(telephoneAField.getText().matches("[0-9]{4}-[0-9]{10}")) || !(telephoneBField.getText().matches("[0-9]{4}-[0-9]{10}")) 
                 || !(faxField.getText().matches("[0-9]{4}-[0-9]{10}|-")))
         {
             JOptionPane.showMessageDialog(this, "<html>Τα πεδία τηλεφώνων μπορούν να πάρουν την μορφή : <b>0030-0123456789</b> .</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(postalCodeField.getText().matches("[0-9]{5}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ταχυδρομικού κώδικα πρέπει να περιέχει 5 αριθμούς.<br/>"
                     + "Π.χ 01234</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(taxRegisterField.getText().matches("[A-Z]{2}[0-9]{8,10}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του Α.Φ.Μ πρέπει να έχει την μορφή : <b>GR0123456789</b>.<br/>"
                     + "Οι αριθμοί μπορεί να είναι 8 εώς 10.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         
         Client client = new Client(businessNameField.getText(),
                 firstNameField.getText(),
@@ -320,7 +322,8 @@ public class AddClientScreen extends javax.swing.JFrame {
                 professionCodeField.getText());
 
         // Inserts Data to Database and gives a JOptionPane for message
-        if (new ClientDatabase().insertClient(client)) {
+        if (new ClientDatabase().insertClient(client))
+        {
             JOptionPane.showMessageDialog(null,
                     "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
                     "Επιτυχής Καταχώριση",
@@ -328,12 +331,14 @@ public class AddClientScreen extends javax.swing.JFrame {
             MainScreen.loadClientTable();
             MainScreen.loadDeskPane();
             this.dispose();
-        } else {
+        } // if
+        else
+        {
             JOptionPane.showMessageDialog(null,
                     "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",
                     "Ανεπιτυχής Καταχώριση",
                     JOptionPane.ERROR_MESSAGE);
-        }
+        } // else
     }//GEN-LAST:event_confirmLabelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

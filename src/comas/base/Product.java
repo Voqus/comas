@@ -22,7 +22,7 @@ public class Product {
         this.purchasePrice          = purchasePrice;
         this.sellingPrice           = sellingPrice;
         this.stock                  = stock;
-    }
+    } // Product
     
     public String getProductName() {
         return productName;

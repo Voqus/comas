@@ -16,7 +16,6 @@ import comas.Comas;
 import comas.base.Client;
 import comas.base.Supplier;
 import comas.database.ClientDatabase;
-import comas.database.Database;
 import comas.database.SupplierDatabase;
 import comas.database.DeskDatabase;
 import java.io.BufferedReader;
@@ -31,31 +30,47 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import static com.itextpdf.text.Chunk.NEWLINE;
-public class MainScreen extends javax.swing.JFrame {
+import comas.database.PurchaseDatabase;
+import comas.database.SellDatabase;
+import comas.database.StorageDatabase;
+public class MainScreen extends javax.swing.JFrame
+{
 
     /**
      * Creates new form MainScreen
      */
-    public MainScreen() {
+    public MainScreen()
+    {
         initComponents();
+        
+        //Load the tables of the application with data from database
         loadClientTable();
         loadSupplierTable();
         loadStorageTable();
         loadPurchaseTable();
         loadSellTable();
         loadDeskPane();
+        
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
-    }
+    } // MainScreen
 
-    public static void loadClientTable() {
+    /**
+     * Loads the client data from the database to the JTable.
+     */
+    public static void loadClientTable()
+    {
         final String QUERY = "SELECT * FROM Clients";
         
-        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new ClientDatabase().selectTable(QUERY);
         clientTable.setModel(dtm);
-    }
+    } // loadClientTable
 
-     public static void loadDeskPane() {
+     /**
+     * Loads the necessary data from the database to the JTable.
+     */
+     public static void loadDeskPane()
+     {
          
          final String sumIncomesQUERY = "SELECT SUM(FinalPrice) FROM Sells";
          incomesLabel.setText(String.valueOf(new DeskDatabase().sumMoney(sumIncomesQUERY)+" €"));
@@ -86,40 +101,55 @@ public class MainScreen extends javax.swing.JFrame {
         final String countClientsQUERY = "SELECT COUNT(*) FROM Clients";
         clientsLabel.setText(String.valueOf(new DeskDatabase().countRecords(countClientsQUERY)));
         // END incomesPane
-    }
-
-    public static void loadSupplierTable() {
-
+    } // loadDeskPane
+     
+    /**
+     * Loads the supplier data from the database to the JTable.
+     */
+    public static void loadSupplierTable()
+    {
         final String QUERY = "SELECT * FROM Suppliers";
 
-        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new SupplierDatabase().selectTable(QUERY);
         supplierTable.setModel(dtm);
-    }
+    } // loadSupplierTable
 
-    public static void loadStorageTable() {
+     /**
+     * Loads the storage data according to it's relations from the database to the JTable.
+     */
+    public static void loadStorageTable()
+    {
         //  Selects the StorageId, ProductName, ProductDescription, Supplier's TaxRegister, Product's SellingPrice and Product's Stock
         final String QUERY = "SELECT Storage.StorageId, Storage.ProductId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
                 + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
                 + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
-        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new StorageDatabase().selectTable(QUERY);
         storageTable.setModel(dtm);
-    }
+    } // loadStorageTable
 
-    public static void loadPurchaseTable() {
+    /**
+     * Loads the purchase data from the database to the JTable.
+     */
+    public static void loadPurchaseTable()
+    {
         final String QUERY = "SELECT Purchases.purchaseId, Purchases.ProductsId, Products.ProductName, Suppliers.FirstName, Suppliers.LastName, Purchases.Stock, Purchases.FinalPrice "
                 + "FROM Purchases,Products,Suppliers WHERE Purchases.ProductsId=Products.ProductId AND Purchases.SupplierId=Suppliers.SupplierId";
 
-        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new PurchaseDatabase().selectTable(QUERY);
         purchaseTable.setModel(dtm);
-    }
+    } // loadPurchaseTable
 
-    public static void loadSellTable() {
+    /**
+     * Loads the sell data from the database to the JTable.
+     */
+    public static void loadSellTable()
+    {
         final String QUERY = "SELECT Sells.SellId, Sells.ProductsId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
                 + "FROM Sells, Products, Clients WHERE Sells.ProductsId = Products.ProductId AND Sells.ClientId=Clients.ClientId";
 
-        DefaultTableModel dtm = (DefaultTableModel) new Database().selectTable(QUERY);
+        DefaultTableModel dtm = (DefaultTableModel) new SellDatabase().selectTable(QUERY);
         sellTable.setModel(dtm);
-    }
+    } // loadSellTable
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -270,22 +300,22 @@ public class MainScreen extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         titleLabel.setText("Ταμείο");
 
-        storageInfosPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Αποθύκη"));
+        storageInfosPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Αποθήκη"));
 
         productsMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        productsMsgLabel.setText("Αριθμός Προιόντων:");
+        productsMsgLabel.setText("Αριθμός Προϊόντων:");
 
         productsLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         productsLabel.setText("jLabel1");
 
         lowStockMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lowStockMsgLabel.setText("Μικρο Αποθεμα: ");
+        lowStockMsgLabel.setText("Ελάχιστο Απόθεμα: ");
 
         lowStockLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lowStockLabel.setText("jLabel2");
 
         finalIncomesMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        finalIncomesMsgLabel.setText("Εκτιμομενα Εσοδα:");
+        finalIncomesMsgLabel.setText("Εκτιμόμενα Έσοδα:");
 
         finalIncomesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         finalIncomesLabel.setText("jLabel4");
@@ -329,7 +359,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(storageInfosPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(finalIncomesMsgLabel)
                     .addComponent(finalIncomesLabel))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         incomesMsgLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -338,16 +368,16 @@ public class MainScreen extends javax.swing.JFrame {
         incomesLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         incomesLabel.setText("jLabel6");
 
-        outcomesPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Εξοδα Επιχειρησεις"));
+        outcomesPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Έξοδα Επιχειρήσεως"));
 
         purchasesMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        purchasesMsgLabel.setText("Συνολο Αγωρών:");
+        purchasesMsgLabel.setText("Σύνολο Αγορών:");
 
         purchasesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         purchasesLabel.setText("jLabel8");
 
         finalOutcomesMsglabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        finalOutcomesMsglabel.setText("Συνολικα Έξοδα:");
+        finalOutcomesMsglabel.setText("Συνολικά Έξοδα:");
 
         finalOutcomesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         finalOutcomesLabel.setText("jLabel10");
@@ -397,7 +427,7 @@ public class MainScreen extends javax.swing.JFrame {
         incomesPane.setToolTipText("");
 
         salesMsgLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        salesMsgLabel.setText("Συνολο Πολησεών");
+        salesMsgLabel.setText("Σύνολο Πωλήσεων:");
 
         salesLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         salesLabel.setText("jLabel12");
@@ -450,32 +480,31 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(incomesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clientsMsgLabel)
                     .addComponent(clientsLabel))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DeskPaneLayout = new javax.swing.GroupLayout(DeskPane);
         DeskPane.setLayout(DeskPaneLayout);
         DeskPaneLayout.setHorizontalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(storageInfosPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(outcomesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(DeskPaneLayout.createSequentialGroup()
                 .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DeskPaneLayout.createSequentialGroup()
-                        .addComponent(incomesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DeskPaneLayout.createSequentialGroup()
-                        .addComponent(incomesMsgLabel)
-                        .addGap(45, 45, 45)
-                        .addComponent(incomesLabel)
-                        .addGap(65, 65, 65))))
-            .addGroup(DeskPaneLayout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addComponent(titleLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(storageInfosPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(outcomesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(DeskPaneLayout.createSequentialGroup()
+                                .addComponent(incomesMsgLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(incomesLabel))
+                            .addComponent(incomesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(DeskPaneLayout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(titleLabel)))
+                .addContainerGap())
         );
         DeskPaneLayout.setVerticalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,15 +512,19 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(titleLabel)
                 .addGap(25, 25, 25)
-                .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(outcomesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(storageInfosPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(incomesPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(incomesMsgLabel)
-                    .addComponent(incomesLabel))
-                .addGap(17, 17, 17))
+                .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DeskPaneLayout.createSequentialGroup()
+                        .addComponent(incomesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(incomesMsgLabel)
+                            .addComponent(incomesLabel))
+                        .addGap(17, 17, 17))
+                    .addGroup(DeskPaneLayout.createSequentialGroup()
+                        .addGroup(DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(storageInfosPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(outcomesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         mainTabbedPane.addTab("Ταμείο", DeskPane);
@@ -500,7 +533,7 @@ public class MainScreen extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainTabbedPane)
+            .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,7 +642,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        // Τερματισμός προγράμματος
+        // Program exits
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
@@ -619,30 +652,34 @@ public class MainScreen extends javax.swing.JFrame {
      * @param evt
      */
     private void restartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartMenuItemActionPerformed
-        //TODO: try to fix splashscreen
-
-        //Get all arguments needed for the program
+        //Get all arguments needed for the program through the system environmental variables
         String command = new String();
         command += System.getProperty("java.home") + File.separator + "bin" + File.separator + "java ";
-        for (String args : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
+        for (String args : ManagementFactory.getRuntimeMXBean().getInputArguments())
+        {
             command += args + " ";
-        }
+        } // for
         command += "-cp " + ManagementFactory.getRuntimeMXBean().getClassPath() + " ";
         command += Comas.class.getName() + " ";
 
-        try {
+        try
+        {
             //Create new process
             Runtime.getRuntime().exec(command);
-        } catch (IOException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } // try
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+        } // catch
 
-        //Terminate this program
+        //Terminate this instance of the program
         System.exit(0);
     }//GEN-LAST:event_restartMenuItemActionPerformed
 
     private void clientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientTableMouseClicked
-        if (evt.getClickCount() > 1) {
+        // If a cell of the table is clicked more than once then open a new window with cell's informations
+        if (evt.getClickCount() > 1)
+        {
             int rowIndex = clientTable.getSelectedRow();
             String clientName = clientTable.getModel().getValueAt(rowIndex, 2).toString();
             int clientId = Integer.parseInt(clientTable.getModel().getValueAt(rowIndex, 0).toString());
@@ -651,7 +688,7 @@ public class MainScreen extends javax.swing.JFrame {
             Client client = new ClientDatabase().selectClient(QUERY);
 
             EditClientScreen.getInstance(client, clientId).setVisible(true);
-        }
+        } // if
     }//GEN-LAST:event_clientTableMouseClicked
 
     private void addClientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClientMenuItemActionPerformed
@@ -663,7 +700,9 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_addSupplierMenuItemActionPerformed
 
     private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
-        if (evt.getClickCount() > 1) {
+        // If a cell of the table is clicked more than once then open a new window with cell's informations
+        if (evt.getClickCount() > 1)
+        {
             int rowIndex = supplierTable.getSelectedRow();
             int supplierId = Integer.parseInt(supplierTable.getModel().getValueAt(rowIndex, 0).toString());
             final String QUERY = "SELECT * FROM Suppliers WHERE SupplierId=" + supplierId;
@@ -671,7 +710,7 @@ public class MainScreen extends javax.swing.JFrame {
             Supplier supplier = new SupplierDatabase().selectSupplier(QUERY);
 
             EditSupplierScreen.getInstance(supplier, supplierId).setVisible(true);
-        }
+        } // if
     }//GEN-LAST:event_supplierTableMouseClicked
 
     private void newPurchaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPurchaseMenuItemActionPerformed
@@ -685,15 +724,19 @@ public class MainScreen extends javax.swing.JFrame {
     private void invoiceMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceMenuItemActionPerformed
         int selectedRow[] = sellTable.getSelectedRows();
         
+        // If the selectedRow length is equal to zero, it means that no row was selected
+        // So there invoice pdf that would be created would contain no client information
         if(selectedRow.length == 0)
         {
             JOptionPane.showMessageDialog(this, "<html>Πρώτα πρέπει να επιλέξετε <b>μία εγγραφή πώλησης"
                     + " ενός και μόνο πελάτη</b> για την έκδοση τιμολογίου","Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         String clientName = sellTable.getValueAt(selectedRow[0],2).toString();
         String clientLastName = sellTable.getValueAt(selectedRow[0],3).toString();
         
+        // For each selectedrow checks if the firstname and last name is the same,
+        // If it's not the same that means that the selected rows do not contain the same client.
         for(int i : selectedRow)
         {
             String newName = sellTable.getValueAt(i, 2).toString();
@@ -703,13 +746,16 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "<html>Διαλέξατε δύο διαφορετικούς πελάτες για την έκδοση τιμολογίου.<br/>"
                         + "Η έκδοση τιμολογίου γίνεται για κάθε άτομο ξεχωριστά.</html>","Σφάλμα", JOptionPane.ERROR_MESSAGE);
                 return;
-            }
-        }
+            } // if
+        } // for
         
-        try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini")))){
+        // Read the information from the business file
+        try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini"))))
+        {
             String[] lines = {};
             String line;
 
+            // Read the file's line and split it on each '//' symbol.
             line = br.readLine();
             lines = line.split("//");
 
@@ -721,8 +767,10 @@ public class MainScreen extends javax.swing.JFrame {
             String compCity = lines[5];
             String compAddress = lines[6];
 
+            // Register bold and plain fonts for the pdf creation.
             FontFactory.register("src/comas/res/fonts/Verdana.ttf", "VERDANA_PLAIN_FONT");
             FontFactory.register("src/comas/res/fonts/Verdanab.ttf", "VERDANA_BOLD_FONT");
+            // Create the pdf document in form of A4 page size.
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, new FileOutputStream("invoice.pdf")).setInitialLeading(16);
             document.open();
@@ -733,6 +781,8 @@ public class MainScreen extends javax.swing.JFrame {
             Font plainFont = FontFactory.getFont("VERDANA_PLAIN_FONT", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             plainFont.setSize(10);
             
+            // Writing the pdf, starting with title and business information
+            // We acquired at the first launch of the program
             Paragraph title = new Paragraph("ΕΚΔΟΣΗ ΤΙΜΟΛΟΓΙΟΥ", boldFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
@@ -749,8 +799,10 @@ public class MainScreen extends javax.swing.JFrame {
             document.add(new Paragraph("ΟΝΟΜΑΤΕΠΩΝΥΜΟ ΠΕΛΑΤΗ: " + clientName + " " + clientLastName, plainFont));
             document.add(NEWLINE);
             
+            // Create a table of 4 columns and selectedRow rows (dynamic)
             PdfPTable table = new PdfPTable(4);
 
+            // Fixed column names -- START
             PdfPCell c1 = new PdfPCell(new Phrase("ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(c1);
@@ -767,16 +819,20 @@ public class MainScreen extends javax.swing.JFrame {
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             table.setHeaderRows(1);
+            // Fixed column names -- END
             
+            // Pass the data of the products and calculate the total sum of products bought
             float totalSum = 0.0f;
-            for (int i : selectedRow) {
+            for (int i : selectedRow)
+            {
                 table.addCell(new Paragraph(sellTable.getValueAt(i,1).toString(), plainFont));
                 table.addCell(new Paragraph(sellTable.getValueAt(i,4).toString(), plainFont));
                 table.addCell(new Paragraph(sellTable.getValueAt(i,5).toString(), plainFont));
                 table.addCell(new Paragraph(sellTable.getValueAt(i,6).toString(), plainFont));
                 totalSum += Float.parseFloat(sellTable.getValueAt(i,6).toString());
-            }
+            } // for
             
+            // Add the total sum of product's prices in the end of the table
             table.addCell( new Paragraph("ΣΥΝΟΛΟ: ", boldFont));
             table.addCell("");
             table.addCell("");
@@ -784,15 +840,19 @@ public class MainScreen extends javax.swing.JFrame {
             document.add(table);
             
             document.close();
-        } catch (IOException e) {
+        } // try
+        catch (IOException e)
+        {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Σφάλμα", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
             return;
-        } catch (DocumentException ex) {
+        } // catch
+        catch (DocumentException ex)
+        {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Σφάλμα", JOptionPane.INFORMATION_MESSAGE);
             ex.printStackTrace();
             return;
-        }
+        } // catch
         JOptionPane.showMessageDialog(this, "<html>Το τιμολόγιο εκδόθηκε επιτυχώς.</html>", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_invoiceMenuItemActionPerformed
 

@@ -4,7 +4,8 @@ import comas.base.Supplier;
 import comas.database.SupplierDatabase;
 import javax.swing.JOptionPane;
 
-public class AddSupplierScreen extends javax.swing.JFrame {
+public class AddSupplierScreen extends javax.swing.JFrame
+{
 
     private static volatile AddSupplierScreen object;
     
@@ -14,17 +15,18 @@ public class AddSupplierScreen extends javax.swing.JFrame {
             object = new AddSupplierScreen();
         
         return object;
-    }
+    } // getInstance
     
     /**
      * Creates new form AddSupplierScreen
      */
-    private AddSupplierScreen() {
+    private AddSupplierScreen()
+    {
         initComponents();
         
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
-    }
+    } // AddSupplierScreen
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -212,29 +214,29 @@ public class AddSupplierScreen extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(txtFirstName.getText().matches("\\w[A-Za-z]*")) || !(txtLastName.getText().matches("\\w[A-Za-z]*")))
         {
             JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν αριθμούς.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(txtPhoneA.getText().matches("[0-9]{4}-[0-9]{10}")) || !(txtPhoneB.getText().matches("[0-9]{4}-[0-9]{10}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του τηλεφώνου μπορεί να πάρει την μορφή : <b>0030-0123456789</b> .</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(txtPostalCode.getText().matches("[0-9]{5}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ταχυδρομικού κώδικα πρέπει να περιέχει 5 αριθμούς.<br/>"
                     + "Π.χ 01234</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(txtTaxReg.getText().matches("[A-Z]{2}[0-9]{8,10}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του Α.Φ.Μ πρέπει να έχει την μορφή : <b>GR0123456789</b>.<br/>"
                     + "Οι αριθμοί μπορεί να είναι 8 εώς 10.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
 
         Supplier supplier = new Supplier(txtFirstName.getText(),
                                          txtLastName.getText(),
@@ -244,7 +246,8 @@ public class AddSupplierScreen extends javax.swing.JFrame {
                                          txtPhoneB.getText(),
                                          txtPostalCode.getText(),
                                          txtTaxReg.getText());
-       if(new SupplierDatabase().insertSupplier(supplier)){
+        if(new SupplierDatabase().insertSupplier(supplier))
+        {
           JOptionPane.showMessageDialog (this,
                                            "Τα στοιχεία καταχωρήθηκαν με επιτυχία",
                                            "Επιτυχής Καταχώριση",
@@ -252,12 +255,14 @@ public class AddSupplierScreen extends javax.swing.JFrame {
           MainScreen.loadSupplierTable();
           MainScreen.loadDeskPane();
           this.dispose();
-        }else{
+        } // if
+        else
+        {
             JOptionPane.showMessageDialog (this,
                                            "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά",
                                            "Ανεπιτυχής Καταχώριση",
                                            JOptionPane.ERROR_MESSAGE);
-       }
+        } // else
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed

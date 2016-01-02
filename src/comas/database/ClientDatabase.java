@@ -2,18 +2,85 @@ package comas.database;
 
 import comas.base.Client;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-public class ClientDatabase extends Database {
+public class ClientDatabase extends Database
+{
+    /**
+     * Loads the table with data then returns the tablemodel.
+     * @param Query
+     * @return TableModel
+     */
+    public TableModel selectTable(final String Query)
+    {
+        connect();
+        try
+        {
+            dbStatement = dbConnection.prepareStatement(Query);
+            dataResults = dbStatement.executeQuery();
+            int columnNumber = dataResults.getMetaData().getColumnCount();
+
+            Vector columns = new Vector();
+            columns.addElement("Id πελάτη");
+            columns.addElement("Όνομα επιχείρησης");
+            columns.addElement("Όνομα");
+            columns.addElement("Επίθετο");
+            columns.addElement("Τηλέφωνο Α");
+            columns.addElement("Τηλέφωνο Β");
+            columns.addElement("Φαξ");
+            columns.addElement("Διεύθυνση");
+            columns.addElement("Πόλη");
+            columns.addElement("Ταχ. Κώδικας");
+            columns.addElement("Α.Φ.Μ");
+            columns.addElement("Κωδικός Επαγγέλματος");
+            columns.addElement("Επάγγελμα");
+
+
+            Vector rows = new Vector();
+            while (dataResults.next())
+            {
+                Vector newRow = new Vector();
+                for (int i = 1; i <= columnNumber; i++)
+                {
+                    newRow.addElement(dataResults.getString(i));
+                } // for
+                rows.addElement(newRow);
+            } // while
+            close();
+            
+            return new DefaultTableModel(rows, columns)
+            {
+                @Override
+                public boolean isCellEditable(int row, int column)
+                {
+                    return false;
+                } // isCellEditable
+            }; // return
+        } // try
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            System.exit(1);
+        } // catch
+        close();
+        return null;
+    } // selectTable
+    
     /**
      * Executes insert query in order to insert a new client in the database.
      * Returns true if succeeded or false following with JOptionPane error.
      * @param client
      * @return boolean
      */
-    public boolean insertClient(Client client) {
+    public boolean insertClient(Client client)
+    {
         connect();
-        try {
+        try
+        {
             dbStatement = dbConnection.prepareStatement("INSERT INTO Clients (clientId,BusinessName,FirstName,LastName,TelephoneA,TelephoneB,Fax,Address,City,PostalCode,TaxRegister,ProfessionCode,Profession) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             dbStatement.setInt(1, 0);
             dbStatement.setString(2, client.getBusinessName());
@@ -31,14 +98,16 @@ public class ClientDatabase extends Database {
             dbStatement.execute();
             close();
             return true;
-        } catch (SQLException e) {
+        } // try
+        catch (SQLException e)
+        {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
-        }
+        } // catch
         close();
         return false;
-    }
+    } // insertClient
 
     /**
      * Executes update query in order to update an already existing client in the database.
@@ -47,9 +116,11 @@ public class ClientDatabase extends Database {
      * @param clientId
      * @return boolean
      */
-    public boolean updateClient(Client client, final int clientId) {
+    public boolean updateClient(Client client, final int clientId)
+    {
         connect();
-        try {
+        try
+        {
             dbStatement = dbConnection.prepareStatement("UPDATE Clients SET "
                     + "BusinessName=? , FirstName=? , LastName=? , TelephoneA=? , TelephoneB=? , "
                     + "Fax=? , Address=? , City=? , PostalCode=? , TaxRegister=? , ProfessionCode=? , Profession=? WHERE ClientId=?");
@@ -69,14 +140,16 @@ public class ClientDatabase extends Database {
             dbStatement.executeUpdate();
             close();
             return true;
-        } catch (SQLException e) {
+        } // try
+        catch (SQLException e)
+        {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
-        }
+        } // catch
         close();
         return false;
-    }
+    } // updateClient
 
     /**
      * Executes select query in order to select a client from the database.
@@ -84,13 +157,16 @@ public class ClientDatabase extends Database {
      * @param QUERY
      * @return 
      */
-    public Client selectClient(final String QUERY) {
+    public Client selectClient(final String QUERY)
+    {
         Client client = null;
         connect();
-        try {
+        try
+        {
             dbStatement = dbConnection.prepareStatement(QUERY);
             dataResults = dbStatement.executeQuery();
-            if (dataResults.next()) {
+            if (dataResults.next())
+            {
                 client = new Client(dataResults.getString("BusinessName"),
                         dataResults.getString("FirstName"),
                         dataResults.getString("LastName"),
@@ -103,19 +179,23 @@ public class ClientDatabase extends Database {
                         dataResults.getString("PostalCode"),
                         dataResults.getString("TaxRegister"),
                         dataResults.getString("ProfessionCode"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No result found.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No result found.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } // else
             close();
-        } catch (SQLException e) {
+        } // try
+        catch (SQLException e)
+        {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
-        }
+        } // catch
 
         close();
         return client;
-    }
+    } // selectClient
 
     /**
      * Executes delete query in order to delete a client from the database.
@@ -123,21 +203,24 @@ public class ClientDatabase extends Database {
      * @param clientId
      * @return 
      */
-    public boolean deleteClient(final int clientId){
+    public boolean deleteClient(final int clientId)
+    {
         connect();
-        try{
+        try
+        {
             dbStatement = dbConnection.prepareStatement("DELETE FROM Clients WHERE ClientId = ?");
             dbStatement.setInt(1,clientId);
             dbStatement.executeUpdate();
             close();
             return true;
-        }catch(SQLException e){
+        } // try
+        catch(SQLException e)
+        {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
-        }
+        } // catch
         close();
         return false;
-    }
-    
+    } // deleteClient
 }

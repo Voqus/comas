@@ -2,9 +2,64 @@ package comas.database;
 
 import comas.base.Product;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-public class PurchaseDatabase extends Database {
+public class PurchaseDatabase extends Database
+{
+    
+    /**
+     * Loads the table with data then returns the tablemodel.
+     * @param Query
+     * @return TableModel
+     */
+    public TableModel selectTable(final String Query)
+    {
+        connect();
+        try
+        {
+            dbStatement = dbConnection.prepareStatement(Query);
+            dataResults = dbStatement.executeQuery();
+            int columnNumber = dataResults.getMetaData().getColumnCount();
+
+            Vector columns = new Vector();
+            columns.addElement("Id αγοράς");
+            columns.addElement("Id προϊόντος");
+            columns.addElement("Id προμηθευτή");
+            columns.addElement("Τεμάχια");
+            columns.addElement("Τιμή");
+
+            Vector rows = new Vector();
+            while (dataResults.next())
+            {
+                Vector newRow = new Vector();
+                for (int i = 1; i <= columnNumber; i++)
+                {
+                    newRow.addElement(dataResults.getString(i));
+                } // for
+                rows.addElement(newRow);
+            } // while
+            close();
+            return new DefaultTableModel(rows, columns)
+            {
+                @Override
+                public boolean isCellEditable(int row, int column)
+                {
+                    return false;
+                } // isCellEditable
+            }; // return
+        } // try
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            System.exit(1);
+        } // catch
+        close();
+        return null;
+    } // selectTable
     
     /**
      * Insertion method for purchase functionality of the GUI.
@@ -12,11 +67,12 @@ public class PurchaseDatabase extends Database {
      * @param supplierId
      * @return 
      */
-    public boolean insertPurchase(Product product, final int supplierId) {
+    public boolean insertPurchase(Product product, final int supplierId)
+    {
         int productId = 0;
-        //TODO: validation check if supplierId actually exists.
         connect();
-        try {
+        try
+        {            
             //add the new product on product table
             dbStatement = dbConnection.prepareStatement("INSERT INTO Products(ProductId, ProductName, ProductDescription, MeasurementUnit, Weight, Stock, PurchasePrice, SellingPrice)"
                     + " VALUES (?,?,?,?,?,?,?,?)");
@@ -40,11 +96,11 @@ public class PurchaseDatabase extends Database {
             if(dataResults.next())
             {
                 productId = dataResults.getInt("ProductId");
-            }
+            } // if
             else // if it didn't, terminate the program and return false
             {
                 return false;
-            }
+            } // else
             
             //add foreign keys to table
             dbStatement = dbConnection.prepareStatement("INSERT INTO SuppliersProducts (SuppliersProductsId, SuppliersId, ProductsId) VALUES(?,?,?)");
@@ -70,12 +126,14 @@ public class PurchaseDatabase extends Database {
             
             close();
             return true;
-        } catch (SQLException e) {
+        } // try
+        catch (SQLException e)
+        {
             JOptionPane.showMessageDialog(null, e.getMessage(), "DATABASE ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
-        }
+        } // catch
         close();
         return false;
-    }
+    } // insertPurchase
 }

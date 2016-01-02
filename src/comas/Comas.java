@@ -4,52 +4,70 @@ import comas.windows.BusinessScreen;
 import javax.swing.SwingUtilities;
 import comas.windows.MainScreen;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Comas {
+public class Comas
+{
 
     /**
      * Launches the main panel of the application
      */
-    private static void launchApplication() {
-        SwingUtilities.invokeLater(new Runnable() {
+    private static void launchApplication()
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
             @Override
-            public void run() {
-                try {
+            public void run()
+            {
+                try
+                {
                     Thread.sleep(3000);
-                } catch (Exception e) {
+                } // try
+                catch (Exception e)
+                {
                     e.printStackTrace();
-                }
+                } // catch
                 new MainScreen().setVisible(true);
-            }
+            } // run
 
-        });
+        }); // Runnable
     }
 
-    private static void createBusinessFile(File file) {
-        if (!(file.exists())) {
+    /**
+     * Creates a file that contains the business's basic information.<br/>
+     * Uses seperate thread to wait while the user inputs his information.
+     * @param file 
+     */
+    private static void createBusinessFile(File file)
+    {
+        if (!(file.exists()))
+        {
             BusinessScreen businessScreen = new BusinessScreen(file, true);
             businessScreen.setVisible(true);
             
             new PauseThread(businessScreen).run();
-        }
+        } // if
         launchApplication();
-    }
+    } // createBusinessFile
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args)
+    {
+        try
+        {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
         }
 
         createBusinessFile(new File("src/comas/res/businessData.ini"));
-    }
+    } // main
     
+    /**
+     * PauseThread is a class responsible for the pause of the program while another service is executed.
+     */
     private static class PauseThread implements Runnable
     {
         private final BusinessScreen bs;
@@ -57,19 +75,24 @@ public class Comas {
         private PauseThread(BusinessScreen bs)
         {
             this.bs = bs;
-        }
+        } // Pausethread
         
         @Override
-        public void run() {
+        public void run()
+        {
+            //while the business screen for data is active, make the thread sleep for 1 second.
             while(bs.isWindowActive())
             {
-                try {
+                try
+                {
                     Thread.sleep(1000);
-                } catch (InterruptedException ex) {
+                } // try
+                catch (InterruptedException ex)
+                {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "THREAD ERROR", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
-                }
-            }
-        }
-    }
+                } // catch
+            } // while
+        } // run()
+    } // PauseThread
 }

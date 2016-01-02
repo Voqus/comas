@@ -1,10 +1,10 @@
 package comas.windows;
 
 import comas.database.SellDatabase;
-import static comas.windows.MainScreen.loadDeskPane;
 import javax.swing.JOptionPane;
 
-public class AddSellScreen extends javax.swing.JFrame {
+public class AddSellScreen extends javax.swing.JFrame
+{
 
     private static volatile AddSellScreen object;
     
@@ -14,17 +14,18 @@ public class AddSellScreen extends javax.swing.JFrame {
             object = new AddSellScreen();
         
         return object;
-    }
+    } // getInstance
     
     /**
      * Creates new form AddSellScreen
      */
-    private AddSellScreen() {
+    private AddSellScreen()
+    {
         initComponents();
 
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
-    }
+    } // AddSellScreen
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,25 +154,26 @@ public class AddSellScreen extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(productIdTextfield.getText().matches("[0-9]*")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ID του προϊόντος μπορεί να πάρει μόνο την μορφή ακεραίου."
                     + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(clientIdTextfield.getText().matches("[0-9]*")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του ID του πελάτη μπορεί να πάρει μόνο την μορφή ακεραίου."
                     + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(stockTextfield.getText().matches("^[1-9]\\d*$")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο των τεμαχιών μπορούν να πάρουν την μορφή ακεραίου, εκτός του μηδενός."
                     + "</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
+        
         int productId   = Integer.parseInt(productIdTextfield.getText());
         int stock       = Integer.parseInt(stockTextfield.getText());
         int clientId    = Integer.parseInt(clientIdTextfield.getText());
@@ -183,11 +185,11 @@ public class AddSellScreen extends javax.swing.JFrame {
             MainScreen.loadSellTable();
             MainScreen.loadDeskPane();
             this.dispose();
-        }
+        } // if
         else
         {
             JOptionPane.showMessageDialog(this, "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
-        }
+        } // else
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

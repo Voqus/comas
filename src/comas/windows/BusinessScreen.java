@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
-public class BusinessScreen extends javax.swing.JFrame {
+public class BusinessScreen extends javax.swing.JFrame
+{
 
     private File file;
     private boolean isWindowActive;
@@ -15,7 +16,8 @@ public class BusinessScreen extends javax.swing.JFrame {
      * @param file
      * @param isWindowActive
      */
-    public BusinessScreen(File file, boolean isWindowActive) {
+    public BusinessScreen(File file, boolean isWindowActive)
+    {
         this.file = file;
         this.isWindowActive = isWindowActive;
 
@@ -23,7 +25,7 @@ public class BusinessScreen extends javax.swing.JFrame {
 
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
-    }
+    } // BusinessScreen
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -181,19 +183,20 @@ public class BusinessScreen extends javax.swing.JFrame {
                 (compAddressTextfield.getText().isEmpty())) {
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         
         if(!(compTaxRegisterTextfield.getText().matches("[A-Z]{2}[0-9]{8,10}")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο του Α.Φ.Μ πρέπει να έχει την μορφή : <b>GR0123456789</b>.<br/>"
                     + "Οι αριθμοί μπορεί να είναι 8 εώς 10.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
         if(!(compTelephoneTextfield.getText().matches("[0-9]{4}-[0-9]{10}")) || !(compFaxTextfield  .getText().matches("[0-9]{4}-[0-9]{10}|-")))
         {
             JOptionPane.showMessageDialog(this, "<html>Το πεδίο τηλεφώνων μπορεί να πάρει την μορφή : <b>0030-0123456789</b> .</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } // if
+        
         String compName         = compNameTextfield.getText();
         String compTaxOffice    = compTaxOfficeTextfield.getText();
         String compTaxRegister  = compTaxRegisterTextfield.getText();
@@ -203,11 +206,15 @@ public class BusinessScreen extends javax.swing.JFrame {
         String compAddress      = compAddressTextfield.getText();
         Object[] options        = {"Ναι", "Όχι"};
 
+        // Confirmation message/input
         int answer = JOptionPane.showOptionDialog(this, "<html><center>Είστε σίγουροι ότι δώσατε τις σωστές πληροφορίες;<br/>"
                 + "Δεν θα υπάρξει τρόπος επεξεργασίας των στοιχείων αυτών ξανά.</center></html>", "Επιβεβαίωση",
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
-        if (answer == JOptionPane.YES_OPTION) {
-            try {
+        
+        if (answer == JOptionPane.YES_OPTION)
+        {
+            try
+            {
                 // Write down the information given from textfields to a file
                 PrintWriter pw = new PrintWriter(file);
                 pw.write(compName + "//");
@@ -219,26 +226,34 @@ public class BusinessScreen extends javax.swing.JFrame {
                 pw.write(compAddress);
                 pw.close();
 
+                // Create a process to add hidden attribute to the file created
                 Process process = Runtime.getRuntime().exec("attrib +h " + file);
                 process.waitFor();
 
+                // Set the window as inactive, so the thread from the main program can continue running
                 setIsWindowActive(false);
                 this.dispose();
-            } catch (IOException | InterruptedException e) {
+            } // try
+            catch (IOException | InterruptedException e)
+            {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "FILE NOT FOUND ERROR", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
                 System.exit(1);
-            }
-        } else {
+            } // catch
+        } // if
+        else
+        {
             System.exit(0);
-        }
+        } // else
     }//GEN-LAST:event_confirmButtonActionPerformed
 
-    public boolean isWindowActive() {
+    public boolean isWindowActive()
+    {
         return isWindowActive;
     }
 
-    public void setIsWindowActive(boolean isWindowActive) {
+    public void setIsWindowActive(boolean isWindowActive)
+    {
         this.isWindowActive = isWindowActive;
     }
 
