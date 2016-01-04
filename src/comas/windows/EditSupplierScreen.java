@@ -280,9 +280,10 @@ public class EditSupplierScreen extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
         } // if
-        if(!(firstnameField.getText().matches("\\w[A-Za-z]*")) || !(lastnameField.getText().matches("\\w[A-Za-z]*")))
+        if(!(firstnameField.getText().matches("\\w[A-Za-z]+")) || !(lastnameField.getText().matches("\\w[A-Za-z]+")))
         {
-            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν αριθμούς.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν κενά, αριθμούς, σύμβολα ή ελληνικούς χαρακτήρες. Μπορούν"
+                    + "να πάρουν την μορφή: <b>Nikos</b>, <b>Papadopoulos</b></html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
         } // if
         if(!(phoneAField.getText().matches("[0-9]{4}-[0-9]{10}")) || !(phoneBField.getText().matches("[0-9]{4}-[0-9]{10}")))

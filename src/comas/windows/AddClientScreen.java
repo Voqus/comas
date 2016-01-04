@@ -282,9 +282,10 @@ public class AddClientScreen extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", "Κενά πεδία", JOptionPane.ERROR_MESSAGE);
             return;
         } // if
-        if(!(firstNameField.getText().matches("\\w[A-Za-z]*")) || !(lastNameField.getText().matches("\\w[A-Za-z]*")))
+        if(!(firstNameField.getText().matches("\\w[A-Za-z]+")) || !(lastNameField.getText().matches("\\w[A-Za-z]+")))
         {
-            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν αριθμούς.</html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν κενά, αριθμούς, σύμβολα ή ελληνικούς χαρακτήρες. Μπορούν"
+                    + "να πάρουν την μορφή: <b>Nikos</b>, <b>Papadopoulos</b></html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
         } // if
         if(!(professionCodeField.getText().matches("[0-9]{5}\\-[0-9]{5}")))
