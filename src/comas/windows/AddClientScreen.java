@@ -31,7 +31,6 @@ public class AddClientScreen extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField3 = new javax.swing.JTextField();
         firstNameLabel = new javax.swing.JLabel();
         lastNameLabel = new javax.swing.JLabel();
         businessNameLabel = new javax.swing.JLabel();
@@ -58,11 +57,16 @@ public class AddClientScreen extends javax.swing.JFrame
         taxRegisterField = new javax.swing.JTextField();
         confirmLabel = new javax.swing.JButton();
         cancelLabel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Καταχώριση Πελάτη");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         firstNameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         firstNameLabel.setText("Όνομα:");
@@ -138,8 +142,8 @@ public class AddClientScreen extends javax.swing.JFrame
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Καταχώριση Στοιχείων Πελάτη");
+        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTitle.setText("Καταχώριση Στοιχείων Πελάτη");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,14 +203,14 @@ public class AddClientScreen extends javax.swing.JFrame
                                     .addComponent(taxRegisterField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblTitle)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameLabel)
@@ -341,6 +345,10 @@ public class AddClientScreen extends javax.swing.JFrame
         } // else
     }//GEN-LAST:event_confirmLabelActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        object = null;
+    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressField;
     private javax.swing.JLabel addressLabel;
@@ -354,10 +362,9 @@ public class AddClientScreen extends javax.swing.JFrame
     private javax.swing.JLabel faxLabel;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField postalCodeField;
     private javax.swing.JLabel postalCodeLabel;
     private javax.swing.JTextField professionCodeField;

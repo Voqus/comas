@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 public class AddPurchaseScreen extends javax.swing.JFrame
 {
-
     private static volatile AddPurchaseScreen object;
     
     public static synchronized AddPurchaseScreen getInstance()
@@ -60,6 +59,11 @@ public class AddPurchaseScreen extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Καταχώριση Αγοράς");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTitle.setText("Καταχώριση Αγοράς");
@@ -274,6 +278,10 @@ public class AddPurchaseScreen extends javax.swing.JFrame
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        object = null;
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

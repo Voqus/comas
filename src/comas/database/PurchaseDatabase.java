@@ -27,7 +27,9 @@ public class PurchaseDatabase extends Database
             Vector columns = new Vector();
             columns.addElement("Id αγοράς");
             columns.addElement("Id προϊόντος");
-            columns.addElement("Id προμηθευτή");
+            columns.addElement("Όνομα προμηθευτή");
+            columns.addElement("Επίθετο προμηθευτή");
+            columns.addElement("Όνομα προϊόντος");
             columns.addElement("Τεμάχια");
             columns.addElement("Τιμή");
 

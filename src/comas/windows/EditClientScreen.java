@@ -81,6 +81,11 @@ public class EditClientScreen extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Επεξεργασία Στοιχείων Πελάτη");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         firstNameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         firstNameLabel.setText("Όνομα:");
@@ -397,6 +402,10 @@ public class EditClientScreen extends javax.swing.JFrame
           this.dispose();
         } // else
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        object = null;
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressField;

@@ -4,9 +4,9 @@ import comas.base.Supplier;
 import comas.database.SupplierDatabase;
 import javax.swing.JOptionPane;
 
-public class EditSupplierScreen extends javax.swing.JFrame {
-    
-    public static volatile EditSupplierScreen object;
+public class EditSupplierScreen extends javax.swing.JFrame
+{
+    private static volatile EditSupplierScreen object;
     private int supplierId;
     
     public static synchronized EditSupplierScreen getInstance(Supplier supplier, final int supplierId)
@@ -33,7 +33,8 @@ public class EditSupplierScreen extends javax.swing.JFrame {
         cityField.setText(supplier.getCity());
         postalCodeField.setText(supplier.getPostalCode());
         taxRegisterField.setText(supplier.getTaxRegister());
-             
+        
+        //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     } // EditSupplierScreen
 
@@ -65,6 +66,11 @@ public class EditSupplierScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         titleLabel.setText("Επεξεργασία Στοιχείων Προμηθευτή");
@@ -323,6 +329,10 @@ public class EditSupplierScreen extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         } // else
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        object = null;
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;

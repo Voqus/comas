@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 public class AddSupplierScreen extends javax.swing.JFrame
 {
-
     private static volatile AddSupplierScreen object;
     
     public static synchronized AddSupplierScreen getInstance()
@@ -61,6 +60,11 @@ public class AddSupplierScreen extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Καταχώριση Προμηθευτή");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         btnClose.setText("Άκυρο");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +272,10 @@ public class AddSupplierScreen extends javax.swing.JFrame
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        object = null;
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;

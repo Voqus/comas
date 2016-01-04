@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 
 public class AddSellScreen extends javax.swing.JFrame
 {
-
     private static volatile AddSellScreen object;
     
     public static synchronized AddSellScreen getInstance()
@@ -48,7 +47,13 @@ public class AddSellScreen extends javax.swing.JFrame
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Καταχώριση Πώλησης");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTitle.setText("Καταχώριση Πώλησης");
@@ -191,6 +196,10 @@ public class AddSellScreen extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Δεν ήταν επιτυχής η καταχώριση παρακαλώ προσπαθήστε ξανά", "Ανεπιτυχής Καταχώριση", JOptionPane.ERROR_MESSAGE);
         } // else
     }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        object = null;
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
