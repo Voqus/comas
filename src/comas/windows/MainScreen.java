@@ -743,13 +743,13 @@ public class MainScreen extends javax.swing.JFrame
             return;
         } // if
         
-        // If the selectedPurcahseTableRow length is equal to zero, it means that no row was selected from purchaseTable
+        // If the selectedPurchaseTableRow length is equal to zero, it means that no row was selected from purchaseTable
         // So there invoice pdf that would be created would contain no information
         String supplierName = purchaseTable.getValueAt(selectedPurchaseTableRow[0],2).toString();
         String supplierLastName = purchaseTable.getValueAt(selectedPurchaseTableRow[0],3).toString();
 
         // For each selectedrow checks if the firstname and last name is the same,
-        // If it's not the same that means that the selected rows do not contain the same client.
+        // If it's not the same that means that the selected rows do not contain the same supplier.
         for(int i : selectedPurchaseTableRow)
         {
             String newName = purchaseTable.getValueAt(i, 2).toString();
@@ -765,12 +765,8 @@ public class MainScreen extends javax.swing.JFrame
         // Read the information from the business file
         try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini"))))
         {
-            String[] lines = {};
-            String line;
-
             // Read the file's line and split it on each '//' symbol.
-            line = br.readLine();
-            lines = line.split("//");
+            String[] lines = br.readLine().split("//");
 
             String compName = lines[0];
             String compTaxOffice = lines[1];
@@ -911,12 +907,8 @@ public class MainScreen extends javax.swing.JFrame
         // Read the information from the business file
         try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini"))))
         {
-            String[] lines = {};
-            String line;
-
             // Read the file's line and split it on each '//' symbol.
-            line = br.readLine();
-            lines = line.split("//");
+            String[] lines = br.readLine().split("//");
 
             String compName = lines[0];
             String compTaxOffice = lines[1];
