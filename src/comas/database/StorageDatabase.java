@@ -31,6 +31,8 @@ public class StorageDatabase extends Database
             columns.addElement("Id προϊόντος");
             columns.addElement("Όνομα προϊόντος");
             columns.addElement("Περιγραφή προϊόντος");
+            columns.addElement("Μονάδα Μέτρησης");
+            columns.addElement("Βάρος");
             columns.addElement("Α.Φ.Μ Προμηθευτή");
             columns.addElement("Τιμή πώλησης");
             columns.addElement("Τεμάχια");
