@@ -118,7 +118,7 @@ public class MainScreen extends javax.swing.JFrame
     public static void loadStorageTable()
     {
         //  Selects the StorageId, ProductName, ProductDescription, Supplier's TaxRegister, Product's SellingPrice and Product's Stock
-        final String QUERY = "SELECT Storage.StorageId, Storage.ProductId, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Suppliers.TaxRegister, Products.SellingPrice, Products.Stock "
+        final String QUERY = "SELECT Storage.StorageId, Storage.ProductId, Suppliers.TaxRegister, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Products.Stock, Products.SellingPrice "
                 + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
                 + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
         DefaultTableModel dtm = (DefaultTableModel) new StorageDatabase().selectTable(QUERY);
@@ -153,7 +153,6 @@ public class MainScreen extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         mainPanel = new javax.swing.JPanel();
         mainTabbedPane = new javax.swing.JTabbedPane();
         clientPane = new javax.swing.JScrollPane();
@@ -210,10 +209,8 @@ public class MainScreen extends javax.swing.JFrame
         helpMenuSeparator = new javax.swing.JPopupMenu.Separator();
         contactMenuItem = new javax.swing.JMenuItem();
 
-        jTextField1.setText("jTextField1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ΛΕΔ: Λογισμικό Εμπορικής Διαχείρησης");
+        setTitle("Comas");
         setMinimumSize(new java.awt.Dimension(800, 504));
         setName("mainFrame"); // NOI18N
 
@@ -1029,7 +1026,6 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JLabel incomesMsgLabel;
     private javax.swing.JPanel incomesPane;
     private javax.swing.JPopupMenu.Separator insertSeparator;
-    private javax.swing.JTextField jTextField1;
     private static javax.swing.JLabel lowStockLabel;
     private javax.swing.JLabel lowStockMsgLabel;
     private javax.swing.JPanel mainPanel;

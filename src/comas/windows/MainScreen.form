@@ -2,11 +2,6 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
-    </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="programMenu">
@@ -123,7 +118,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="&#x39b;&#x395;&#x394;: &#x39b;&#x3bf;&#x3b3;&#x3b9;&#x3c3;&#x3bc;&#x3b9;&#x3ba;&#x3cc; &#x395;&#x3bc;&#x3c0;&#x3bf;&#x3c1;&#x3b9;&#x3ba;&#x3ae;&#x3c2; &#x394;&#x3b9;&#x3b1;&#x3c7;&#x3b5;&#x3af;&#x3c1;&#x3b7;&#x3c3;&#x3b7;&#x3c2;"/>
+    <Property name="title" type="java.lang.String" value="Comas"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[800, 504]"/>
     </Property>

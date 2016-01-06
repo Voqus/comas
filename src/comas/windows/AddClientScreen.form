@@ -85,9 +85,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="confirmLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="confirmButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="cancelLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="taxRegisterField" min="-2" pref="194" max="-2" attributes="0"/>
                               </Group>
@@ -170,8 +170,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="confirmLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cancelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="13" max="32767" attributes="0"/>
           </Group>
@@ -335,20 +335,20 @@
         <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; GR0123456789 // &#x39a;&#x3c9;&#x3b4;&#x3b9;&#x3ba;&#x3cc;&#x3c2; &#x3c7;&#x3ce;&#x3c1;&#x3b1;&#x3c2; + 8 &#x3bc;&#x3b5; 10 &#x3c8;&#x3b7;&#x3c6;&#x3af;&#x3b1;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="confirmLabel">
+    <Component class="javax.swing.JButton" name="confirmButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x395;&#x3c0;&#x3b9;&#x3b2;&#x3b5;&#x3b2;&#x3b1;&#x3af;&#x3c9;&#x3c3;&#x3b7;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmLabelActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="cancelLabel">
+    <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x386;&#x3ba;&#x3c5;&#x3c1;&#x3bf;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelLabelActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">

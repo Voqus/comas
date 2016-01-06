@@ -29,13 +29,13 @@ public class StorageDatabase extends Database
             Vector columns = new Vector();
             columns.addElement("Id αποθήκης");
             columns.addElement("Id προϊόντος");
+            columns.addElement("Α.Φ.Μ Προμηθευτή");
             columns.addElement("Όνομα προϊόντος");
             columns.addElement("Περιγραφή προϊόντος");
             columns.addElement("Μονάδα Μέτρησης");
             columns.addElement("Βάρος");
-            columns.addElement("Α.Φ.Μ Προμηθευτή");
-            columns.addElement("Τιμή πώλησης");
             columns.addElement("Τεμάχια");
+            columns.addElement("Τιμή πώλησης");
 
             Vector rows = new Vector();
             while (dataResults.next())

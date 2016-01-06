@@ -55,8 +55,8 @@ public class AddClientScreen extends javax.swing.JFrame
         faxField = new javax.swing.JTextField();
         postalCodeField = new javax.swing.JTextField();
         taxRegisterField = new javax.swing.JTextField();
-        confirmLabel = new javax.swing.JButton();
-        cancelLabel = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -128,17 +128,17 @@ public class AddClientScreen extends javax.swing.JFrame
 
         taxRegisterField.setToolTipText("π.χ GR0123456789 // Κωδικός χώρας + 8 με 10 ψηφία");
 
-        confirmLabel.setText("Επιβεβαίωση");
-        confirmLabel.addActionListener(new java.awt.event.ActionListener() {
+        confirmButton.setText("Επιβεβαίωση");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmLabelActionPerformed(evt);
+                confirmButtonActionPerformed(evt);
             }
         });
 
-        cancelLabel.setText("Άκυρο");
-        cancelLabel.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Άκυρο");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelLabelActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -197,9 +197,9 @@ public class AddClientScreen extends javax.swing.JFrame
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(confirmLabel)
+                                        .addComponent(confirmButton)
                                         .addGap(38, 38, 38)
-                                        .addComponent(cancelLabel))
+                                        .addComponent(cancelButton))
                                     .addComponent(taxRegisterField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
@@ -261,20 +261,20 @@ public class AddClientScreen extends javax.swing.JFrame
                     .addComponent(taxRegisterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmLabel)
-                    .addComponent(cancelLabel))
+                    .addComponent(confirmButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelLabelActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
-    }//GEN-LAST:event_cancelLabelActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Saves Clients Data to Database {Returns message on jOptionPane}
-    private void confirmLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmLabelActionPerformed
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         if(businessNameField.getText().isEmpty() || firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || professionField.getText().isEmpty()
                 || addressField.getText().isEmpty() || cityField.getText().isEmpty() || telephoneAField.getText().isEmpty() || telephoneBField.getText().isEmpty()
                 || faxField.getText().isEmpty() || postalCodeField.getText().isEmpty() || taxRegisterField.getText().isEmpty() || professionCodeField.getText().isEmpty())
@@ -344,7 +344,7 @@ public class AddClientScreen extends javax.swing.JFrame
                     "Ανεπιτυχής Καταχώριση",
                     JOptionPane.ERROR_MESSAGE);
         } // else
-    }//GEN-LAST:event_confirmLabelActionPerformed
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         object = null;
@@ -355,10 +355,10 @@ public class AddClientScreen extends javax.swing.JFrame
     private javax.swing.JLabel addressLabel;
     private javax.swing.JTextField businessNameField;
     private javax.swing.JLabel businessNameLabel;
-    private javax.swing.JButton cancelLabel;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JTextField cityField;
     private javax.swing.JLabel cityLabel;
-    private javax.swing.JButton confirmLabel;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JTextField faxField;
     private javax.swing.JLabel faxLabel;
     private javax.swing.JTextField firstNameField;
