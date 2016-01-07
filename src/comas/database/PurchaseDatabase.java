@@ -105,7 +105,7 @@ public class PurchaseDatabase extends Database
             } // else
             
             //add foreign keys to table
-            dbStatement = dbConnection.prepareStatement("INSERT INTO SuppliersProducts (SuppliersProductId, SupplierId, ProductId) VALUES(?,?,?)");
+            dbStatement = dbConnection.prepareStatement("INSERT INTO SuppliersProducts (SuppliersProductsId, SupplierId, ProductId) VALUES(?,?,?)");
             dbStatement.setInt(1,0);
             dbStatement.setInt(2, supplierId);
             dbStatement.setInt(3, productId);
