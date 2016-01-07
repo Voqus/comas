@@ -115,7 +115,7 @@ public class SellDatabase extends Database
             } // else
                         
             // add new record on sell table
-            dbStatement = dbConnection.prepareStatement("INSERT INTO Sells(SellId,ProductsId,ClientId,Stock,FinalPrice) VALUES (?,?,?,?,?)");
+            dbStatement = dbConnection.prepareStatement("INSERT INTO Sells(SellId,ProductId,ClientId,Stock,FinalPrice) VALUES (?,?,?,?,?)");
             dbStatement.setInt(1, 0);
             dbStatement.setInt(2, productId);
             dbStatement.setInt(3, clientId);

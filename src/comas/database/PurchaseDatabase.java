@@ -105,7 +105,7 @@ public class PurchaseDatabase extends Database
             } // else
             
             //add foreign keys to table
-            dbStatement = dbConnection.prepareStatement("INSERT INTO SuppliersProducts (SuppliersProductsId, SuppliersId, ProductsId) VALUES(?,?,?)");
+            dbStatement = dbConnection.prepareStatement("INSERT INTO SuppliersProducts (SuppliersProductId, SupplierId, ProductId) VALUES(?,?,?)");
             dbStatement.setInt(1,0);
             dbStatement.setInt(2, supplierId);
             dbStatement.setInt(3, productId);
@@ -118,7 +118,7 @@ public class PurchaseDatabase extends Database
             dbStatement.execute();
             
             //finally insert to purchase table the product
-            dbStatement = dbConnection.prepareStatement("INSERT INTO Purchases (purchaseId, ProductsId, SupplierId, Stock, FinalPrice) VALUES (?,?,?,?,?)");
+            dbStatement = dbConnection.prepareStatement("INSERT INTO Purchases (purchaseId, ProductId, SupplierId, Stock, FinalPrice) VALUES (?,?,?,?,?)");
             dbStatement.setInt(1,0);
             dbStatement.setInt(2, productId);
             dbStatement.setInt(3, supplierId);

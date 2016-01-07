@@ -119,8 +119,8 @@ public class MainScreen extends javax.swing.JFrame
     {
         //  Selects the StorageId, ProductName, ProductDescription, Supplier's TaxRegister, Product's SellingPrice and Product's Stock
         final String QUERY = "SELECT Storage.StorageId, Storage.ProductId, Suppliers.TaxRegister, Products.ProductName, Products.ProductDescription, Products.MeasurementUnit, Products.Weight, Products.Stock, Products.SellingPrice "
-                + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductsId AND "
-                + "SuppliersProducts.SuppliersId = Suppliers.SupplierId";
+                + "FROM Storage,Products,Suppliers,SuppliersProducts WHERE Storage.ProductId = Products.ProductId AND Products.ProductId = SuppliersProducts.ProductId AND "
+                + "SuppliersProducts.SupplierId = Suppliers.SupplierId";
         DefaultTableModel dtm = (DefaultTableModel) new StorageDatabase().selectTable(QUERY);
         storageTable.setModel(dtm);
     } // loadStorageTable
@@ -130,8 +130,8 @@ public class MainScreen extends javax.swing.JFrame
      */
     public static void loadPurchaseTable()
     {
-        final String QUERY = "SELECT Purchases.purchaseId, Purchases.ProductsId, Suppliers.FirstName, Suppliers.LastName, Products.ProductName, Purchases.Stock, Purchases.FinalPrice "
-                + "FROM Purchases,Products,Suppliers WHERE Purchases.ProductsId=Products.ProductId AND Purchases.SupplierId=Suppliers.SupplierId";
+        final String QUERY = "SELECT Purchases.purchaseId, Purchases.ProductId, Suppliers.FirstName, Suppliers.LastName, Products.ProductName, Purchases.Stock, Purchases.FinalPrice "
+                + "FROM Purchases,Products,Suppliers WHERE Purchases.ProductId=Products.ProductId AND Purchases.SupplierId=Suppliers.SupplierId";
 
         DefaultTableModel dtm = (DefaultTableModel) new PurchaseDatabase().selectTable(QUERY);
         purchaseTable.setModel(dtm);
@@ -142,8 +142,8 @@ public class MainScreen extends javax.swing.JFrame
      */
     public static void loadSellTable()
     {
-        final String QUERY = "SELECT Sells.SellId, Sells.ProductsId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
-                + "FROM Sells, Products, Clients WHERE Sells.ProductsId = Products.ProductId AND Sells.ClientId=Clients.ClientId";
+        final String QUERY = "SELECT Sells.SellId, Sells.ProductId, Clients.FirstName, Clients.LastName, Products.ProductName, Sells.Stock, Sells.FinalPrice "
+                + "FROM Sells, Products, Clients WHERE Sells.ProductId = Products.ProductId AND Sells.ClientId=Clients.clientId";
 
         DefaultTableModel dtm = (DefaultTableModel) new SellDatabase().selectTable(QUERY);
         sellTable.setModel(dtm);
