@@ -11,13 +11,3 @@ Later on, there will be a setup.exe for the installation of the software but rig
 ### Team Members ###
 * Vasilis Chados
 * Mellides Gabriel
-
-### Instructions ###
-* -- DONE --
-* -~ ALMOST DONE ~-
-
-### TODO List: ###
-* CashDesk pane, to set/update labels correctly.
-* --UML class diagram--  **on hold for possible changes (2 packages done)**
-* Use case  diagram
-* Database relationships diagarm
