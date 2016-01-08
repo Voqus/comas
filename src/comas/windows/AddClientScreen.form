@@ -168,12 +168,12 @@
                   <Component id="taxRegisterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="taxRegisterField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="confirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -277,12 +277,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="firstNameField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x39d;&#x3af;&#x3ba;&#x3bf;&#x3c2;"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; Nikos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="lastNameField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; &#x3a0;&#x3b1;&#x3c0;&#x3b1;&#x3b4;&#x3cc;&#x3c0;&#x3bf;&#x3c5;&#x3bb;&#x3bf;&#x3c2;"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#x3c0;.&#x3c7; Papadopoulos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="businessNameField">

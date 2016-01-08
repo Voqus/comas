@@ -123,9 +123,9 @@ public class EditClientScreen extends javax.swing.JFrame
         taxRegisterLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         taxRegisterLabel.setText("Α.Φ.Μ:");
 
-        firstNameField.setToolTipText("π.χ Νίκος");
+        firstNameField.setToolTipText("π.χ Nikos");
 
-        lastNameField.setToolTipText("π.χ Παπαδόπουλος");
+        lastNameField.setToolTipText("π.χ Papadopoulos");
 
         businessNameField.setToolTipText("π.χ Παπαδόπουλος Α.Ε");
 
@@ -164,7 +164,7 @@ public class EditClientScreen extends javax.swing.JFrame
         editClientLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         editClientLabel.setText("Επεξεργασία Στοιχείων Πελάτη");
 
-        deleteButton.setText("Διαγραφή Πελάτη");
+        deleteButton.setText("Διαγραφή");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -181,16 +181,15 @@ public class EditClientScreen extends javax.swing.JFrame
                         .addGap(102, 102, 102)
                         .addComponent(editClientLabel))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(taxRegisterLabel))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(faxLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(faxField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(postalCodeLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(telephoneBLabel)
                                 .addGap(18, 18, 18)
@@ -221,21 +220,18 @@ public class EditClientScreen extends javax.swing.JFrame
                                     .addComponent(businessNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(professionField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(professionCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(taxRegisterField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(taxRegisterLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(cancelButton)
-                        .addGap(33, 33, 33)
-                        .addComponent(deleteButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(confirmButton)
-                .addGap(21, 21, 21))
+                            .addComponent(taxRegisterField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(confirmButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancelButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(postalCodeLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(21, 37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +307,7 @@ public class EditClientScreen extends javax.swing.JFrame
         } // if
         if(!(firstNameField.getText().matches("\\w[A-Za-z]+")) || !(lastNameField.getText().matches("\\w[A-Za-z]+")))
         {
-            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν κενά, αριθμούς, σύμβολα ή ελληνικούς χαρακτήρες. Μπορούν"
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν κενά, αριθμούς, σύμβολα ή ελληνικούς χαρακτήρες. Μπορούν "
                     + "να πάρουν την μορφή: <b>Nikos</b>, <b>Papadopoulos</b></html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
         } // if

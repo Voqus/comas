@@ -104,9 +104,9 @@ public class AddClientScreen extends javax.swing.JFrame
         taxRegisterLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         taxRegisterLabel.setText("Α.Φ.Μ:");
 
-        firstNameField.setToolTipText("π.χ Νίκος");
+        firstNameField.setToolTipText("π.χ Nikos");
 
-        lastNameField.setToolTipText("π.χ Παπαδόπουλος");
+        lastNameField.setToolTipText("π.χ Papadopoulos");
 
         businessNameField.setToolTipText("π.χ Παπαδόπουλος Α.Ε");
 
@@ -259,11 +259,11 @@ public class AddClientScreen extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(taxRegisterLabel)
                     .addComponent(taxRegisterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelButton)
+                    .addComponent(confirmButton))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,7 +284,7 @@ public class AddClientScreen extends javax.swing.JFrame
         } // if
         if(!(firstNameField.getText().matches("\\w[A-Za-z]+")) || !(lastNameField.getText().matches("\\w[A-Za-z]+")))
         {
-            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν κενά, αριθμούς, σύμβολα ή ελληνικούς χαρακτήρες. Μπορούν"
+            JOptionPane.showMessageDialog(this, "<html>Τα πεδία ονομάτων δεν μπορούν να περιέχουν κενά, αριθμούς, σύμβολα ή ελληνικούς χαρακτήρες. Μπορούν "
                     + "να πάρουν την μορφή: <b>Nikos</b>, <b>Papadopoulos</b></html>", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
             return;
         } // if
