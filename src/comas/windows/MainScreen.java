@@ -760,7 +760,7 @@ public class MainScreen extends javax.swing.JFrame
         } // for
 
         // Read the information from the business file
-        try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini"))))
+        try (BufferedReader br = new BufferedReader(new FileReader(("businessData.ini"))))
         {
             // Read the file's line and split it on each '//' symbol.
             String[] lines = br.readLine().split("//");
@@ -774,8 +774,8 @@ public class MainScreen extends javax.swing.JFrame
             String compAddress = lines[6];
 
             // Register bold and plain fonts for the pdf creation.
-            FontFactory.register("src/comas/res/fonts/Verdana.ttf", "VERDANA_PLAIN_FONT");
-            FontFactory.register("src/comas/res/fonts/Verdanab.ttf", "VERDANA_BOLD_FONT");
+            FontFactory.register("fonts/Verdana.ttf", "VERDANA_PLAIN_FONT");
+            FontFactory.register("fonts/Verdanab.ttf", "VERDANA_BOLD_FONT");
             // Create the pdf document in form of A4 page size.
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, new FileOutputStream("invoicePurchase.pdf")).setInitialLeading(16);
@@ -902,7 +902,7 @@ public class MainScreen extends javax.swing.JFrame
         } // for
 
         // Read the information from the business file
-        try (BufferedReader br = new BufferedReader(new FileReader(("src/comas/res/businessData.ini"))))
+        try (BufferedReader br = new BufferedReader(new FileReader(("businessData.ini"))))
         {
             // Read the file's line and split it on each '//' symbol.
             String[] lines = br.readLine().split("//");
@@ -916,8 +916,8 @@ public class MainScreen extends javax.swing.JFrame
             String compAddress = lines[6];
 
             // Register bold and plain fonts for the pdf creation.
-            FontFactory.register("src/comas/res/fonts/Verdana.ttf", "VERDANA_PLAIN_FONT");
-            FontFactory.register("src/comas/res/fonts/Verdanab.ttf", "VERDANA_BOLD_FONT");
+            FontFactory.register("fonts/Verdana.ttf", "VERDANA_PLAIN_FONT");
+            FontFactory.register("fonts/Verdanab.ttf", "VERDANA_BOLD_FONT");
             // Create the pdf document in form of A4 page size.
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, new FileOutputStream("invoiceSell.pdf")).setInitialLeading(16);

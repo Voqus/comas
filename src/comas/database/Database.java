@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Database 
 {
-    private static final String dbPath = "jdbc:ucanaccess://" + new File("src/comas/res/Database.accdb").getAbsolutePath();
+    private static final String dbPath = "jdbc:ucanaccess://" + new File("Database.accdb").getAbsolutePath();
     protected Connection dbConnection;
     protected ResultSet dataResults;
     protected PreparedStatement dbStatement;

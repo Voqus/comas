@@ -62,7 +62,7 @@ public class Comas
             ex.printStackTrace();
         }
 
-        createBusinessFile(new File("src/comas/res/businessData.ini"));
+        createBusinessFile(new File("businessData.ini"));
     } // main
     
     /**
