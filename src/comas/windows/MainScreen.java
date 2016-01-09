@@ -31,6 +31,7 @@ import static com.itextpdf.text.Chunk.NEWLINE;
 import comas.database.PurchaseDatabase;
 import comas.database.SellDatabase;
 import comas.database.StorageDatabase;
+import java.awt.Toolkit;
 public class MainScreen extends javax.swing.JFrame
 {
 
@@ -48,6 +49,9 @@ public class MainScreen extends javax.swing.JFrame
         loadPurchaseTable();
         loadSellTable();
         loadDeskPane();
+        
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
         
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);

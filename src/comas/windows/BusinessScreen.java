@@ -1,5 +1,6 @@
 package comas.windows;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +23,10 @@ public class BusinessScreen extends javax.swing.JFrame
         this.isWindowActive = isWindowActive;
 
         initComponents();
-
+        
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
+        
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     } // BusinessScreen

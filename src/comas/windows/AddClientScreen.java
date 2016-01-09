@@ -2,6 +2,7 @@ package comas.windows;
 
 import comas.base.Client;
 import comas.database.ClientDatabase;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class AddClientScreen extends javax.swing.JFrame
@@ -23,6 +24,9 @@ public class AddClientScreen extends javax.swing.JFrame
     {
         initComponents();
 
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
+        
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     } // AddClientScreen

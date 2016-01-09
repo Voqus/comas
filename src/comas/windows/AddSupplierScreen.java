@@ -2,6 +2,7 @@ package comas.windows;
 
 import comas.base.Supplier;
 import comas.database.SupplierDatabase;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class AddSupplierScreen extends javax.swing.JFrame
@@ -22,6 +23,9 @@ public class AddSupplierScreen extends javax.swing.JFrame
     private AddSupplierScreen()
     {
         initComponents();
+        
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
         
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);

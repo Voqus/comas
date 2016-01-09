@@ -1,6 +1,7 @@
 package comas.windows;
 
 import comas.database.SellDatabase;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class AddSellScreen extends javax.swing.JFrame
@@ -21,7 +22,10 @@ public class AddSellScreen extends javax.swing.JFrame
     private AddSellScreen()
     {
         initComponents();
-
+        
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
+        
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
     } // AddSellScreen

@@ -1,5 +1,7 @@
 package comas.windows;
 
+import java.awt.Toolkit;
+
 public class HelpScreen extends javax.swing.JFrame
 {
     public static volatile HelpScreen object;
@@ -17,6 +19,9 @@ public class HelpScreen extends javax.swing.JFrame
     private HelpScreen()
     {
         initComponents();
+        
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
         
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);

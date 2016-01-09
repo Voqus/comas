@@ -2,6 +2,7 @@ package comas.windows;
 
 import comas.base.Client;
 import comas.database.ClientDatabase;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class EditClientScreen extends javax.swing.JFrame
@@ -40,6 +41,9 @@ public class EditClientScreen extends javax.swing.JFrame
         postalCodeField.setText(client.getPostalCode());
         taxRegisterField.setText(client.getTaxRegister());
         professionCodeField.setText(client.getProfessionCode());
+        
+        // Set window icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("app_icon64.png")));
         
         //  Set window's location to the center of the screen
         setLocationRelativeTo(null);
