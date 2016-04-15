@@ -1,7 +1,7 @@
 # README #
 
 This program was created using NetBeans IDE, so it's recommended to use this program if you want to read/edit the source code.
-There is also a separate branch *master_setup* where it's specifically made for the jar to run independently.
+There is also a separate branch *master_setup* where it's specifically made for the jar to run independently. 
 
 ### What is this COMAS? ###
 
